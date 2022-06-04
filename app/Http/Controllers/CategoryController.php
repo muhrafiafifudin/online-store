@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -23,7 +24,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.admin.shop.form-category');
     }
 
     /**
@@ -34,7 +35,19 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'category'  => 'required'
+        ]);
+
+        $category = Category::create([
+            'category' => $request->category,
+        ]);
+
+        if ($category) {
+            return redirect()->route('category.index')->with(['success' => 'Data Berhasil Disimpan!']);
+        } else {
+            return redirect()->route('category.index')->with(['error' => 'Data Gagal Disimpan!']);
+        }
     }
 
     /**
@@ -45,7 +58,8 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
+        $category = Category::findOrFail($id);
+        return view('pages.admin.shop.category', compact('category'));
     }
 
     /**

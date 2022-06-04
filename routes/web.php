@@ -17,6 +17,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/cek', function () {
+    return view('pages.admin.shop.form-item');
+});
+
 Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index');
 
 Route::resource('/dashboard/category', App\Http\Controllers\CategoryController::class);
