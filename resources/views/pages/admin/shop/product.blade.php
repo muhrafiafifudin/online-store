@@ -26,7 +26,7 @@
 							<a href="" class="text-muted">Shop</a>
 						</li>
 						<li class="breadcrumb-item">
-							<a href="" class="text-muted">Category</a>
+							<a href="" class="text-muted">Product</a>
 						</li>
 					</ul>
 					<!--end::Breadcrumb-->
@@ -45,13 +45,13 @@
 			<div class="card card-custom">
 				<div class="card-header border-0 flex-wrap py-5">
 					<div class="card-title">
-						<h3 class="card-label">Item
-							<div class="text-muted pt-2 font-size-sm">All Data Item</div>
+						<h3 class="card-label">Product
+							<div class="text-muted pt-2 font-size-sm">All Data Product</div>
 						</h3>
 					</div>
 					<div class="card-toolbar">
 						<!--begin::Button-->
-						<a href="#" class="btn btn-primary font-weight-bolder">
+						<a href="{{ route('product.create') }}" class="btn btn-primary font-weight-bolder">
 						<span class="svg-icon svg-icon-md">
 							<!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
 							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -62,7 +62,7 @@
 								</g>
 							</svg>
 							<!--end::Svg Icon-->
-						</span>Add Item</a>
+						</span>Add Product</a>
 						<!--end::Button-->
 					</div>
 				</div>
@@ -73,8 +73,8 @@
 							<tr>
 								<th>No</th>
 								<th>Images</th>
-								<th>Name Item</th>
-								<th>Short Description</th>
+								<th>Name Product</th>
+								<th>Description</th>
 								<th>Category</th>
 								<th>Price</th>
 								<th>Actions</th>

@@ -54,12 +54,14 @@
 					</div>	
 				</div>
 				<!--begin::Form-->
-				<form>
+				<form action="{{ route('product.store') }}" method="post">
+					@csrf
+					@method('post')
 					<div class="card-body">
 						<div class="form-group">
-							<label>Name Item
+							<label>Name Product
 							<span class="text-danger">*</span></label>
-							<input type="text" class="form-control" placeholder="Enter email" />
+							<input type="text" name="name" class="form-control" placeholder="Enter email" />
 						</div>
 						<div class="form-group">
 							<label>Images</label>
@@ -70,30 +72,26 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="exampleTextarea">Short Description</label>
-							<textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+							<label for="exampleTextarea">Description</label>
+							<textarea class="form-control" name="description" rows="3"></textarea>
 						</div>
 						<div class="form-group">
 							<label for="exampleSelect1">Category
 							<span class="text-danger">*</span></label>
-							<select class="form-control" id="exampleSelect1">
-								<option>1</option>
-								<option>2</option>
-								<option>3</option>
+							<select class="form-control" name="categories_id">
+								@foreach ($category as $data)
+									<option value="{{ route->id }}">{{ $data->category }}</option>
+								@endforeach
 							</select>
 						</div>
 						<div class="form-group">
 							<label>Price
 							<span class="text-danger">*</span></label>
-							<input type="number" class="form-control" placeholder="Enter email" />
-						</div>
-						<div class="form-group">
-							<label for="exampleTextarea">Description</label>
-							<textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+							<input type="number" name="price" class="form-control" placeholder="Enter email" />
 						</div>
 					</div>
 					<div class="card-footer">
-						<button type="reset" class="btn btn-primary mr-2">Submit</button>
+						<button type="reset" class="btn btn-primary">Submit</button>
 						<button type="reset" class="btn btn-secondary">Cancel</button>
 					</div>
 				</form>

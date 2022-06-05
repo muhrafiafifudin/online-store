@@ -56,6 +56,8 @@
 				<!--begin::Form-->
 				<form action="{{ route('category.store') }}" method="post">
 					@csrf
+					@method('post')
+					
 					<div class="card-body">
 						<div class="form-group">
 							<label>Category

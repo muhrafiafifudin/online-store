@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
-class ItemController extends Controller
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +16,7 @@ class ItemController extends Controller
      */
     public function index()
     {
-        return view('pages.admin.shop.item');
+        return view('pages.admin.shop.product');
     }
 
     /**
@@ -24,7 +26,9 @@ class ItemController extends Controller
      */
     public function create()
     {
-        //
+        $category = Category::all();
+
+        return view('pages.admin.shop.form-product', compact('category'));
     }
 
     /**
@@ -69,7 +73,14 @@ class ItemController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $product = Product::findOrFail($id);
+        $product->name = $request->input('name');
+        $product->categories_id = $request->input('categories_id');
+        $product->price = $request->input('price');
+        $product->description = $request->input('desciption');
+        $product->slug = $request->input('slug');
+
+        $product->save();
     }
 
     /**

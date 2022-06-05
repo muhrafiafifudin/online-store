@@ -24,4 +24,4 @@ Route::get('/cek', function () {
 Route::get('/dashboard', 'App\Http\Controllers\Admin\DashboardController@index');
 
 Route::resource('/dashboard/category', App\Http\Controllers\Admin\CategoryController::class);
-Route::resource('/dashboard/item', App\Http\Controllers\Admin\ItemController::class);
+Route::resource('/dashboard/product', App\Http\Controllers\Admin\ProductController::class);
