@@ -69,7 +69,7 @@
 				</div>
 				<div class="card-body">
 					<!--begin: Datatable-->
-					<table class="table table-checkable" id="kt_datatable">
+					<table class="table table-checkable">
 						<thead>
 							<tr>
 								<th>No</th>
@@ -78,16 +78,22 @@
 							</tr>
 						</thead>
 						<tbody id="tbody">
-							<!-- @php $no=1 @endphp
+							@php $no=1 @endphp
 							@foreach ($category as $data)
 								<tr>
 									<td>{{ $no++ }}</td>
 									<td>{{ $data->category }}</td>
 									<td>
+										<form action="{{ route('category.destroy', $data->id) }}" method="post">
+											@csrf	
+											@method('DELETE')
 
+											<a href="{{ route('category.edit', $data->id) }}" class="btn btn-warning">Edit</a>
+											<button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure ?')">Delete</button>
+										</form>
 									</td>
 								</tr>
-							@endforeach -->
+							@endforeach
 						</tbody>
 					</table>
 					<!--end: Datatable-->

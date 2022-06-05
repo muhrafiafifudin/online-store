@@ -21,7 +21,7 @@ Route::get('/cek', function () {
     return view('pages.admin.shop.form-item');
 });
 
-Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index');
+Route::get('/dashboard', 'App\Http\Controllers\Admin\DashboardController@index');
 
-Route::resource('/dashboard/category', App\Http\Controllers\CategoryController::class);
-Route::resource('/dashboard/item', App\Http\Controllers\ItemController::class);
+Route::resource('/dashboard/category', App\Http\Controllers\Admin\CategoryController::class);
+Route::resource('/dashboard/item', App\Http\Controllers\Admin\ItemController::class);

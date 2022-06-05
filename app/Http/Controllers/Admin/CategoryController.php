@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Category;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -14,7 +15,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('pages.admin.shop.category');   
+        $category = Category::all();
+
+        return view('pages.admin.shop.category', compact('category')); 
     }
 
     /**
@@ -54,8 +57,7 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        $category = Category::findOrFail($id);
-        return view('pages.admin.shop.category', compact('category'));
+        //
     }
 
     /**
@@ -66,7 +68,9 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Category::findOrFail($id);
+
+        return view('pages.admin.shop.edit-category', compact('category'));
     }
 
     /**
@@ -78,7 +82,14 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'category' => 'required',
+        ]);
+
+        $category = Category::findOrFail($id);
+        $category->category = $request->category;
+        $category->save();
+        return redirect()->route('category.index');
     }
 
     /**
@@ -89,6 +100,9 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = Category::findOrFail($id);
+        $category->delete();
+        
+        return redirect()->route('category.index');
     }
 }
