@@ -1,4 +1,4 @@
-@extends('layouts.home')
+@extends('layouts.user')
 
 @section('title')
     About Us

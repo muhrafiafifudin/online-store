@@ -14,14 +14,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('pages.user.home');
 });
 
-Route::get('/cek', function () {
-    return view('pages.admin.shop.form-item');
-});
+Route::get('/shop', App\Http\Controllers\ShopController::class, 'index');
 
-Route::get('/dashboard', 'App\Http\Controllers\Admin\DashboardController@index');
+Route::get('/dashboard', 'App\Http\Controllers\Admin\DashboardController@index');    
 
 Route::resource('/dashboard/category', App\Http\Controllers\Admin\CategoryController::class);
 Route::resource('/dashboard/product', App\Http\Controllers\Admin\ProductController::class);
