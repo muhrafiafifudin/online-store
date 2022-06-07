@@ -51,31 +51,34 @@
 
         <div class="products">
             <div class="row">
+
+                @foreach ($product as $data)
                 <div class="col-6 col-md-4 col-lg-4 col-xl-3">
                     <div class="product">
                         <figure class="product-media">
                             <span class="product-label label-new">New</span>
-                            <a href="product.html">
-                                <img src="user/assets/images/products/product-1.jpg" alt="Product image" class="product-image">
+                            <a href="{{ route('guest.product.product-detail') }}">
+                                <img src="../admin/assets/images/{{ $data->photos }}" alt="Product image" class="product-image">
                             </a>
 
                             <div class="product-action">
-                                <a href="#" class="btn-product btn-cart"><span>ADD TO CART</span></a>
+                                <a href="{{ route('guest.product.login') }}" class="btn-product btn-cart"><span>ADD TO CART</span></a>
                             </div><!-- End .product-action -->
                         </figure><!-- End .product-media -->
 
                         <div class="product-body text-center">
                             <div class="product-cat">
-                                <a href="#">Women</a>
+                                <a href="{{ route('guest.product.product-detail') }}">{{ $data->category->category }}</a>
                             </div><!-- End .product-cat -->
-                            <h3 class="product-title"><a href="product.html">Nunc dignissim risus</a></h3><!-- End .product-title -->
+                            <h3 class="product-title"><a href="{{ route('guest.product.product-detail') }}">{{ $data->name }}</a></h3><!-- End .product-title -->
                             <div class="product-price">
-                                $50.00
+                                IDR. {{ number_format($data->price, 2, ',', '.') }}
                             </div><!-- End .product-price -->
 
                         </div><!-- End .product-body -->
                     </div><!-- End .product -->
                 </div><!-- End .col-sm-6 col-lg-4 col-xl-3 -->
+                @endforeach
 
             </div><!-- End .row -->
 

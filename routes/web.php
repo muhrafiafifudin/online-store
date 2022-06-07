@@ -17,7 +17,9 @@ Route::get('/', function () {
     return view('pages.user.home');
 });
 
-Route::get('/shop', App\Http\Controllers\ShopController::class, 'index');
+Route::get('/product', 'App\Http\Controllers\ProductController@index')->name('guest.product.index');
+Route::get('/product-detail', 'App\Http\Controllers\ProductController@product_detail')->name('guest.product.product-detail');
+Route::get('/login', 'App\Http\Controllers\ProductController@login')->name('guest.product.login');
 
 Route::get('/dashboard', 'App\Http\Controllers\Admin\DashboardController@index');    
 
