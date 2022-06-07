@@ -77,11 +77,32 @@
 								<th>Description</th>
 								<th>Category</th>
 								<th>Price</th>
+								<th>Slug</th>
 								<th>Actions</th>
 							</tr>
 						</thead>
 						<tbody>
+							@php $no=1 @endphp
+							@foreach ($product as $data)
+								<tr>
+									<td>{{ $no++ }}</td>
+									<td><img src="../admin/assets/images/{{ $data->photos }}" width="100px"></td>
+									<td>{{ $data->name }}</td>
+									<td>{{ $data->description }}</td>
+									<td>{{ $data->category->category }}</td>
+									<td>{{ $data->price }}</td>
+									<td>{{ $data->slug }}</td>
+									<td>
+										<form action="{{ route('product.destroy', $data->id) }}" method="post">
+											@csrf	
+											@method('DELETE')
 
+											<a href="{{ route('product.edit', $data->id) }}" class="btn btn-warning">Edit</a>
+											<button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure ?')">Delete</button>
+										</form>
+									</td>
+								</tr>
+							@endforeach
 						</tbody>
 					</table>
 					<!--end: Datatable-->

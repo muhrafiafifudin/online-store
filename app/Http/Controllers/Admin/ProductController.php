@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Gallery;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -16,7 +17,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('pages.admin.shop.product');
+        $product = Product::get();
+
+        return view('pages.admin.shop.product', compact('product'));
     }
 
     /**
@@ -39,7 +42,22 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'photos' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        $data = $request->all();
+
+        if ($image = $request->file('photos')) {
+            $destinationPath = 'admin/assets/images/';
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $data['photos'] = $profileImage;
+        }
+
+        Product::create($data);
+
+        return redirect()->route('product.index');
     }
 
     /**
@@ -61,7 +79,12 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = Product::findOrFail($id);
+
+        return view('pages.admin.shop.edit-product', [
+            'product'   => $product,
+            'category'  => Category::all() 
+        ]); 
     }
 
     /**
@@ -71,16 +94,22 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Product $product)
     {
-        $product = Product::findOrFail($id);
-        $product->name = $request->input('name');
-        $product->categories_id = $request->input('categories_id');
-        $product->price = $request->input('price');
-        $product->description = $request->input('desciption');
-        $product->slug = $request->input('slug');
+        $data = $request->all();
 
-        $product->save();
+        if ($image = $request->file('photos')) {
+            $destinationPath = 'admin/assets/images/';
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $data['photos'] = $profileImage;
+        } else{
+            unset($data['photos']);
+        }
+          
+        $product->update($data);
+
+        return redirect()->route('product.index');
     }
 
     /**
@@ -91,6 +120,9 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Product::findOrFail($id);
+        $product->delete();
+        
+        return redirect()->route('product.index');
     }
 }

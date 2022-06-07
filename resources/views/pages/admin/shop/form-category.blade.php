@@ -67,7 +67,7 @@
 					</div>
 					<div class="card-footer">
 						<button type="submit" class="btn btn-primary mr-2">Submit</button>
-						<!-- <button type="reset" class="btn btn-secondary">Cancel</button> -->
+						<a href="{{ route('category.index') }}" class="btn btn-secondary">Cancel</a>
 					</div>
 				</form>
 				<!--end::Form-->
