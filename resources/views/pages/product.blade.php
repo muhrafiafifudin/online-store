@@ -56,8 +56,7 @@
                 <div class="col-6 col-md-4 col-lg-4 col-xl-3">
                     <div class="product">
                         <figure class="product-media">
-                            <span class="product-label label-new">New</span>
-                            <a href="{{ route('guest.product.product-detail') }}">
+                            <a href="{{ route('guest.product-detail.index') }}">
                                 <img src="../admin/assets/images/{{ $data->photos }}" alt="Product image" class="product-image">
                             </a>
 
@@ -68,9 +67,9 @@
 
                         <div class="product-body text-center">
                             <div class="product-cat">
-                                <a href="{{ route('guest.product.product-detail') }}">{{ $data->category->category }}</a>
+                                <a href="{{ route('guest.product-detail.index') }}">{{ $data->category->category }}</a>
                             </div><!-- End .product-cat -->
-                            <h3 class="product-title"><a href="{{ route('guest.product.product-detail') }}">{{ $data->name }}</a></h3><!-- End .product-title -->
+                            <h3 class="product-title"><a href="{{ route('guest.product-detail.index') }}">{{ $data->name }}</a></h3><!-- End .product-title -->
                             <div class="product-price">
                                 IDR. {{ number_format($data->price, 2, ',', '.') }}
                             </div><!-- End .product-price -->

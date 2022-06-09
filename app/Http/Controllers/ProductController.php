@@ -18,9 +18,4 @@ class ProductController extends Controller
     {
         return view('pages.login');
     }
-
-    public function product_detail()
-    {
-        return view('pages.product-detail');
-    }
 }

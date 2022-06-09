@@ -18,7 +18,7 @@ Route::get('/', function () {
 });
 
 Route::get('/product', 'App\Http\Controllers\ProductController@index')->name('guest.product.index');
-Route::get('/product-detail', 'App\Http\Controllers\ProductController@product_detail')->name('guest.product.product-detail');
+Route::get('/product-detail', 'App\Http\Controllers\ProductDetailController@index')->name('guest.product-detail.index');
 Route::get('/login', 'App\Http\Controllers\ProductController@login')->name('guest.product.login');
 
 Route::get('/dashboard', 'App\Http\Controllers\Admin\DashboardController@index');    

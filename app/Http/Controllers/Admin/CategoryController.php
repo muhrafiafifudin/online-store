@@ -89,6 +89,7 @@ class CategoryController extends Controller
         $category = Category::findOrFail($id);
         $category->category = $request->category;
         $category->save();
+        
         return redirect()->route('category.index');
     }
 
