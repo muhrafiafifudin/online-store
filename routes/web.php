@@ -14,14 +14,24 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('pages.user.home');
+    return view('welcome');
 });
 
-Route::get('/product', 'App\Http\Controllers\ProductController@index')->name('guest.product.index');
-Route::get('/product-detail', 'App\Http\Controllers\ProductDetailController@index')->name('guest.product-detail.index');
-Route::get('/login', 'App\Http\Controllers\ProductController@login')->name('guest.product.login');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
-Route::get('/dashboard', 'App\Http\Controllers\Admin\DashboardController@index');    
+require __DIR__.'/auth.php';
 
-Route::resource('/dashboard/category', App\Http\Controllers\Admin\CategoryController::class);
-Route::resource('/dashboard/product', App\Http\Controllers\Admin\ProductController::class);
+
+// Admin
+Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
+    Route::namespace('Auth')->group(function () {
+        // Login Route
+        Route::get('login', 'AuthenticatedSessionController@create')->name('login');
+        Route::post('login', 'AuthenticatedSessionController@store')->name('adminlogin');
+    });
+    Route::get('dashboard','HomeController@index')->name('dashboard');
+    Route::post('logout', 'Auth\AuthenticatedSessionController@destroy')->name('logout');
+});
+
