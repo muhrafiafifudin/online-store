@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('admin.layouts.admin')
 
 @section('title')
 	Diva Metal Mandiri | Shop
@@ -51,7 +51,7 @@
 					</div>
 					<div class="card-toolbar">
 						<!--begin::Button-->
-						<a href="{{ route('category.create') }}" class="btn btn-primary font-weight-bolder">
+						<a href="{{ route('admin.category.create') }}" class="btn btn-primary font-weight-bolder">
 						<span class="svg-icon svg-icon-md">
 							<!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
 							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -84,11 +84,11 @@
 									<td>{{ $no++ }}</td>
 									<td>{{ $data->category }}</td>
 									<td>
-										<form action="{{ route('category.destroy', $data->id) }}" method="post">
+										<form action="{{ route('admin.category.destroy', $data->id) }}" method="post">
 											@csrf	
 											@method('DELETE')
 
-											<a href="{{ route('category.edit', $data->id) }}" class="btn btn-warning">Edit</a>
+											<a href="{{ route('admin.category.edit', $data->id) }}" class="btn btn-warning">Edit</a>
 											<button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure ?')">Delete</button>
 										</form>
 									</td>

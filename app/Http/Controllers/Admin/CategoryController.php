@@ -17,7 +17,7 @@ class CategoryController extends Controller
     {
         $category = Category::all();
 
-        return view('pages.admin.shop.category', compact('category')); 
+        return view('admin.pages.shop.category', compact('category')); 
     }
 
     /**
@@ -27,7 +27,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('pages.admin.shop.form-category');
+        return view('admin.pages.shop.form-category');
     }
 
     /**
@@ -46,7 +46,7 @@ class CategoryController extends Controller
             'category' => $request->category,
         ]);
 
-        return redirect()->route('category.index');
+        return redirect()->route('admin.category.index');
     }
 
     /**
@@ -70,7 +70,7 @@ class CategoryController extends Controller
     {
         $category = Category::findOrFail($id);
 
-        return view('pages.admin.shop.edit-category', compact('category'));
+        return view('admin.pages.shop.edit-category', compact('category'));
     }
 
     /**
@@ -90,7 +90,7 @@ class CategoryController extends Controller
         $category->category = $request->category;
         $category->save();
         
-        return redirect()->route('category.index');
+        return redirect()->route('admin.category.index');
     }
 
     /**
@@ -104,6 +104,6 @@ class CategoryController extends Controller
         $category = Category::findOrFail($id);
         $category->delete();
         
-        return redirect()->route('category.index');
+        return redirect()->route('admin.category.index');
     }
 }

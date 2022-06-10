@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('admin.layouts.admin')
 
 @section('title')
 	Diva Metal Mandiri | Shop
@@ -54,7 +54,7 @@
 					</div>
 				</div>
 				<!--begin::Form-->
-				<form action="{{ route('category.store') }}" method="post">
+				<form action="{{ route('admin.category.store') }}" method="post">
 					@csrf
 					@method('post')
 					
@@ -67,7 +67,7 @@
 					</div>
 					<div class="card-footer">
 						<button type="submit" class="btn btn-primary mr-2">Submit</button>
-						<a href="{{ route('category.index') }}" class="btn btn-secondary">Cancel</a>
+						<a href="{{ route('admin.category.index') }}" class="btn btn-secondary">Cancel</a>
 					</div>
 				</form>
 				<!--end::Form-->

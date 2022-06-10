@@ -51,7 +51,7 @@
 					</div>
 					<div class="card-toolbar">
 						<!--begin::Button-->
-						<a href="{{ route('product.create') }}" class="btn btn-primary font-weight-bolder">
+						<a href="{{ route('admin.product.create') }}" class="btn btn-primary font-weight-bolder">
 						<span class="svg-icon svg-icon-md">
 							<!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
 							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -93,11 +93,11 @@
 									<td>{{ $data->price }}</td>
 									<td>{{ $data->slug }}</td>
 									<td>
-										<form action="{{ route('product.destroy', $data->id) }}" method="post">
+										<form action="{{ route('admin.product.destroy', $data->id) }}" method="post">
 											@csrf	
 											@method('DELETE')
 
-											<a href="{{ route('product.edit', $data->id) }}" class="btn btn-warning">Edit</a>
+											<a href="{{ route('admin.product.edit', $data->id) }}" class="btn btn-warning">Edit</a>
 											<button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure ?')">Delete</button>
 										</form>
 									</td>

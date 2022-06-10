@@ -54,7 +54,7 @@
 					</div>	
 				</div>
 				<!--begin::Form-->
-				<form action="{{ route('product.store') }}" method="post" enctype="multipart/form-data">
+				<form action="{{ route('admin.product.store') }}" method="post" enctype="multipart/form-data">
 					@csrf
 					@method('post')
 
@@ -98,7 +98,7 @@
 					</div>
 					<div class="card-footer">
 						<button type="submit" class="btn btn-primary">Save</button>
-						<a href="{{ route('product.index') }}" class="btn btn-secondary">Cancel</a>
+						<a href="{{ route('admin.product.index') }}" class="btn btn-secondary">Cancel</a>
 					</div>
 				</form>
 				<!--end::Form-->

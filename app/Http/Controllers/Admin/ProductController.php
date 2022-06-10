@@ -57,7 +57,7 @@ class ProductController extends Controller
 
         Product::create($data);
 
-        return redirect()->route('product.index');
+        return redirect()->route('admin.product.index');
     }
 
     /**
@@ -109,7 +109,7 @@ class ProductController extends Controller
           
         $product->update($data);
 
-        return redirect()->route('product.index');
+        return redirect()->route('admin.product.index');
     }
 
     /**
@@ -123,6 +123,6 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
         $product->delete();
         
-        return redirect()->route('product.index');
+        return redirect()->route('admin.product.index');
     }
 }

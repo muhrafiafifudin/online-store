@@ -4,8 +4,8 @@
     <div id="kt_aside_menu" class="aside-menu my-4" data-menu-vertical="1" data-menu-scroll="1" data-menu-dropdown-timeout="500">
         <!--begin::Menu Nav-->
         <ul class="menu-nav">
-            <li class="menu-item" aria-haspopup="true">
-                <a href="index.html" class="menu-link">
+            <li class="menu-item {{ request()->is('admin/dashboard') ? 'menu-item-active' : '' }}" aria-haspopup="true">
+                <a href="{{ route('admin.dashboard') }}" class="menu-link">
                     <span class="svg-icon menu-icon">
                         <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Layers.svg-->
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -40,7 +40,7 @@
                     <span class="menu-text">Home</span>
                 </a>
             </li>
-            <li class="menu-item {{ (request()->is('dashboard/category', 'dashboard/product')) ? 'menu-item-active menu-item-open' : 'menu-item-submenu' }}" aria-haspopup="true" data-menu-toggle="hover">
+            <li class="menu-item {{ (request()->is('admin/category', 'admin/product')) ? 'menu-item-active menu-item-open' : 'menu-item-submenu' }}" aria-haspopup="true" data-menu-toggle="hover">
                 <a href="javascript:;" class="menu-link menu-toggle">
                     <span class="svg-icon menu-icon">
                         <!--begin::Svg Icon | path:assets/media/svg/icons/Shopping/Barcode-read.svg-->
@@ -59,7 +59,7 @@
                 <div class="menu-submenu">
                     <i class="menu-arrow"></i>
                     <ul class="menu-subnav">
-                        <li class="menu-item {{ (request()->is('dashboard/category')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
+                        <li class="menu-item {{ (request()->is('admin/category')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
                             <a href="{{ route('admin.category.index') }}" class="menu-link">
                                 <i class="menu-bullet menu-bullet-dot">
                                     <span></span>
@@ -67,7 +67,7 @@
                                 <span class="menu-text">Category</span>
                             </a>
                         </li>
-                        <li class="menu-item {{ (request()->is('dashboard/product')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
+                        <li class="menu-item {{ (request()->is('admin/product')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
                             <a href="{{ route('admin.product.index') }}" class="menu-link">
                                 <i class="menu-bullet menu-bullet-dot">
                                     <span></span>

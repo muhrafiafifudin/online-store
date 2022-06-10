@@ -26,10 +26,10 @@
 							<a href="" class="text-muted">Shop</a>
 						</li>
 						<li class="breadcrumb-item">
-							<a href="" class="text-muted">Item</a>
+							<a href="" class="text-muted">Category</a>
 						</li>
 						<li class="breadcrumb-item">
-							<a href="" class="text-muted">Add Item</a>
+							<a href="" class="text-muted">Add Category</a>
 						</li>
 					</ul>
 					<!--end::Breadcrumb-->
@@ -48,57 +48,26 @@
 			<div class="card card-custom">
 				<div class="card-header flex-wrap py-5">
 					<div class="card-title">
-						<h3 class="card-label">Form Item
-							<div class="text-muted pt-2 font-size-sm">Add Data Item</div>
+						<h3 class="card-label">Form Category
+							<div class="text-muted pt-2 font-size-sm">Add Data Category</div>
 						</h3>
-					</div>	
+					</div>
 				</div>
 				<!--begin::Form-->
-				<form action="{{ route('product.update', $product->id) }}" method="post" enctype="multipart/form-data">
+				<form action="{{ route('admin.category.update', $category->id) }}" method="post">
 					@csrf
 					@method('put')
-
+					
 					<div class="card-body">
 						<div class="form-group">
-							<label>Name Product
+							<label>Category
 							<span class="text-danger">*</span></label>
-							<input type="text" name="name" value="{{ $product->name }}" class="form-control" placeholder="Enter email" />
-						</div>
-						<div class="form-group">
-							<label>Images</label>
-							<div></div>
-							<div class="custom-file">
-								<input type="file" class="custom-file-input" name="photos" />
-								<label class="custom-file-label">{{ $product->photos }}</label>
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="exampleTextarea">Description</label>
-							<textarea class="form-control" name="description" rows="3">{{ $product->description }}</textarea>
-						</div>
-						<div class="form-group">
-							<label for="exampleSelect1">Category
-							<span class="text-danger">*</span></label>
-							<select class="form-control" name="categories_id" value="Cek" >
-								@foreach ($category as $data)
-									<option value="{{ $data->id }}" {{ $data->id == $product->categories_id ? ' selected' : '' }}>{{ $data->category }}</option>
-								@endforeach
-							</select>
-						</div>
-						<div class="form-group">
-							<label>Price
-							<span class="text-danger">*</span></label>
-							<input type="number" name="price" value="{{ $product->price }}" class="form-control" placeholder="Enter email" />
-						</div>
-						<div class="form-group">
-							<label>Slug
-							<span class="text-danger">*</span></label>
-							<input type="text" name="slug" value="{{ $product->slug }}" class="form-control" placeholder="Enter email" />
+							<input type="text" name="category" class="form-control" value="{{ $category->category }}" placeholder="Enter category" />
 						</div>
 					</div>
 					<div class="card-footer">
 						<button type="submit" class="btn btn-primary">Save</button>
-						<a href="{{ route('product.index') }}" class="btn btn-secondary">Cancel</a>
+						<a href="{{ route('admin.category.index') }}" class="btn btn-secondary">Cancel</a>
 					</div>
 				</form>
 				<!--end::Form-->
@@ -110,4 +79,5 @@
 	<!--end::Entry-->
 </div>
 <!--end::Content-->
+
 @endsection
