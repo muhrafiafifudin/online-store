@@ -60,7 +60,7 @@
                     <i class="menu-arrow"></i>
                     <ul class="menu-subnav">
                         <li class="menu-item {{ (request()->is('dashboard/category')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
-                            <a href="{{ route('category.index') }}" class="menu-link">
+                            <a href="{{ route('admin.category.index') }}" class="menu-link">
                                 <i class="menu-bullet menu-bullet-dot">
                                     <span></span>
                                 </i>
@@ -68,7 +68,7 @@
                             </a>
                         </li>
                         <li class="menu-item {{ (request()->is('dashboard/product')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
-                            <a href="{{ route('product.index') }}" class="menu-link">
+                            <a href="{{ route('admin.product.index') }}" class="menu-link">
                                 <i class="menu-bullet menu-bullet-dot">
                                     <span></span>
                                 </i>

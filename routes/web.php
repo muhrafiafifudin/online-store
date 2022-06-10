@@ -26,12 +26,19 @@ require __DIR__.'/auth.php';
 
 // Admin
 Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
-    Route::namespace('Auth')->group(function () {
+    Route::namespace('Auth')->middleware('guest:admin')->group(function () {
         // Login Route
         Route::get('login', 'AuthenticatedSessionController@create')->name('login');
         Route::post('login', 'AuthenticatedSessionController@store')->name('adminlogin');
     });
-    Route::get('dashboard','HomeController@index')->name('dashboard');
+    Route::middleware('admin')->group(function () {
+        // Dashboard
+        Route::get('dashboard','DashboardController@index')->name('dashboard');
+        // Category
+        Route::resource('category','CategoryController');
+        //Product
+        Route::resource('product','CategoryController');
+    });
     Route::post('logout', 'Auth\AuthenticatedSessionController@destroy')->name('logout');
 });
 
