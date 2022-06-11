@@ -56,24 +56,29 @@
                 <div class="col-6 col-md-4 col-lg-4 col-xl-3">
                     <div class="product">
                         <figure class="product-media">
-                            <a href="{{ route('guest.product-detail.index') }}">
+                            <a href="{{ route('product-detail.index') }}">
                                 <img src="../admin/assets/images/{{ $data->photos }}" alt="Product image" class="product-image">
                             </a>
 
                             <div class="product-action">
-                                <a href="{{ route('guest.product.login') }}" class="btn-product btn-cart"><span>ADD TO CART</span></a>
+                                <a href="#" class="btn-product btn-cart"><span>ADD TO CART</span></a>
                             </div><!-- End .product-action -->
                         </figure><!-- End .product-media -->
 
-                        <div class="product-body text-center">
+                        <div class="product-body">
                             <div class="product-cat">
-                                <a href="{{ route('guest.product-detail.index') }}">{{ $data->category->category }}</a>
+                                <a href="{{ route('product-detail.index') }}">{{ $data->category->category }}</a>
                             </div><!-- End .product-cat -->
-                            <h3 class="product-title"><a href="{{ route('guest.product-detail.index') }}">{{ $data->name }}</a></h3><!-- End .product-title -->
+                            <h3 class="product-title"><a href="{{ route('product-detail.index') }}">{{ $data->name }}</a></h3><!-- End .product-title -->
                             <div class="product-price">
                                 IDR. {{ number_format($data->price, 2, ',', '.') }}
                             </div><!-- End .product-price -->
-
+                            <div class="ratings-container">
+                                <div class="ratings">
+                                    <div class="ratings-val" style="width: 0%;"></div><!-- End .ratings-val -->
+                                </div><!-- End .ratings -->
+                                <span class="ratings-text">( 0 Reviews )</span>
+                            </div><!-- End .rating-container -->
                         </div><!-- End .product-body -->
                     </div><!-- End .product -->
                 </div><!-- End .col-sm-6 col-lg-4 col-xl-3 -->

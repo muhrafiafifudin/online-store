@@ -13,6 +13,18 @@
                 <li class="breadcrumb-item"><a href="#">Products</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Default</li>
             </ol>
+
+            <nav class="product-pager ml-auto" aria-label="Product">
+                <a class="product-pager-link product-pager-prev" href="#" aria-label="Previous" tabindex="-1">
+                    <i class="icon-angle-left"></i>
+                    <span>Prev</span>
+                </a>
+
+                <a class="product-pager-link product-pager-next" href="#" aria-label="Next" tabindex="-1">
+                    <span>Next</span>
+                    <i class="icon-angle-right"></i>
+                </a>
+            </nav><!-- End .pager-nav -->
         </div><!-- End .container -->
     </nav><!-- End .breadcrumb-nav -->
 
@@ -20,23 +32,24 @@
         <div class="container">
             <div class="product-details-top">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-5">
                         <div class="product-gallery product-gallery-vertical">
-                            <div class="row">
-                                <figure class="product-main-image">
-                                    <img id="product-zoom" src="assets/images/products/single/1.jpg" data-zoom-image="assets/images/products/single/1-big.jpg" alt="product image">
-
-                                    <a href="#" id="btn-product-gallery" class="btn-product-gallery">
-                                        <i class="icon-arrows"></i>
-                                    </a>
-                                </figure><!-- End .product-main-image -->
-                            </div><!-- End .row -->
+                            <figure class="product-main-image">
+                                <img src="/user/assets/images/products/single/1.jpg" alt="product image">
+                            </figure><!-- End .product-main-image -->
                         </div><!-- End .product-gallery -->
                     </div><!-- End .col-md-6 -->
 
-                    <div class="col-md-6">
+                    <div class="col-md-7">
                         <div class="product-details">
-                            <h1 class="product-title">{{}}</h1><!-- End .product-title -->
+                            <h1 class="product-title">Dark yellow lace cut out swing dress</h1><!-- End .product-title -->
+
+                            <div class="ratings-container">
+                                <div class="ratings">
+                                    <div class="ratings-val" style="width: 80%;"></div><!-- End .ratings-val -->
+                                </div><!-- End .ratings -->
+                                <a class="ratings-text" href="#product-review-link" id="review-link">( 2 Reviews )</a>
+                            </div><!-- End .rating-container -->
 
                             <div class="product-price">
                                 $84.00
@@ -55,14 +68,28 @@
 
                             <div class="product-details-action">
                                 <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
+
+                                <div class="details-action-wrapper">
+                                    <a href="#" class="btn-product btn-wishlist" title="Wishlist"><span>Add to Wishlist</span></a>
+                                </div><!-- End .details-action-wrapper -->
                             </div><!-- End .product-details-action -->
 
                             <div class="product-details-footer">
                                 <div class="product-cat">
-                                    <span>Category: </span>
+                                    <span>Category:</span>
+                                    <a href="#">Women</a>,
+                                    <a href="#">Dresses</a>,
+                                    <a href="#">Yellow</a>
                                 </div><!-- End .product-cat -->
-                            </div><!-- End .product-details-footer -->
 
+                                <div class="social-icons social-icons-sm">
+                                    <span class="social-label">Share:</span>
+                                    <a href="#" class="social-icon" title="Facebook" target="_blank"><i class="icon-facebook-f"></i></a>
+                                    <a href="#" class="social-icon" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>
+                                    <a href="#" class="social-icon" title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
+                                    <a href="#" class="social-icon" title="Pinterest" target="_blank"><i class="icon-pinterest"></i></a>
+                                </div>
+                            </div><!-- End .product-details-footer -->
                         </div><!-- End .product-details -->
                     </div><!-- End .col-md-6 -->
                 </div><!-- End .row -->
@@ -214,7 +241,7 @@
                     <figure class="product-media">
                         <span class="product-label label-new">New</span>
                         <a href="product.html">
-                            <img src="assets/images/products/product-4.jpg" alt="Product image" class="product-image">
+                            <img src="/user/assets/images/products/product-4.jpg" alt="Product image" class="product-image">
                         </a>
 
                         <div class="product-action-vertical">
@@ -245,14 +272,14 @@
 
                         <div class="product-nav product-nav-thumbs">
                             <a href="#" class="active">
-                                <img src="assets/images/products/product-4-thumb.jpg" alt="product desc">
+                                <img src="/user/assets/images/products/product-4-thumb.jpg" alt="product desc">
                             </a>
                             <a href="#">
-                                <img src="assets/images/products/product-4-2-thumb.jpg" alt="product desc">
+                                <img src="/user/assets/images/products/product-4-2-thumb.jpg" alt="product desc">
                             </a>
 
                             <a href="#">
-                                <img src="assets/images/products/product-4-3-thumb.jpg" alt="product desc">
+                                <img src="/user/assets/images/products/product-4-3-thumb.jpg" alt="product desc">
                             </a>
                         </div><!-- End .product-nav -->
                     </div><!-- End .product-body -->
@@ -262,7 +289,7 @@
                     <figure class="product-media">
                         <span class="product-label label-out">Out of Stock</span>
                         <a href="product.html">
-                            <img src="assets/images/products/product-6.jpg" alt="Product image" class="product-image">
+                            <img src="/user/assets/images/products/product-6.jpg" alt="Product image" class="product-image">
                         </a>
 
                         <div class="product-action-vertical">
@@ -297,7 +324,7 @@
                     <figure class="product-media">
                         <span class="product-label label-top">Top</span>
                         <a href="product.html">
-                            <img src="assets/images/products/product-11.jpg" alt="Product image" class="product-image">
+                            <img src="/user/assets/images/products/product-11.jpg" alt="Product image" class="product-image">
                         </a>
 
                         <div class="product-action-vertical">
@@ -328,14 +355,14 @@
 
                         <div class="product-nav product-nav-thumbs">
                             <a href="#" class="active">
-                                <img src="assets/images/products/product-11-thumb.jpg" alt="product desc">
+                                <img src="/user/assets/images/products/product-11-thumb.jpg" alt="product desc">
                             </a>
                             <a href="#">
-                                <img src="assets/images/products/product-11-2-thumb.jpg" alt="product desc">
+                                <img src="/user/assets/images/products/product-11-2-thumb.jpg" alt="product desc">
                             </a>
 
                             <a href="#">
-                                <img src="assets/images/products/product-11-3-thumb.jpg" alt="product desc">
+                                <img src="/user/assets/images/products/product-11-3-thumb.jpg" alt="product desc">
                             </a>
                         </div><!-- End .product-nav -->
                     </div><!-- End .product-body -->
@@ -344,7 +371,7 @@
                 <div class="product product-7 text-center">
                     <figure class="product-media">
                         <a href="product.html">
-                            <img src="assets/images/products/product-10.jpg" alt="Product image" class="product-image">
+                            <img src="/user/assets/images/products/product-10.jpg" alt="Product image" class="product-image">
                         </a>
 
                         <div class="product-action-vertical">
@@ -378,7 +405,7 @@
                 <div class="product product-7 text-center">
                     <figure class="product-media">
                         <a href="product.html">
-                            <img src="assets/images/products/product-7.jpg" alt="Product image" class="product-image">
+                            <img src="/user/assets/images/products/product-7.jpg" alt="Product image" class="product-image">
                         </a>
 
                         <div class="product-action-vertical">
@@ -412,4 +439,34 @@
         </div><!-- End .container -->
     </div><!-- End .page-content -->
 </main><!-- End .main -->
+
+<!-- Sticky Bar -->
+<div class="sticky-bar">
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <figure class="product-media">
+                    <a href="product.html">
+                        <img src="/user/assets/images/products/sticky/product-1.jpg" alt="Product image">
+                    </a>
+                </figure><!-- End .product-media -->
+                <h4 class="product-title"><a href="product.html">Dark yellow lace cut out swing dress</a></h4><!-- End .product-title -->
+            </div><!-- End .col-6 -->
+
+            <div class="col-6 justify-content-end">
+                <div class="product-price">
+                    $84.00
+                </div><!-- End .product-price -->
+                <div class="product-details-quantity">
+                    <input type="number" id="sticky-cart-qty" class="form-control" value="1" min="1" max="10" step="1" data-decimals="0" required>
+                </div><!-- End .product-details-quantity -->
+
+                <div class="product-details-action">
+                    <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
+                    <a href="#" class="btn-product btn-wishlist" title="Wishlist"><span>Add to Wishlist</span></a>
+                </div><!-- End .product-details-action -->
+            </div><!-- End .col-6 -->
+        </div><!-- End .row -->
+    </div><!-- End .container -->
+</div><!-- End .sticky-bar -->
 @endsection

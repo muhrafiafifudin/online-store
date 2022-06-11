@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,18 +14,30 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('pages.home');
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
 
+Route::get('/', function () {
+    return view('pages.home');
+});
 
-// Admin
+Route::get('/product', 'ProductController@index')->name('product.index');
+Route::get('/product-detail', 'ProductDetailController@index')->name('product-detail.index');
+Route::get('/cart', 'ProductDetailController@cart')->name('product-detail.cart');
+
+// User Routes
+Route::middleware(['auth'])->group(function () {
+    
+});
+
+// Admin Routes
 Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
     Route::namespace('Auth')->middleware('guest:admin')->group(function () {
         // Login Route
@@ -37,8 +50,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
         // Category
         Route::resource('category','CategoryController');
         //Product
-        Route::resource('product','CategoryController');
+        Route::resource('product','ProductController');
     });
     Route::post('logout', 'Auth\AuthenticatedSessionController@destroy')->name('logout');
 });
-

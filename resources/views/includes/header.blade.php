@@ -18,7 +18,7 @@
                         <a href="{{ url('/') }}">Home</a>
                     </li>
                     <li>
-                        <a href="{{ route('guest.product.index') }}">Product</a>
+                        <a href="{{ route('product.index') }}">Product</a>
                     </li>
                     {{-- <li>
                         <a href="{{ url('blog') }}">Blog</a>
@@ -33,23 +33,51 @@
             </nav><!-- End .main-nav -->
         </div><!-- End .header-left -->
 
-        <div class="header-right">
-            <div class="header-search">
-                <a href="#" class="search-toggle" role="button" title="Search"><i class="icon-search"></i></a>
-                <form action="#" method="get">
-                    <div class="header-search-wrapper">
-                        <label for="q" class="sr-only">Search</label>
-                        <input type="search" class="form-control" name="q" id="q" placeholder="Search in..." required>
-                    </div><!-- End .header-search-wrapper -->
-                </form>
-            </div><!-- End .header-search -->
+        
+            
 
-            <div class="sign-up">
-                <button type="submit" class="btn btn-outline-primary-2 ml-4">
-                    <span>SIGN UP</span>
-                </button>
-            </div>
-        </div><!-- End .header-right -->
+        @if (Route::has('login'))
+            <div class="header-right">
+                @auth
+                <div class="dropdown cart-dropdown">
+                    <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
+                        <i class="icon-shopping-cart"></i>
+                        <span class="cart-count">2</span>
+                    </a>
+                </div><!-- End .cart-dropdown -->
+
+                <div class="dropdown compare-dropdown user-login">
+                    <a href="#" class="dropdown-toggle name-user-login" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static" title="Compare Products" aria-label="Compare Products">
+                        Hi, User<i class="icon-user"></i>
+                    </a>
+
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <ul class="compare-products">
+                            <li class="compare-product">
+                                <h4 class="compare-product-title"><a href="product.html">Dashboard</a></h4>
+                            </li>
+                            <li class="compare-product">
+                                <h4 class="compare-product-title"><a href="product.html">Setting</a></h4>
+                            </li>
+                        </ul>
+
+                        <div class="compare-actions">
+                            <form method="post" action="{{ route('logout') }}">
+                                @csrf
+
+                                <button type="submit" class="btn btn-outline-primary-2"><span>Logout</span><i class="icon-long-arrow-right"></i></button>
+                            </form>
+                        </div>
+                    </div><!-- End .dropdown-menu -->
+                </div><!-- End .compare-dropdown -->
+                @else
+                <div class="sign-up">
+                    <a href="{{ route('login') }}" class="btn btn-outline-primary-2 ml-4">SIGN IN</a>
+                </div>
+                @endauth
+            </div><!-- End .header-right -->
+        @endif
+        
     </div><!-- End .container -->
 </div><!-- End .header-middle -->
 </header><!-- End .header -->
