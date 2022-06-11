@@ -66,15 +66,27 @@
                         </div><!-- End .form-choice -->
                     </div><!-- .End .tab-pane -->
                     <div class="tab-pane fade" id="register-2" role="tabpanel" aria-labelledby="register-tab-2">
-                        <form action="#">
+                        <form method="post" action="{{ route('register') }}">
+                            @csrf
+
                             <div class="form-group">
-                                <label for="register-email-2">Your email address *</label>
-                                <input type="email" class="form-control" id="register-email-2" name="register-email" required>
+                                <label for="name">Your name *</label>
+                                <input type="text" class="form-control" id="name" name="name" required>
                             </div><!-- End .form-group -->
 
                             <div class="form-group">
-                                <label for="register-password-2">Password *</label>
-                                <input type="password" class="form-control" id="register-password-2" name="register-password" required>
+                                <label for="email">Your email address *</label>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                            </div><!-- End .form-group -->
+
+                            <div class="form-group">
+                                <label for="password">Password *</label>
+                                <input type="password" class="form-control" id="password" name="password" required>
+                            </div><!-- End .form-group -->
+
+                            <div class="form-group">
+                                <label for="password_confirmation">Confirm password *</label>
+                                <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
                             </div><!-- End .form-group -->
 
                             <div class="form-footer">
@@ -82,11 +94,6 @@
                                     <span>SIGN UP</span>
                                     <i class="icon-long-arrow-right"></i>
                                 </button>
-
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="register-policy-2" required>
-                                    <label class="custom-control-label" for="register-policy-2">I agree to the <a href="#">privacy policy</a> *</label>
-                                </div><!-- End .custom-checkbox -->
                             </div><!-- End .form-footer -->
                         </form>
                         <div class="form-choice">

@@ -9,9 +9,9 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $product = Product::get();
+        $products = Product::get();
 
-        return view('pages.product', compact('product'));
+        return view('pages.product', compact('products'));
     }
 
     public function login()

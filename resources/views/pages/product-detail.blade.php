@@ -30,19 +30,20 @@
 
     <div class="page-content">
         <div class="container">
-            <div class="product-details-top">
+
+            <div class="product-details-top product_data">
                 <div class="row">
                     <div class="col-md-5">
                         <div class="product-gallery product-gallery-vertical">
                             <figure class="product-main-image">
-                                <img src="/user/assets/images/products/single/1.jpg" alt="product image">
+                                <img src="/admin/assets/images/{{ $products->photos }}" alt="product image">
                             </figure><!-- End .product-main-image -->
                         </div><!-- End .product-gallery -->
                     </div><!-- End .col-md-6 -->
 
                     <div class="col-md-7">
                         <div class="product-details">
-                            <h1 class="product-title">Dark yellow lace cut out swing dress</h1><!-- End .product-title -->
+                            <h1 class="product-title">{{ $products->name }}</h1><!-- End .product-title -->
 
                             <div class="ratings-container">
                                 <div class="ratings">
@@ -52,22 +53,24 @@
                             </div><!-- End .rating-container -->
 
                             <div class="product-price">
-                                $84.00
+                                IDR. {{ number_format($products->price, 2, ',', '.') }}
                             </div><!-- End .product-price -->
 
                             <div class="product-content">
-                                <p>Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing. Sed lectus. </p>
+                                <p>{{ $products->description }}</p>
                             </div><!-- End .product-content -->
 
                             <div class="details-filter-row details-row-size">
+                                <input type="hidden" value="{{ $products->id }}" class="prod_id">
                                 <label for="qty">Qty:</label>
                                 <div class="product-details-quantity">
-                                    <input type="number" id="qty" class="form-control" value="1" min="1" max="10" step="1" data-decimals="0" required>
+                                    <input type="number" id="qty" class="form-control qty-input" value="1" min="1" max="10" step="1" data-decimals="0" required>
                                 </div><!-- End .product-details-quantity -->
                             </div><!-- End .details-filter-row -->
 
                             <div class="product-details-action">
-                                <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
+                                <button class="btn-product btn-cart addToCartBtn"><span>add to cart</span></button>
+                                <!-- <a href="#" class="btn-product btn-cart addToCartBtn"><span>add to cart</span></a> -->
 
                                 <div class="details-action-wrapper">
                                     <a href="#" class="btn-product btn-wishlist" title="Wishlist"><span>Add to Wishlist</span></a>
@@ -76,10 +79,7 @@
 
                             <div class="product-details-footer">
                                 <div class="product-cat">
-                                    <span>Category:</span>
-                                    <a href="#">Women</a>,
-                                    <a href="#">Dresses</a>,
-                                    <a href="#">Yellow</a>
+                                    <span>Category: {{ $products->category->category }}</span>
                                 </div><!-- End .product-cat -->
 
                                 <div class="social-icons social-icons-sm">
@@ -439,34 +439,4 @@
         </div><!-- End .container -->
     </div><!-- End .page-content -->
 </main><!-- End .main -->
-
-<!-- Sticky Bar -->
-<div class="sticky-bar">
-    <div class="container">
-        <div class="row">
-            <div class="col-6">
-                <figure class="product-media">
-                    <a href="product.html">
-                        <img src="/user/assets/images/products/sticky/product-1.jpg" alt="Product image">
-                    </a>
-                </figure><!-- End .product-media -->
-                <h4 class="product-title"><a href="product.html">Dark yellow lace cut out swing dress</a></h4><!-- End .product-title -->
-            </div><!-- End .col-6 -->
-
-            <div class="col-6 justify-content-end">
-                <div class="product-price">
-                    $84.00
-                </div><!-- End .product-price -->
-                <div class="product-details-quantity">
-                    <input type="number" id="sticky-cart-qty" class="form-control" value="1" min="1" max="10" step="1" data-decimals="0" required>
-                </div><!-- End .product-details-quantity -->
-
-                <div class="product-details-action">
-                    <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
-                    <a href="#" class="btn-product btn-wishlist" title="Wishlist"><span>Add to Wishlist</span></a>
-                </div><!-- End .product-details-action -->
-            </div><!-- End .col-6 -->
-        </div><!-- End .row -->
-    </div><!-- End .container -->
-</div><!-- End .sticky-bar -->
 @endsection

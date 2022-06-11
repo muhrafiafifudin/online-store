@@ -52,11 +52,11 @@
         <div class="products">
             <div class="row">
 
-                @foreach ($product as $data)
+                @foreach ($products as $data)
                 <div class="col-6 col-md-4 col-lg-4 col-xl-3">
                     <div class="product">
                         <figure class="product-media">
-                            <a href="{{ route('product-detail.index') }}">
+                            <a href="{{ url('product/' . $data->slug) }}">
                                 <img src="../admin/assets/images/{{ $data->photos }}" alt="Product image" class="product-image">
                             </a>
 
@@ -67,9 +67,9 @@
 
                         <div class="product-body">
                             <div class="product-cat">
-                                <a href="{{ route('product-detail.index') }}">{{ $data->category->category }}</a>
+                                <a href="{{ url('product/' . $data->slug) }}">{{ $data->category->category }}</a>
                             </div><!-- End .product-cat -->
-                            <h3 class="product-title"><a href="{{ route('product-detail.index') }}">{{ $data->name }}</a></h3><!-- End .product-title -->
+                            <h3 class="product-title"><a href="{{ url('product/' . $data->slug) }}">{{ $data->name }}</a></h3><!-- End .product-title -->
                             <div class="product-price">
                                 IDR. {{ number_format($data->price, 2, ',', '.') }}
                             </div><!-- End .product-price -->

@@ -4,8 +4,86 @@
  * License: MIT, see file 'LICENSE'
  */
 
-(function ($) {
+// $(document).ready(function() {
+//     $('.addToCartBtn').click(function(e) {
+//         e.preventDefault();
+
+//         var products_id = $(this).closest('.product_data').find('.prod_id').val();
+//         var products_qty = $(this).closest('.product_data').find('.qty-input').val();
+
+//         $.ajaxSetup({
+//             headers: {
+//                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+//             }
+//         });
+        
+//         $.ajax({
+//             method: "POST",
+//             url: "/add-to-cart",
+//             data: {
+//                 'products_id': products_id,
+//                 'products_qty': products_qty
+//             },
+//             success: function(response) {
+//                 alert(response.status);
+//             }
+//         })
+//     })
+// })
+
+$(document).ready(function() {
     "use strict"
+
+    $('.addToCartBtn').click(function(e) {
+        e.preventDefault();
+
+        var products_id = $(this).closest('.product_data').find('.prod_id').val();
+        var products_qty = $(this).closest('.product_data').find('.qty-input').val();
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        
+        $.ajax({
+            method: "POST",
+            url: "/add-to-cart",
+            data: {
+                'products_id': products_id,
+                'products_qty': products_qty
+            },
+            success: function(response) {
+                swal(response.status);
+            }
+        })
+    })
+
+    $('.delete-cart-item').click(function(e) {
+        e.preventDefault();
+
+        var products_id = $(this).closest('.product_data').find('.prod_id').val();
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+            method: "POST",
+            url: "delete-cart-item",
+            data: {
+                'products_id': products_id,
+            },
+            success: function(response) {
+                window.location.reload();
+                swal("", response.status, "success");
+            }
+        })
+    });
+
+    
 
     var spacePressed = false
     var originalVal = $.fn.val
@@ -39,11 +117,11 @@
 
         var html = '<div class="input-group ' + config.groupClass + '">' +
             '<div class="input-group-prepend">' +
-            '<button style="min-width: ' + config.buttonsWidth + '" class="btn btn-decrement ' + config.buttonsClass + '" type="button">' + config.decrementButton + '</button>' +
+            '<button style="min-width: ' + config.buttonsWidth + '" class="btn btn-decrement changeQuantity ' + config.buttonsClass + '" type="button">' + config.decrementButton + '</button>' +
             '</div>' +
             '<input type="text" style="text-align: ' + config.textAlign + '" class="form-control"/>' +
             '<div class="input-group-append">' +
-            '<button style="min-width: ' + config.buttonsWidth + '" class="btn btn-increment ' + config.buttonsClass + '" type="button">' + config.incrementButton + '</button>' +
+            '<button style="min-width: ' + config.buttonsWidth + '" class="btn btn-increment changeQuantity ' + config.buttonsClass + '" type="button">' + config.incrementButton + '</button>' +
             '</div>' +
             '</div>'
 
@@ -63,7 +141,35 @@
             var $inputGroup = $(html)
             var $buttonDecrement = $inputGroup.find(".btn-decrement")
             var $buttonIncrement = $inputGroup.find(".btn-increment")
+            var $btnChangeQty = $inputGroup.find(".changeQuantity")
             var $input = $inputGroup.find("input")
+
+            $($btnChangeQty).click(function(e) {
+                e.preventDefault();
+        
+                var products_id = $(this).closest('.product_data').find('.prod_id').val();
+                var products_qty = $(this).closest('.product_data').find($input).val();
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                var data = {
+                    'products_id' : products_id,
+                    'products_qty' : products_qty
+                }
+        
+                $.ajax({
+                    method: "POST",
+                    url: "update-cart",
+                    data: data,
+                    success: function(response) {
+                        window.location.reload();
+                    }
+                })
+            })
 
             var min = null
             var max = null

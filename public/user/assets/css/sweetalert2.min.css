@@ -1,0 +1,27 @@
+.swal2-modal .swal2-title {
+    color: #595959;
+    font-size: 18px;
+    text-align: center;
+    font-weight: 300;
+    text-transform: none;
+    position: relative;
+    margin: 1em 0 0.4em;
+    padding: 0;
+    display: block;
+    word-wrap: break-word;
+    font-family: 'Poppins';
+}
+button.swal2-confirm:hover {
+    color: #fff !important;
+    background-color: #c96 !important;
+}
+button.swal2-confirm {
+    color: #c96 !important;
+    background-color: #fff !important;
+}
+.swal2-modal .swal2-styled {
+    border: 1px solid #c96 !important;
+    font-family: 'Poppins';
+    padding: 5px 50px !important;
+    border-radius: 0px !important
+}

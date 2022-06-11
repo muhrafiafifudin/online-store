@@ -7,15 +7,14 @@ use Illuminate\Http\Request;
 
 class ProductDetailController extends Controller
 {
-    public function index()
+    public function index($slug)
     {
-        $product_detail = Product::get();
+        if (Product::where('slug', $slug)->exists()) {
+            $products = Product::where('slug', $slug)->first();
 
-        return view('pages.product-detail', compact('product_detail'));
-    }
-
-    public function cart()
-    {
-        return view('pages.login');
+            return view('pages.product-detail', compact('products'));
+        } else {
+            return redirect('/product')->with('view', 'The link was broken');
+        }
     }
 }

@@ -4,3 +4,4 @@
 <link rel="stylesheet" href="{{ asset('user/assets/css/plugins/magnific-popup/magnific-popup.css') }}">
 <!-- Main CSS File -->
 <link rel="stylesheet" href="{{ asset('user/assets/css/style.css') }}">
+<link rel="stylesheet" href="{{ asset('user/assets/css/sweetalert2.min.css') }}">

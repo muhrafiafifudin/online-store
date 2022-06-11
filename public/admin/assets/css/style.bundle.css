@@ -40204,7 +40204,8 @@ button {
 .btn.btn-danger {
   color: #ffffff;
   background-color: #F64E60;
-  border-color: #F64E60; }
+  border-color: #F64E60;
+  margin-top: 0.5rem; }
   .btn.btn-danger i {
     color: #ffffff; }
   .btn.btn-danger .svg-icon svg g [fill] {

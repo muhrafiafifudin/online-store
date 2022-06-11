@@ -9,7 +9,7 @@
             </button>
 
             <a href="index.html" class="logo">
-                <img src="user/assets/images/logo.png" alt="Molla Logo" width="105" height="25">
+                <img src="{{ asset('user/assets/images/logo.png') }}" alt="Molla Logo" width="105" height="25">
             </a>
 
             <nav class="main-nav">
@@ -40,7 +40,7 @@
             <div class="header-right">
                 @auth
                 <div class="dropdown cart-dropdown">
-                    <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
+                    <a href="{{ url('cart') }}" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
                         <i class="icon-shopping-cart"></i>
                         <span class="cart-count">2</span>
                     </a>
@@ -48,7 +48,7 @@
 
                 <div class="dropdown compare-dropdown user-login">
                     <a href="#" class="dropdown-toggle name-user-login" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static" title="Compare Products" aria-label="Compare Products">
-                        Hi, User<i class="icon-user"></i>
+                        Hi, {{ Auth::user()->name }}<i class="icon-user"></i>
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-right">

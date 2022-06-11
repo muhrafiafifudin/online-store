@@ -24,16 +24,17 @@ Route::get('/dashboard', function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('/', function () {
-    return view('pages.home');
-});
-
+Route::get('/', 'DashboardController@index');
 Route::get('/product', 'ProductController@index')->name('product.index');
-Route::get('/product-detail', 'ProductDetailController@index')->name('product-detail.index');
-Route::get('/cart', 'ProductDetailController@cart')->name('product-detail.cart');
+Route::get('/product/{slug}', 'ProductDetailController@index');
+
+Route::post('add-to-cart', 'CartController@addProduct');
+Route::post('update-cart', 'CartController@updateProduct');
+Route::post('delete-cart-item', 'CartController@deleteProduct');
 
 // User Routes
 Route::middleware(['auth'])->group(function () {
+    Route::get('cart', 'CartController@index');
     
 });
 

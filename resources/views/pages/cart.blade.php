@@ -38,67 +38,44 @@
                             </thead>
 
                             <tbody>
-                                <tr>
-                                    <td class="product-col">
-                                        <div class="product">
-                                            <figure class="product-media">
-                                                <a href="#">
-                                                    <img src="/user/assets/images/products/table/product-1.jpg" alt="Product image">
-                                                </a>
-                                            </figure>
+                                @php $total = 0; $totalItem = 0; @endphp
+                                @foreach ($cartItems as $data)
+                                    <tr class="product_data">
+                                        <td class="product-col ">
+                                            <div class="product">
+                                                <figure class="product-media">
+                                                    <a href="#">
+                                                        <img src="/admin/assets/images/{{ $data->products->photos }}" alt="Product image">
+                                                    </a>
+                                                </figure>
 
-                                            <h3 class="product-title">
-                                                <a href="#">Beige knitted elastic runner shoes</a>
-                                            </h3><!-- End .product-title -->
-                                        </div><!-- End .product -->
-                                    </td>
-                                    <td class="price-col">$84.00</td>
-                                    <td class="quantity-col">
-                                        <div class="cart-product-quantity">
-                                            <input type="number" class="form-control" value="1" min="1" max="10" step="1" data-decimals="0" required>
-                                        </div><!-- End .cart-product-quantity -->
-                                    </td>
-                                    <td class="total-col">$84.00</td>
-                                    <td class="remove-col"><button class="btn-remove"><i class="icon-close"></i></button></td>
-                                </tr>
-                                <tr>
-                                    <td class="product-col">
-                                        <div class="product">
-                                            <figure class="product-media">
-                                                <a href="#">
-                                                    <img src="/userassets/images/products/table/product-2.jpg" alt="Product image">
-                                                </a>
-                                            </figure>
+                                                <h3 class="product-title">
+                                                    <a href="#">{{ $data->products->name }}</a>
+                                                </h3><!-- End .product-title -->
+                                            </div><!-- End .product -->
+                                        </td>
+                                        <td class="price-col">IDR. <br>{{ number_format($data->products->price, 2, ',', '.') }}</td>
+                                        <td class="quantity-col">
+                                            <input type="hidden" class="prod_id" value="{{ $data->products_id }}">
+                                            <div class="cart-product-quantity">
+                                                <input type="number" class="form-control" value="{{ $data->products_qty }}" min="1" max="10" step="1" data-decimals="0" required>
+                                            </div><!-- End .cart-product-quantity -->
+                                        </td>
+                                        @php $totalItem = $data->products->price * $data->products_qty; @endphp
+                                        <td class="total-col">IDR. <br>{{ number_format($totalItem, 2, ',', '.') }}</td>
+                                        <td class="remove-col">
+                                            <button class="btn-remove delete-cart-item">
+                                            <i class="icon-close"></i>
+                                        </button></td>
+                                    </tr>
 
-                                            <h3 class="product-title">
-                                                <a href="#">Blue utility pinafore denim dress</a>
-                                            </h3><!-- End .product-title -->
-                                        </div><!-- End .product -->
-                                    </td>
-                                    <td class="price-col">$76.00</td>
-                                    <td class="quantity-col">
-                                        <div class="cart-product-quantity">
-                                            <input type="number" class="form-control" value="1" min="1" max="10" step="1" data-decimals="0" required>
-                                        </div><!-- End .cart-product-quantity -->                                 
-                                    </td>
-                                    <td class="total-col">$76.00</td>
-                                    <td class="remove-col"><button class="btn-remove"><i class="icon-close"></i></button></td>
-                                </tr>
+                                    @php $total += $data->products->price * $data->products_qty; @endphp
+
+                                @endforeach
                             </tbody>
                         </table><!-- End .table table-wishlist -->
 
                         <div class="cart-bottom">
-                            <div class="cart-discount">
-                                <form action="#">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" required placeholder="coupon code">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-outline-primary-2" type="submit"><i class="icon-long-arrow-right"></i></button>
-                                        </div><!-- .End .input-group-append -->
-                                    </div><!-- End .input-group -->
-                                </form>
-                            </div><!-- End .cart-discount -->
-
                             <a href="#" class="btn btn-outline-dark-2"><span>UPDATE CART</span><i class="icon-refresh"></i></a>
                         </div><!-- End .cart-bottom -->
                     </div><!-- End .col-lg-9 -->
@@ -110,7 +87,7 @@
                                 <tbody>
                                     <tr class="summary-subtotal">
                                         <td>Subtotal:</td>
-                                        <td>$160.00</td>
+                                        <td>IDR. <br>{{ number_format($total, 2, ',', '.') }}</td>
                                     </tr><!-- End .summary-subtotal -->
                                     <tr class="summary-shipping">
                                         <td>Shipping:</td>
