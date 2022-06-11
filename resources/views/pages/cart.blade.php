@@ -61,7 +61,9 @@
                                                 <input type="number" class="form-control" value="{{ $data->products_qty }}" min="1" max="10" step="1" data-decimals="0" required>
                                             </div><!-- End .cart-product-quantity -->
                                         </td>
+
                                         @php $totalItem = $data->products->price * $data->products_qty; @endphp
+                                        
                                         <td class="total-col">IDR. <br>{{ number_format($totalItem, 2, ',', '.') }}</td>
                                         <td class="remove-col">
                                             <button class="btn-remove delete-cart-item">
@@ -75,9 +77,6 @@
                             </tbody>
                         </table><!-- End .table table-wishlist -->
 
-                        <div class="cart-bottom">
-                            <a href="#" class="btn btn-outline-dark-2"><span>UPDATE CART</span><i class="icon-refresh"></i></a>
-                        </div><!-- End .cart-bottom -->
                     </div><!-- End .col-lg-9 -->
                     <aside class="col-lg-3">
                         <div class="summary summary-cart">

@@ -54,7 +54,9 @@ $(document).ready(function() {
                 'products_qty': products_qty
             },
             success: function(response) {
-                swal(response.status);
+                swal(response.status).then(function() {
+                    location.reload();
+                });
             }
         })
     })
@@ -77,8 +79,9 @@ $(document).ready(function() {
                 'products_id': products_id,
             },
             success: function(response) {
-                window.location.reload();
-                swal("", response.status, "success");
+                swal("", response.status, "success").then(function() {
+                    location.reload();
+                });
             }
         })
     });

@@ -42,7 +42,14 @@
                 <div class="dropdown cart-dropdown">
                     <a href="{{ url('cart') }}" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
                         <i class="icon-shopping-cart"></i>
-                        <span class="cart-count">2</span>
+                        @php
+                        if (Auth::user()) {
+                            $count = DB::table('carts')->where('users_id', Auth::id())->count();
+                        }
+                        @endphp
+                        
+
+                        <span class="cart-count">{{ $count }}</span>
                     </a>
                 </div><!-- End .cart-dropdown -->
 
