@@ -57,21 +57,30 @@
                                         <td class="price-col">IDR. <br>{{ number_format($data->products->price, 2, ',', '.') }}</td>
                                         <td class="quantity-col">
                                             <input type="hidden" class="prod_id" value="{{ $data->products_id }}">
-                                            <div class="cart-product-quantity">
-                                                <input type="number" class="form-control" value="{{ $data->products_qty }}" min="1" max="10" step="1" data-decimals="0" required>
-                                            </div><!-- End .cart-product-quantity -->
-                                        </td>
 
-                                        @php $totalItem = $data->products->price * $data->products_qty; @endphp
+                                            @if ($data->products->qty > $data->products_qty)
+                                                <div class="cart-product-quantity">
+                                                    <input type="number" class="form-control" value="{{ $data->products_qty }}" min="1" max="10" step="1" data-decimals="0" required>
+                                                </div><!-- End .cart-product-quantity -->
+
+                                                @php 
+                                                    $totalItem = $data->products->price * $data->products_qty;
+                                                    $total += $data->products->price * $data->products_qty; 
+                                                @endphp
+                                            @else
+                                                <span class="product-label-detail label-out">Out of Stock</span>
+                                                
+                                                @php $totalItem = $data->products->price * 0; @endphp
+                                            @endif
+                                            
+                                        </td>
                                         
-                                        <td class="total-col">IDR. <br>{{ number_format($totalItem, 2, ',', '.') }}</td>
+                                        <td class="total-col">IDR. {{ number_format($totalItem, 2, ',', '.') }}</td>
                                         <td class="remove-col">
                                             <button class="btn-remove delete-cart-item">
                                             <i class="icon-close"></i>
                                         </button></td>
                                     </tr>
-
-                                    @php $total += $data->products->price * $data->products_qty; @endphp
 
                                 @endforeach
                             </tbody>
@@ -135,7 +144,7 @@
                                 </tbody>
                             </table><!-- End .table table-summary -->
 
-                            <a href="checkout.html" class="btn btn-outline-primary-2 btn-order btn-block">PROCEED TO CHECKOUT</a>
+                            <a href="{{ url('checkout') }}" class="btn btn-outline-primary-2 btn-order btn-block">PROCEED TO CHECKOUT</a>
                         </div><!-- End .summary -->
 
                         <a href="category.html" class="btn btn-outline-dark-2 btn-block mb-3"><span>CONTINUE SHOPPING</span><i class="icon-refresh"></i></a>

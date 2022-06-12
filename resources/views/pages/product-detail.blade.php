@@ -62,15 +62,25 @@
 
                             <div class="details-filter-row details-row-size">
                                 <input type="hidden" value="{{ $products->id }}" class="prod_id">
-                                <label for="qty">Qty:</label>
-                                <div class="product-details-quantity">
-                                    <input type="number" id="qty" class="form-control qty-input" value="1" min="1" max="10" step="1" data-decimals="0" required>
-                                </div><!-- End .product-details-quantity -->
+
+                                @if ($products->qty > 0)
+                                    <label for="qty">Qty:</label>
+                                    <div class="product-details-quantity">
+                                        <input type="number" id="qty" class="form-control qty-input" value="1" min="1" max="10" step="1" data-decimals="0" required>
+                                    </div><!-- End .product-details-quantity -->
+                                    <span class="product-label-detail label-new">In Stock</span>
+                                @else
+                                    <span class="product-label-detail label-out">Out of Stock</span>
+                                @endif
+                                
                             </div><!-- End .details-filter-row -->
 
                             <div class="product-details-action">
-                                <button class="btn-product btn-cart addToCartBtn"><span>add to cart</span></button>
-                                <!-- <a href="#" class="btn-product btn-cart addToCartBtn"><span>add to cart</span></a> -->
+                                @if ($products->qty > 0)
+                                    <button class="btn-product btn-cart addToCartBtn"><span>add to cart</span></button>
+                                @else
+                                    <button class="btn-product btn-cart-out"><span>add to cart</span></button>
+                                @endif
 
                                 <div class="details-action-wrapper">
                                     <a href="#" class="btn-product btn-wishlist" title="Wishlist"><span>Add to Wishlist</span></a>

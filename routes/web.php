@@ -35,7 +35,7 @@ Route::post('delete-cart-item', 'CartController@deleteProduct');
 // User Routes
 Route::middleware(['auth'])->group(function () {
     Route::get('cart', 'CartController@index');
-    
+    Route::get('checkout', 'CheckoutController@index');
 });
 
 // Admin Routes
