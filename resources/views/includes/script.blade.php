@@ -11,3 +11,5 @@
 <!-- Add in Detail Cart -->
 <script src="{{ asset('user/assets/js/bootstrap-input-spinner.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.js"></script>
+<!-- IndoRegion Jquery -->
+<script src="{{ asset('user/assets/js/indoregion-jquery.js') }}"></script>

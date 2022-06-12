@@ -41,19 +41,19 @@
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <label>Province *</label>
-                                        <select name="sortby" id="sortby" class="form-control">
+                                        <select name="sortby" id="province" class="form-control">
                                             <option value="popularity" selected="selected">Choose Your Province</option>
-                                            <option value="rating">Most Rated</option>
-                                            <option value="date">Date</option>
+                                            @foreach ($provinces as $province)
+                                                <option value="{{ $province->id }}">{{ $province->name }}</option>>
+                                            @endforeach
                                         </select>
                                     </div><!-- End .col-sm-6 -->
 
                                     <div class="col-sm-6">
                                         <label>Town / City *</label>
-                                        <select name="sortby" id="sortby" class="form-control">
+                                        <select name="sortby" id="city" class="form-control">
                                             <option value="popularity" selected="selected">Choose Your City</option>
-                                            <option value="rating">Most Rated</option>
-                                            <option value="date">Date</option>
+                                            
                                         </select>
                                     </div><!-- End .col-sm-6 -->
                                 </div><!-- End .row -->
@@ -61,7 +61,7 @@
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <label>District *</label>
-                                        <select name="sortby" id="sortby" class="form-control">
+                                        <select name="sortby" id="district" class="form-control">
                                             <option value="popularity" selected="selected">Choose Your District</option>
                                             <option value="rating">Most Rated</option>
                                             <option value="date">Date</option>
@@ -70,7 +70,7 @@
 
                                     <div class="col-sm-6">
                                         <label>Village *</label>
-                                        <select name="sortby" id="sortby" class="form-control">
+                                        <select name="sortby" id="village" class="form-control">
                                             <option value="popularity" selected="selected">Choose Your Village</option>
                                             <option value="rating">Most Rated</option>
                                             <option value="date">Date</option>
@@ -91,7 +91,7 @@
                                 </div><!-- End .row -->
 
                                 <label>Order notes (optional)</label>
-	        							<textarea class="form-control" cols="30" rows="4" placeholder="Notes about your order, e.g. special notes for delivery"></textarea>
+                                <textarea class="form-control" cols="30" rows="4" placeholder="Notes about your order, e.g. special notes for delivery"></textarea>
                         </div><!-- End .col-lg-9 -->
                         <aside class="col-lg-3">
                             <div class="summary">

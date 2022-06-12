@@ -4,33 +4,6 @@
  * License: MIT, see file 'LICENSE'
  */
 
-// $(document).ready(function() {
-//     $('.addToCartBtn').click(function(e) {
-//         e.preventDefault();
-
-//         var products_id = $(this).closest('.product_data').find('.prod_id').val();
-//         var products_qty = $(this).closest('.product_data').find('.qty-input').val();
-
-//         $.ajaxSetup({
-//             headers: {
-//                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-//             }
-//         });
-        
-//         $.ajax({
-//             method: "POST",
-//             url: "/add-to-cart",
-//             data: {
-//                 'products_id': products_id,
-//                 'products_qty': products_qty
-//             },
-//             success: function(response) {
-//                 alert(response.status);
-//             }
-//         })
-//     })
-// })
-
 $(document).ready(function() {
     "use strict"
 
