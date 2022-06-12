@@ -34,28 +34,53 @@
                                 <label>Email address *</label>
                                 <input type="email" class="form-control" required>
 
-                                <label>Country *</label>
-                                <input type="text" class="form-control" required>
-
                                 <label>Street address *</label>
-                                <input type="text" class="form-control" placeholder="House number and Street name" required>
-                                <input type="text" class="form-control" placeholder="Appartments, suite, unit etc ..." required>
+                                <input type="text" class="form-control" placeholder="Street name etc ..." required>
+                                <input type="text" class="form-control" placeholder="House number etc ..." required>
 
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <label>Town / City *</label>
-                                        <input type="text" class="form-control" required>
+                                        <label>Province *</label>
+                                        <select name="sortby" id="sortby" class="form-control">
+                                            <option value="popularity" selected="selected">Choose Your Province</option>
+                                            <option value="rating">Most Rated</option>
+                                            <option value="date">Date</option>
+                                        </select>
                                     </div><!-- End .col-sm-6 -->
 
                                     <div class="col-sm-6">
-                                        <label>State / County *</label>
-                                        <input type="text" class="form-control" required>
+                                        <label>Town / City *</label>
+                                        <select name="sortby" id="sortby" class="form-control">
+                                            <option value="popularity" selected="selected">Choose Your City</option>
+                                            <option value="rating">Most Rated</option>
+                                            <option value="date">Date</option>
+                                        </select>
                                     </div><!-- End .col-sm-6 -->
                                 </div><!-- End .row -->
 
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <label>Postcode / ZIP *</label>
+                                        <label>District *</label>
+                                        <select name="sortby" id="sortby" class="form-control">
+                                            <option value="popularity" selected="selected">Choose Your District</option>
+                                            <option value="rating">Most Rated</option>
+                                            <option value="date">Date</option>
+                                        </select>
+                                    </div><!-- End .col-sm-6 -->
+
+                                    <div class="col-sm-6">
+                                        <label>Village *</label>
+                                        <select name="sortby" id="sortby" class="form-control">
+                                            <option value="popularity" selected="selected">Choose Your Village</option>
+                                            <option value="rating">Most Rated</option>
+                                            <option value="date">Date</option>
+                                        </select>
+                                    </div><!-- End .col-sm-6 -->
+                                </div><!-- End .row -->
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <label>Postcode *</label>
                                         <input type="text" class="form-control" required>
                                     </div><!-- End .col-sm-6 -->
 
@@ -64,6 +89,9 @@
                                         <input type="tel" class="form-control" required>
                                     </div><!-- End .col-sm-6 -->
                                 </div><!-- End .row -->
+
+                                <label>Order notes (optional)</label>
+	        							<textarea class="form-control" cols="30" rows="4" placeholder="Notes about your order, e.g. special notes for delivery"></textarea>
                         </div><!-- End .col-lg-9 -->
                         <aside class="col-lg-3">
                             <div class="summary">
