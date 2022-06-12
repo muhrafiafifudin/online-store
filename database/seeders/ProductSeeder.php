@@ -21,7 +21,8 @@ class ProductSeeder extends Seeder
                 'categories_id' => 2,
                 'price' => 900000,
                 'description' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged',
-                'slug' => 'home-modern-chair'
+                'slug' => 'home-modern-chair',
+                'qty' => 10
             ),
             array(
                 'name' => 'Floating Shelves Particle Board',
@@ -29,7 +30,8 @@ class ProductSeeder extends Seeder
                 'categories_id' => 1,
                 'price' => 1200000,
                 'description' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged',
-                'slug' => 'floating-shelves'
+                'slug' => 'floating-shelves',
+                'qty' => 5
             )    
         ));
     }

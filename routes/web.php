@@ -36,6 +36,7 @@ Route::post('delete-cart-item', 'CartController@deleteProduct');
 Route::middleware(['auth'])->group(function () {
     Route::get('cart', 'CartController@index');
     Route::get('checkout', 'CheckoutController@index');
+    Route::post('place-order', 'CheckoutController@placeorder');
 
     // Get region with IndoRegion
     Route::post('get-city', 'CheckoutController@getCity');

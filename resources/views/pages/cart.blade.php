@@ -58,7 +58,7 @@
                                         <td class="quantity-col">
                                             <input type="hidden" class="prod_id" value="{{ $data->products_id }}">
 
-                                            @if ($data->products->qty > $data->products_qty)
+                                            @if ($data->products->qty >= $data->products_qty)
                                                 <div class="cart-product-quantity">
                                                     <input type="number" class="form-control" value="{{ $data->products_qty }}" min="1" max="10" step="1" data-decimals="0" required>
                                                 </div><!-- End .cart-product-quantity -->

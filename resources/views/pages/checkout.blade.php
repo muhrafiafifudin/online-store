@@ -24,74 +24,79 @@
     <div class="page-content">
         <div class="checkout">
             <div class="container">
-                <form action="#">
+                <form action="{{ url('place-order') }}" method="post">
+                    @csrf
+                    
                     <div class="row">
                         <div class="col-lg-9">
                             <h2 class="checkout-title">Billing Details</h2><!-- End .checkout-title -->
-                                <label>Full Name *</label>
-                                <input type="text" class="form-control">
+                            
+                            <label>Full Name *</label>
+                            <input type="text" class="form-control" value="{{ Auth::user()->name }}" name="full_name" placeholder="Enter Your Full Name ..." required>
 
-                                <label>Email address *</label>
-                                <input type="email" class="form-control" required>
+                            <label>Email address *</label>
+                            <input type="email" class="form-control" value="{{ Auth::user()->email }}" name="email" placeholder="Enter Your Email ..." required>
 
-                                <label>Street address *</label>
-                                <input type="text" class="form-control" placeholder="Street name etc ..." required>
-                                <input type="text" class="form-control" placeholder="House number etc ..." required>
+                            <label>Street address *</label>
+                            <input type="text" class="form-control" value="{{ Auth::user()->street_address }}" name="street_address" placeholder="Street name etc ..." required>
+                            <input type="text" class="form-control" value="{{ Auth::user()->home_address }}" name="house_address" placeholder="House number etc ..." required>
 
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <label>Province *</label>
-                                        <select name="sortby" id="province" class="form-control">
-                                            <option value="popularity" selected="selected">Choose Your Province</option>
-                                            @foreach ($provinces as $province)
-                                                <option value="{{ $province->id }}">{{ $province->name }}</option>>
-                                            @endforeach
-                                        </select>
-                                    </div><!-- End .col-sm-6 -->
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label>Province *</label>
+                                    <select name="province" id="province" class="form-control" required>
+                                        <option value="popularity" selected="selected">Choose Your Province</option>
+                                        @foreach ($provinces as $province)
+                                            <option value="{{ $province->id }}" {{ $province->id == Auth::user()->provinces_id ? 'selected' : '' }}>{{ $province->name }}</option>>
+                                        @endforeach
+                                    </select>
+                                </div><!-- End .col-sm-6 -->
 
-                                    <div class="col-sm-6">
-                                        <label>Town / City *</label>
-                                        <select name="sortby" id="city" class="form-control">
-                                            <option value="popularity" selected="selected">Choose Your City</option>
-                                            
-                                        </select>
-                                    </div><!-- End .col-sm-6 -->
-                                </div><!-- End .row -->
+                                <div class="col-sm-6">
+                                    <label>Town / City *</label>
+                                    <select name="city" id="city" class="form-control" required>
+                                        @foreach ($users as $user)
+                                            <option value="{{ Auth::user()->cities_id == NULL ? 0 : $user->regencies->id }}" selected >{{ Auth::user()->cities_id == NULL ? 'Choose Your City' : $user->regencies->name }}</option>
+                                        @endforeach
+                                        
+                                    </select>
+                                </div><!-- End .col-sm-6 -->
+                            </div><!-- End .row -->
 
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <label>District *</label>
-                                        <select name="sortby" id="district" class="form-control">
-                                            <option value="popularity" selected="selected">Choose Your District</option>
-                                            <option value="rating">Most Rated</option>
-                                            <option value="date">Date</option>
-                                        </select>
-                                    </div><!-- End .col-sm-6 -->
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label>District *</label>
+                                    <select name="district" id="district" class="form-control">
+                                        @foreach ($users as $user)
+                                            <option value="{{ Auth::user()->districts_id == NULL ? 0 : $user->districts->id }}" selected >{{ Auth::user()->districts_id == NULL ? 'Choose Your District' : $user->districts->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div><!-- End .col-sm-6 -->
 
-                                    <div class="col-sm-6">
-                                        <label>Village *</label>
-                                        <select name="sortby" id="village" class="form-control">
-                                            <option value="popularity" selected="selected">Choose Your Village</option>
-                                            <option value="rating">Most Rated</option>
-                                            <option value="date">Date</option>
-                                        </select>
-                                    </div><!-- End .col-sm-6 -->
-                                </div><!-- End .row -->
+                                <div class="col-sm-6">
+                                    <label>Village *</label>
+                                    <select name="village" id="village" class="form-control">
+                                        @foreach ($users as $user)
+                                            <option value="{{ Auth::user()->villages_id == NULL ? 0 : $user->villages->id }}" selected >{{ Auth::user()->villages_id == NULL ? 'Choose Your Village' : $user->villages->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div><!-- End .col-sm-6 -->
+                            </div><!-- End .row -->
 
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <label>Postcode *</label>
-                                        <input type="text" class="form-control" required>
-                                    </div><!-- End .col-sm-6 -->
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label>Postcode *</label>
+                                    <input type="text" class="form-control" value="{{ Auth::user()->postcode }}" name="postcode" placeholder="Enter Post Code ..." required>
+                                </div><!-- End .col-sm-6 -->
 
-                                    <div class="col-sm-6">
-                                        <label>Phone *</label>
-                                        <input type="tel" class="form-control" required>
-                                    </div><!-- End .col-sm-6 -->
-                                </div><!-- End .row -->
+                                <div class="col-sm-6">
+                                    <label>Phone *</label>
+                                    <input type="text" class="form-control" value="{{ Auth::user()->phone_number }}" name="phone_number" placeholder="Enter Phone Number ..." required>
+                                </div><!-- End .col-sm-6 -->
+                            </div><!-- End .row -->
 
-                                <label>Order notes (optional)</label>
-                                <textarea class="form-control" cols="30" rows="4" placeholder="Notes about your order, e.g. special notes for delivery"></textarea>
+                            <label>Order notes (optional)</label>
+                            <textarea class="form-control" cols="30" rows="4" name="note" placeholder="Notes about your order, e.g. special notes for delivery"></textarea>
                         </div><!-- End .col-lg-9 -->
                         <aside class="col-lg-3">
                             <div class="summary">
