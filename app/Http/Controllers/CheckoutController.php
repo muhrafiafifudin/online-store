@@ -113,6 +113,91 @@ class CheckoutController extends Controller
         $cartItems = Cart::where('users_id', Auth::id())->get();
         Cart::destroy($cartItems);
 
-        return redirect('/')->with('status', 'Order Placed Successfully');
+        // Set your Merchant Server Key
+        \Midtrans\Config::$serverKey = 'SB-Mid-server-UotwAE5oBWVH47THXMwwB4Kv';
+        // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+        \Midtrans\Config::$isProduction = false;
+        // Set sanitization on (default)
+        \Midtrans\Config::$isSanitized = true;
+        // Set 3DS transaction for credit card to true
+        \Midtrans\Config::$is3ds = true;
+        
+        $params = array(
+            'transaction_details' => array(
+                'order_id' => rand(),
+                'gross_amount' => 10000,
+            ),
+            'item_details' => array(
+                [
+                    'id' => 'a01',
+                    'price' => 8000,
+                    'quantity' => 4,
+                    'name' => 'Apple'
+                ],
+                [
+                    'id' => 'a01',
+                    'price' => 8000,
+                    'quantity' => 4,
+                    'name' => 'Apple'
+                ],
+            ),
+            'customer_details' => array(
+                'first_name' => 'budi',
+                'last_name' => 'pratama',
+                'email' => 'budi.pra@example.com',
+                'phone' => '08111222333',
+            ),
+            'shipping_address' => array(
+                'first_name' => $request->input('full_name'),
+                'last_name' => '',
+                'email' => $request->input('email'),
+                'phone' => $request->input('phone_number'),
+                'address' => $request->input('street_address') . $request->input('house_address'),
+                'city' => '',
+                'postal_code' => $request->input('postcode'),
+                'country_code' => 'IDN'
+            )
+        );
+        
+        $snapToken = \Midtrans\Snap::getSnapToken($params);
+
+        // return redirect('/')->with('success', 'Order Placed Successfully');
+        return redirect('/checkout', ['snapToken' => $snapToken]);
+    }
+
+    public function paymentMethod(Request $request) 
+    {
+        $cartItems = Cart::where('users_id', Auth::id())->get();
+        $total_price = 0;
+        foreach ($cartItems as $item) {
+            $total_price += $item->products->price * $item->products_qty;
+        }
+
+        $full_name = $request->input('full_name');
+        $email = $request->input('email');
+        $street_address = $request->input('street_address');
+        $house_address = $request->input('house_address');
+        $provinces = $request->input('province');;
+        $cities = $request->input('city');
+        $districts = $request->input('district');
+        $villages = $request->input('village');
+        $postcode = $request->input('postcode');
+        $phone_number = $request->input('phone_number');
+        $note = $request->input('note');
+
+        return response()->json([
+            'full_name' => $full_name,
+            'email' => $email,
+            'street_address' => $street_address,
+            'house_address' => $house_address,
+            'provinces' => $provinces,
+            'cities' => $cities,
+            'districts' => $districts,
+            'villages' => $villages,
+            'postcode' => $postcode,
+            'phone_number' => $phone_number,
+            'note' => $note,
+            'total_price' => $total_price,
+        ]);
     }
 }

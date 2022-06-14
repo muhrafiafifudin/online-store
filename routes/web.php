@@ -36,7 +36,7 @@ Route::post('delete-cart-item', 'CartController@deleteProduct');
 Route::middleware(['auth'])->group(function () {
     Route::get('cart', 'CartController@index');
     Route::get('checkout', 'CheckoutController@index');
-    Route::post('place-order', 'CheckoutController@placeorder');
+    Route::post('checkout', 'CheckoutController@paymentMethod');
 
     // Get region with IndoRegion
     Route::post('get-city', 'CheckoutController@getCity');
@@ -60,4 +60,10 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
         Route::resource('product','ProductController');
     });
     Route::post('logout', 'Auth\AuthenticatedSessionController@destroy')->name('logout');
+});
+
+
+// Test HTML
+Route::get('cart-html', function() {
+    return view('pages.checkout-view');
 });
