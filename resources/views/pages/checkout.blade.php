@@ -24,11 +24,11 @@
     <div class="page-content">
         <div class="checkout">
             <div class="container">
-                <!-- <form action="{{ url('place-order') }}" method="post">
-                    @csrf -->
+                <form action="{{ url('place-order') }}" method="post">
+                    @csrf
                     
                     <div class="row">
-                        <div class="col-lg-9">
+                        <div class="col-lg-7">
                             <h2 class="checkout-title">Billing Details</h2><!-- End .checkout-title -->
                             
                             <label>Full Name *</label>
@@ -38,14 +38,14 @@
                             <input type="email" class="form-control email" value="{{ Auth::user()->email }}" name="email" placeholder="Enter Your Email ..." required>
 
                             <label>Street address *</label>
-                            <input type="text" class="form-control street_address" value="{{ Auth::user()->street_address }}" name="street_address" placeholder="Street name etc ..." required>
+                            <input type="text" class="form-control street_address" value="{{ Auth::user()->street_address }}" name="street_address" placeholder="Street address etc ..." required etc ..." required>
                             <input type="text" class="form-control home_address" value="{{ Auth::user()->home_address }}" name="house_address" placeholder="House number etc ...">
 
                             <div class="row">
                                 <div class="col-sm-6">
                                     <label>Province *</label>
                                     <select name="province" id="province" class="form-control" required>
-                                        <option value="popularity" selected="selected">Choose Your Province</option>
+                                        <option selected="selected">Choose Your Province</option>
                                         @foreach ($provinces as $province)
                                             <option value="{{ $province->id }}" {{ $province->id == Auth::user()->provinces_id ? 'selected' : '' }}>{{ $province->name }}</option>>
                                         @endforeach
@@ -54,7 +54,7 @@
 
                                 <div class="col-sm-6">
                                     <label>Town / City *</label>
-                                    <select name="city" id="city" class="form-control cities" required>
+                                    <select name="city" id="city" class="form-control cities">
                                         @foreach ($users as $user)
                                             <option value="{{ Auth::user()->cities_id == NULL ? 0 : $user->regencies->id }}" selected >{{ Auth::user()->cities_id == NULL ? 'Choose Your City' : $user->regencies->name }}</option>
                                         @endforeach
@@ -98,7 +98,7 @@
                             <label>Order notes (optional)</label>
                             <textarea class="form-control note" cols="30" rows="4" name="note" placeholder="Notes about your order, e.g. special notes for delivery"></textarea>
                         </div><!-- End .col-lg-9 -->
-                        <aside class="col-lg-3">
+                        <aside class="col-lg-5">
                             <div class="summary">
                                 <h3 class="summary-title">Your Order</h3><!-- End .summary-title -->
 
@@ -111,161 +111,44 @@
                                     </thead>
 
                                     <tbody>
+                                        @php $total = 0; $totalItem = 0; @endphp
                                         @foreach ($cartItems as $data)
+                                            @php 
+                                                $totalItem = $data->products->price * $data->products_qty;
+                                                $total += $data->products->price * $data->products_qty; 
+                                            @endphp
+
                                             <tr>
-                                                <td><a href="#">{{ $data->products->name }}</a></td>
-                                                <td>{{ $data->products->total }}</td>
+                                                <td><a href="#">{{ $data->products->name }} ({{ $data->products_qty }})</a></td>
+                                                <td>IDR. {{ number_format($totalItem, 2, ',', '.') }}</td>
                                             </tr>
                                         @endforeach
 
                                         <tr class="summary-subtotal">
                                             <td>Subtotal:</td>
-                                            <td>$160.00</td>
+                                            <td>IDR. {{ number_format($total, 2, ',', '.') }}</td>
                                         </tr><!-- End .summary-subtotal -->
                                         <tr>
-                                            <td>Shipping:</td>
+                                            <td>Shipping Price</td>
                                             <td>Free shipping</td>
                                         </tr>
                                         <tr class="summary-total">
                                             <td>Total:</td>
-                                            <td>$160.00</td>
+                                            <td>IDR. {{ number_format($total, 2, ',', '.') }}</td>
                                         </tr><!-- End .summary-total -->
                                     </tbody>
                                 </table><!-- End .table table-summary -->
 
-                                <div class="accordion-summary" id="accordion-payment">
-                                    <div class="card">
-                                        <div class="card-header" id="heading-1">
-                                            <h2 class="card-title">
-                                                <a role="button" data-toggle="collapse" href="#collapse-1" aria-expanded="true" aria-controls="collapse-1">
-                                                    Direct bank transfer
-                                                </a>
-                                            </h2>
-                                        </div><!-- End .card-header -->
-                                        <div id="collapse-1" class="collapse show" aria-labelledby="heading-1" data-parent="#accordion-payment">
-                                            <div class="card-body">
-                                                Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order will not be shipped until the funds have cleared in our account.
-                                            </div><!-- End .card-body -->
-                                        </div><!-- End .collapse -->
-                                    </div><!-- End .card -->
-
-                                    <div class="card">
-                                        <div class="card-header" id="heading-2">
-                                            <h2 class="card-title">
-                                                <a class="collapsed" role="button" data-toggle="collapse" href="#collapse-2" aria-expanded="false" aria-controls="collapse-2">
-                                                    Check payments
-                                                </a>
-                                            </h2>
-                                        </div><!-- End .card-header -->
-                                        <div id="collapse-2" class="collapse" aria-labelledby="heading-2" data-parent="#accordion-payment">
-                                            <div class="card-body">
-                                                Ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. 
-                                            </div><!-- End .card-body -->
-                                        </div><!-- End .collapse -->
-                                    </div><!-- End .card -->
-
-                                    <div class="card">
-                                        <div class="card-header" id="heading-3">
-                                            <h2 class="card-title">
-                                                <a class="collapsed" role="button" data-toggle="collapse" href="#collapse-3" aria-expanded="false" aria-controls="collapse-3">
-                                                    Cash on delivery
-                                                </a>
-                                            </h2>
-                                        </div><!-- End .card-header -->
-                                        <div id="collapse-3" class="collapse" aria-labelledby="heading-3" data-parent="#accordion-payment">
-                                            <div class="card-body">Quisque volutpat mattis eros. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. 
-                                            </div><!-- End .card-body -->
-                                        </div><!-- End .collapse -->
-                                    </div><!-- End .card -->
-
-                                    <div class="card">
-                                        <div class="card-header" id="heading-4">
-                                            <h2 class="card-title">
-                                                <a class="collapsed" role="button" data-toggle="collapse" href="#collapse-4" aria-expanded="false" aria-controls="collapse-4">
-                                                    PayPal <small class="float-right paypal-link">What is PayPal?</small>
-                                                </a>
-                                            </h2>
-                                        </div><!-- End .card-header -->
-                                        <div id="collapse-4" class="collapse" aria-labelledby="heading-4" data-parent="#accordion-payment">
-                                            <div class="card-body">
-                                                Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum.
-                                            </div><!-- End .card-body -->
-                                        </div><!-- End .collapse -->
-                                    </div><!-- End .card -->
-
-                                    <div class="card">
-                                        <div class="card-header" id="heading-5">
-                                            <h2 class="card-title">
-                                                <a class="collapsed" role="button" data-toggle="collapse" href="#collapse-5" aria-expanded="false" aria-controls="collapse-5">
-                                                    Credit Card (Stripe)
-                                                    <img src="assets/images/payments-summary.png" alt="payments cards">
-                                                </a>
-                                            </h2>
-                                        </div><!-- End .card-header -->
-                                        <div id="collapse-5" class="collapse" aria-labelledby="heading-5" data-parent="#accordion-payment">
-                                            <div class="card-body"> Donec nec justo eget felis facilisis fermentum.Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Lorem ipsum dolor sit ame.
-                                            </div><!-- End .card-body -->
-                                        </div><!-- End .collapse -->
-                                    </div><!-- End .card -->
-                                </div><!-- End .accordion -->
-
-                                <button class="btn btn-outline-primary-2 btn-order btn-block" id="pay-btn">
+                                <button type="submit" class="btn btn-outline-primary-2 btn-order btn-block">
                                     <span class="btn-text">Place Order</span>
                                     <span class="btn-hover-text">Proceed to Checkout</span>
                                 </button>
                             </div><!-- End .summary -->
                         </aside><!-- End .col-lg-3 -->
                     </div><!-- End .row -->
-                <!-- </form> -->
+                </form>
             </div><!-- End .container -->
         </div><!-- End .checkout -->
     </div><!-- End .page-content -->
 </main><!-- End .main -->
-@endsection
-
-@section('scripts')
-<script>
-    $(document).ready(function() {
-    $('#pay-btn').click(function(e) {
-        e.preventDefault();
-
-        var full_name = $('.full_name').val();
-        var email = $('.email').val();
-        var street_address = $('.street_address').val();
-        var home_address = $('.home_address').val();
-        var provinces = $('.provinces').val();
-        var cities = $('cities').val();
-        var districts = $('.districts').val();
-        var villages = $('.villages').val();
-        var postcode = $('.postcode').val();
-        var phone_number = $('.phone_number').val();
-        var note = $('.note').val();
-        
-        var data = {
-            'full_name': full_name,
-            'email': email,
-            'street_address': street_address,
-            'home_address': home_address,
-            'provinces': provinces,
-            'cities' : cities,
-            'districts' : districts,
-            'villages' : villages,
-            'postcode' : postcode,
-            'phone_number' : phone_number,
-            'note' : note,
-        }
-
-        $.ajax({
-            method: 'POST',
-            url: '/checkout',
-            data: data,
-            dataType: 'json',
-            success: function(response) {
-                alert(response.total_price)
-            }
-        })
-    })
-})
-</script>
-    
 @endsection

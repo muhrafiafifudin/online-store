@@ -34,9 +34,15 @@ Route::post('delete-cart-item', 'CartController@deleteProduct');
 
 // User Routes
 Route::middleware(['auth'])->group(function () {
+    // Account Setting
+    Route::get('account/dashboard', 'AccountController@dashboard');
+    Route::get('account/order', 'AccountController@order');
+    Route::get('account/order/{id}', 'AccountController@orderDetail');
+    Route::get('account/address', 'AccountController@address');
+
     Route::get('cart', 'CartController@index');
     Route::get('checkout', 'CheckoutController@index');
-    Route::post('checkout', 'CheckoutController@paymentMethod');
+    Route::post('place-order', 'CheckoutController@placeorder');
 
     // Get region with IndoRegion
     Route::post('get-city', 'CheckoutController@getCity');
@@ -64,6 +70,6 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
 
 
 // Test HTML
-Route::get('cart-html', function() {
-    return view('pages.checkout-view');
+Route::get('tes', function() {
+    return view('pages.account-order-detail');
 });

@@ -17,7 +17,7 @@ class CategoryController extends Controller
     {
         $category = Category::all();
 
-        return view('admin.pages.shop.category', compact('category')); 
+        return view('admin.pages.shop.category', compact('category'));
     }
 
     /**
@@ -89,7 +89,7 @@ class CategoryController extends Controller
         $category = Category::findOrFail($id);
         $category->category = $request->category;
         $category->save();
-        
+
         return redirect()->route('admin.category.index');
     }
 
@@ -103,7 +103,7 @@ class CategoryController extends Controller
     {
         $category = Category::findOrFail($id);
         $category->delete();
-        
+
         return redirect()->route('admin.category.index');
     }
 }

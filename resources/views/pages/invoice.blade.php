@@ -37,7 +37,7 @@
                                                 <tr>
                                                     <td class="invoice-form">Full Name</td>
                                                     <td class="invoice-bridge">: &nbsp;</td>
-                                                    <td class="invoice-data">User</td>
+                                                    <td class="invoice-data"></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Email</td>
@@ -109,7 +109,7 @@
                                             </tbody>
                                         </table><!-- End .table table-summary -->
 
-                                        <button type="submit" class="btn btn-outline-primary-2 btn-order btn-block">
+                                        <button class="btn btn-outline-primary-2 btn-order btn-block" id="pay-button">
                                             <span class="btn-text">Place Order</span>
                                             <span class="btn-hover-text">Proceed to Checkout</span>
                                         </button>

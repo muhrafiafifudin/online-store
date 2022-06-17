@@ -50,4 +50,9 @@ class Village extends Model
     {
         return $this->hasOne(User::class);
     }
+
+    public function order() 
+    {
+        return $this->hasOne(Order::class);
+    }
 }

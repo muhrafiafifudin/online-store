@@ -51,7 +51,7 @@
 						<h3 class="card-label">Form Item
 							<div class="text-muted pt-2 font-size-sm">Add Data Item</div>
 						</h3>
-					</div>	
+					</div>
 				</div>
 				<!--begin::Form-->
 				<form action="{{ route('admin.product.update', $product->id) }}" method="post" enctype="multipart/form-data">
@@ -81,7 +81,7 @@
 							<span class="text-danger">*</span></label>
 							<select class="form-control" name="categories_id" value="Cek" >
 								@foreach ($category as $data)
-									<option value="{{ $data->id }}" {{ $data->id == $product->categories_id ? 'selected' : '' }}>{{ $data->category }}</option>
+									<option value="{{ $data->id }}" {{ $data->id == $product->categories_id ? ' selected' : '' }}>{{ $data->category }}</option>
 								@endforeach
 							</select>
 						</div>

@@ -29,6 +29,7 @@ class CreateOrdersTable extends Migration
             $table->string('note')->nullable();
             $table->tinyInteger('status')->default(0);
             $table->string('tracking_no');
+            $table->bigInteger('gross_amount');
             $table->timestamps();
         });
     }
