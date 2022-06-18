@@ -16,7 +16,7 @@ class AccountController extends Controller
     public function order()
     {
         $orders = Order::where('users_id', Auth::id())->get();
-        
+
         return view('pages.account-order', compact('orders'));
     }
 
@@ -24,7 +24,9 @@ class AccountController extends Controller
     {
         $orders = Order::where('id', $id)->where('users_id', Auth::id())->first();
 
-        return view('pages.account-order-detail', compact('orders'));
+        return view('pages.account-order-detail', [
+            'orders' => $orders,
+        ]);
     }
 
     public function address()

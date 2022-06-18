@@ -26,11 +26,11 @@
             <div class="container">
                 <form action="{{ url('place-order') }}" method="post">
                     @csrf
-                    
+
                     <div class="row">
                         <div class="col-lg-7">
                             <h2 class="checkout-title">Billing Details</h2><!-- End .checkout-title -->
-                            
+
                             <label>Full Name *</label>
                             <input type="text" class="form-control full_name" value="{{ Auth::user()->name }}" name="full_name" placeholder="Enter Your Full Name ..." required>
 
@@ -58,7 +58,7 @@
                                         @foreach ($users as $user)
                                             <option value="{{ Auth::user()->cities_id == NULL ? 0 : $user->regencies->id }}" selected >{{ Auth::user()->cities_id == NULL ? 'Choose Your City' : $user->regencies->name }}</option>
                                         @endforeach
-                                        
+
                                     </select>
                                 </div><!-- End .col-sm-6 -->
                             </div><!-- End .row -->
@@ -113,13 +113,13 @@
                                     <tbody>
                                         @php $total = 0; $totalItem = 0; @endphp
                                         @foreach ($cartItems as $data)
-                                            @php 
+                                            @php
                                                 $totalItem = $data->products->price * $data->products_qty;
-                                                $total += $data->products->price * $data->products_qty; 
+                                                $total += $data->products->price * $data->products_qty;
                                             @endphp
 
                                             <tr>
-                                                <td><a href="#">{{ $data->products->name }} ({{ $data->products_qty }})</a></td>
+                                                <td><a href="#">{{ $data->products->name }} <strong>x{{ $data->products_qty }}</strong></a></td>
                                                 <td>IDR. {{ number_format($totalItem, 2, ',', '.') }}</td>
                                             </tr>
                                         @endforeach

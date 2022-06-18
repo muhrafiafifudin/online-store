@@ -82,8 +82,9 @@ class CheckoutController extends Controller
         // To Calculate the Gross Amount
         $gross_amount = 0;
         $cartItems_total = Cart::where('users_id', Auth::id())->get();
+
         foreach ($cartItems_total as $data) {
-            $gross_amount += $data->products->price;
+            $gross_amount += $data->products->price * $data->products_qty;
         }
 
         $order->gross_amount = $gross_amount;
@@ -96,7 +97,7 @@ class CheckoutController extends Controller
                 'orders_id' => $order->id,
                 'products_id' => $item->products_id,
                 'qty' => $item->products_qty,
-                'price' => $item->products->price
+                'price' => $item->products->price * $item->products_qty
             ]);
 
             $product = Product::where('id', $item->products_id)->first();
@@ -135,7 +136,7 @@ class CheckoutController extends Controller
         \Midtrans\Config::$isSanitized = true;
         // Set 3DS transaction for credit card to true
         \Midtrans\Config::$is3ds = true;
-        
+
         $params = array(
             'transaction_details' => array(
                 'order_id' => 'order-'.rand(),
@@ -162,9 +163,9 @@ class CheckoutController extends Controller
                 'phone' => '12345',
             ),
         );
-        
+
         $snapToken = \Midtrans\Snap::getSnapToken($params);
 
         return view('pages.invoice', ['snapToken' => $snapToken]);
-    } 
+    }
 }

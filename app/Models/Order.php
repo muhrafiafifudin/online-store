@@ -30,7 +30,7 @@ class Order extends Model
 
     public function orderItems()
     {
-        return $this->hasMany(OrderItem::class);
+        return $this->hasMany(OrderItem::class, 'orders_id', 'id');
     }
 
     public function provinces()
@@ -42,12 +42,12 @@ class Order extends Model
     {
         return $this->belongsTo(Regency::class, 'cities_id');
     }
-    
+
     public function districts()
     {
         return $this->belongsTo(District::class, 'districts_id');
     }
-    
+
     public function villages()
     {
         return $this->belongsTo(Village::class, 'villages_id');

@@ -6,7 +6,7 @@
 
 @section('content')
 <main class="main">
-    <div class="page-header text-center" style="background-image: url('user/assets/images/page-header-bg.jpg')">
+    <div class="page-header text-center" style="background-image: url('/user/assets/images/page-header-bg.jpg')">
         <div class="container">
             <h1 class="page-title">Checkout<span>Shop</span></h1>
         </div><!-- End .container -->
@@ -26,11 +26,11 @@
             <div class="container">
                 <form action="{{ url('place-order') }}" method="post">
                     @csrf
-                    
+
                     <div class="row">
                         <div class="col-lg-7">
                             <h2 class="checkout-title">Order Number : {{ $orders->tracking_no }}</h2><!-- End .checkout-title -->
-                            
+
                             <label>Full Name *</label>
                             <input type="text" class="form-control" value="{{ $orders->full_name }}" disabled>
 
@@ -68,17 +68,17 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <label>Postcode *</label>
-                                    <input type="text" class="form-control postcode" value="{{ $orders->postcode }}" name="postcode" placeholder="Enter Post Code ..." disabled>
+                                    <input type="text" class="form-control postcode" value="{{ $orders->postcode }}" disabled>
                                 </div><!-- End .col-sm-6 -->
 
                                 <div class="col-sm-6">
                                     <label>Phone *</label>
-                                    <input type="text" class="form-control phone_number" value="{{ $orders->phone_number }}" name="phone_number" placeholder="Enter Phone Number ..." disabled>
+                                    <input type="text" class="form-control phone_number" value="{{ $orders->phone_number }}" disabled>
                                 </div><!-- End .col-sm-6 -->
                             </div><!-- End .row -->
 
                             <label>Order notes (optional)</label>
-                            <textarea class="form-control note" cols="30" rows="4" name="note" placeholder="Notes about your order, e.g. special notes for delivery"></textarea>
+                            <textarea class="form-control note" cols="30" rows="4" name="note" disabled></textarea>
                         </div><!-- End .col-lg-9 -->
                         <aside class="col-lg-5">
                             <div class="summary">
@@ -95,22 +95,23 @@
                                     <tbody>
                                         @foreach ($orders->orderItems as $item)
                                             <tr>
-                                                <td>{{ $item->products->name }} ({{ $item->qty }})</a></td>
-                                                <td>IDR. {{ number_format($orders->gross_amount, 2, ',', '.') }}</td>
+                                                <td>{{ $item->products->name }} <strong>x{{ $item->qty }}</strong></a></td>
+                                                <td>IDR. {{ number_format($item->price, 2, ',', '.') }}</td>
                                             </tr>
-                                            <tr class="summary-subtotal">
-                                                <td>Subtotal:</td>
-                                                <td>IDR. {{ number_format($orders->gross_amount, 2, ',', '.') }}</td>
-                                            </tr><!-- End .summary-subtotal -->
-                                            <tr>
-                                                <td>Shipping Price</td>
-                                                <td>Free shipping</td>
-                                            </tr>
-                                            <tr class="summary-total">
-                                                <td>Total:</td>
-                                                <td>IDR. {{ number_format($orders->gross_amount, 2, ',', '.') }}</td>
-                                            </tr><!-- End .summary-total -->
                                         @endforeach
+
+                                        <tr class="summary-subtotal">
+                                            <td>Subtotal:</td>
+                                            <td>IDR. {{ number_format($orders->gross_amount, 2, ',', '.') }}</td>
+                                        </tr><!-- End .summary-subtotal -->
+                                        <tr>
+                                            <td>Shipping Price</td>
+                                            <td>Free shipping</td>
+                                        </tr>
+                                        <tr class="summary-total">
+                                            <td>Total:</td>
+                                            <td>IDR. {{ number_format($orders->gross_amount, 2, ',', '.') }}</td>
+                                        </tr><!-- End .summary-total -->
                                     </tbody>
                                 </table><!-- End .table table-summary -->
 
