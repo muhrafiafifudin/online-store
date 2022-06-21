@@ -34,9 +34,9 @@
                                     <tbody>
                                         @foreach ($orders as $order)
                                             <tr>
-                                                <td>{{ $order->tracking_no }}</td>
+                                                <td>{{ $order->order_id }}</td>
                                                 <td class="text-center">IDR. {{ number_format($order->gross_amount, 2, ',', '.') }}</td>
-                                                <td class="text-right">{{ $order->status == 0 ? 'Pending' : 'Success' }}</td>
+                                                <td class="text-center">{{ $order->status }}</td>
                                                 <td class="text-right">
                                                     <a href="{{ url('account/order/' . $order->id) }}" class="btn btn-outline-primary">View</a>
                                                 </td>

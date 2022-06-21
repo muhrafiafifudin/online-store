@@ -18,7 +18,7 @@ $(document).ready(function() {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-        
+
         $.ajax({
             method: "POST",
             url: "/add-to-cart",
@@ -59,7 +59,7 @@ $(document).ready(function() {
         })
     });
 
-    
+
 
     var spacePressed = false
     var originalVal = $.fn.val
@@ -122,7 +122,7 @@ $(document).ready(function() {
 
             $($btnChangeQty).click(function(e) {
                 e.preventDefault();
-        
+
                 var products_id = $(this).closest('.product_data').find('.prod_id').val();
                 var products_qty = $(this).closest('.product_data').find($input).val();
 
@@ -136,7 +136,7 @@ $(document).ready(function() {
                     'products_id' : products_id,
                     'products_qty' : products_qty
                 }
-        
+
                 $.ajax({
                     method: "POST",
                     url: "update-cart",

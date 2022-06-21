@@ -32,7 +32,7 @@
                             <h2 class="checkout-title">Billing Details</h2><!-- End .checkout-title -->
 
                             <label>Full Name *</label>
-                            <input type="text" class="form-control full_name" value="{{ Auth::user()->name }}" name="full_name" placeholder="Enter Your Full Name ..." required>
+                            <input type="text" class="form-control name" value="{{ Auth::user()->name }}" name="name" placeholder="Enter Your Full Name ..." required>
 
                             <label>Email address *</label>
                             <input type="email" class="form-control email" value="{{ Auth::user()->email }}" name="email" placeholder="Enter Your Email ..." required>

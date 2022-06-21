@@ -13,7 +13,7 @@ class Order extends Model
 
     protected $fillable = [
         'users_id',
-        'full_name',
+        'name',
         'email',
         'street_address',
         'house_address',
@@ -24,8 +24,11 @@ class Order extends Model
         'post_code',
         'phone_number',
         'status',
-        'tracking_no',
-        'gross_amount'
+        'order_id',
+        'gross_amount',
+        'transaction_id',
+        'payment_type'
+
     ];
 
     public function orderItems()

@@ -67,7 +67,7 @@ class CheckoutController extends Controller
     {
         $order = new Order();
         $order->users_id = Auth::id();
-        $order->full_name = $request->input('full_name');
+        $order->name = $request->input('name');
         $order->email = $request->input('email');
         $order->street_address = $request->input('street_address');
         $order->house_address = $request->input('house_address');
@@ -88,7 +88,7 @@ class CheckoutController extends Controller
         }
 
         $order->gross_amount = $gross_amount;
-        $order->tracking_no = 'order-'.rand(1111, 9999);
+        $order->order_id = 'order-'.rand(1111, 9999);
         $order->save();
 
         $cartItems = Cart::where('users_id', Auth::id())->get();
@@ -107,7 +107,7 @@ class CheckoutController extends Controller
 
         if (Auth::user()->street_address == NULL) {
             $user = User::where('id', Auth::id())->first();
-            $user->name = $request->input('full_name');
+            $user->name = $request->input('name');
             $user->email = $request->input('email');
             $user->street_address = $request->input('street_address');
             $user->house_address = $request->input('house_address');
@@ -157,7 +157,7 @@ class CheckoutController extends Controller
                 ],
             ),
             'customer_details' => array(
-                'first_name' => $request->get('full_name'),
+                'first_name' => $request->get('name'),
                 'last_name' => '',
                 'email' => 'nama@gmail.com',
                 'phone' => '12345',

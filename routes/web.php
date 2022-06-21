@@ -38,10 +38,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('account/dashboard', 'AccountController@dashboard');
     Route::get('account/order', 'AccountController@order');
     Route::get('account/order/{id}', 'AccountController@orderDetail');
+    // Update Data to Database Order from Midtrans
+    Route::post('account/order/{id}', 'AccountController@payment_post');
+
     Route::get('account/address', 'AccountController@address');
 
     Route::get('cart', 'CartController@index');
     Route::get('checkout', 'CheckoutController@index');
+    // Add Data to Database Order
     Route::post('place-order', 'CheckoutController@placeorder');
 
     // Get region with IndoRegion
