@@ -27,11 +27,11 @@ class CreateOrdersTable extends Migration
             $table->string('postcode');
             $table->string('phone_number');
             $table->string('note')->nullable();
-            $table->string('status')->nullable();
+            $table->string('status')->default('waiting');
             $table->string('order_id');
             $table->string('transaction_id')->nullable();
             $table->string('payment_type')->nullable();
-            $table->bigInteger('gross_amount');
+            $table->string('gross_amount');
             $table->timestamps();
         });
     }

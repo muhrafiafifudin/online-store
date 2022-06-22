@@ -24,6 +24,13 @@ class AccountController extends Controller
     {
         $orders = Order::where('id', $id)->where('users_id', Auth::id())->first();
 
+        return view('pages.account-order-detail', compact('orders'));
+    }
+
+    public function paymentDetail($id)
+    {
+        $orders = Order::where('id', $id)->where('users_id', Auth::id())->first();
+
         // Set your Merchant Server Key
         \Midtrans\Config::$serverKey = env('MIDTRANS_SERVER_KEY');
         // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
@@ -58,13 +65,13 @@ class AccountController extends Controller
 
         $snapToken = \Midtrans\Snap::getSnapToken($params);
 
-        return view('pages.account-order-detail', [
+        return view('pages.account-payment-detail', [
             'orders' => $orders,
             'snapToken' => $snapToken
         ]);
     }
 
-    public function payment_post(Request $request)
+    public function paymentPost(Request $request)
     {
         $json = json_decode($request->get('json'));
         $order = Order::where('order_id', $json->order_id)->first();

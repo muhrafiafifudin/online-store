@@ -37,9 +37,10 @@ Route::middleware(['auth'])->group(function () {
     // Account Setting
     Route::get('account/dashboard', 'AccountController@dashboard');
     Route::get('account/order', 'AccountController@order');
-    Route::get('account/order/{id}', 'AccountController@orderDetail');
+    Route::get('account/order/order-{id}', 'AccountController@orderDetail');
+    Route::get('account/order/{id}', 'AccountController@paymentDetail');
     // Update Data to Database Order from Midtrans
-    Route::post('account/order/{id}', 'AccountController@payment_post');
+    Route::post('account/order/{id}', 'AccountController@paymentPost');
 
     Route::get('account/address', 'AccountController@address');
 

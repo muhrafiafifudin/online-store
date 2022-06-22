@@ -37,8 +37,16 @@
                                                 <td>{{ $order->order_id }}</td>
                                                 <td class="text-center">IDR. {{ number_format($order->gross_amount, 2, ',', '.') }}</td>
                                                 <td class="text-center">{{ $order->status }}</td>
-                                                <td class="text-right">
-                                                    <a href="{{ url('account/order/' . $order->id) }}" class="btn btn-outline-primary">View</a>
+                                                <td class="text-center">{{ $order->created_at }}</td>
+                                                <td class="text-center">
+                                                    <a href="{{ url('account/order/order-' . $order->id) }}" class="btn btn-outline-primary mr-3">View Orders</a>
+
+                                                    @if ($order->status == 'waiting')
+                                                        <a href="{{ url('account/order/' . $order->id) }}" class="btn btn-outline-primary-2">Pay</a>
+                                                    @else
+                                                        <button class="btn btn-outline-primary-paid">Pay</button>
+                                                    @endif
+
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -52,4 +60,9 @@
         </div><!-- End .dashboard -->
     </div><!-- End .page-content -->
 </main><!-- End .main -->
+
+@if (session('success'))
+    <script>alert("{{ session('success') }}")</script>
+@endif
+
 @endsection

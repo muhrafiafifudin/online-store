@@ -123,7 +123,7 @@ class CheckoutController extends Controller
         $cartItems = Cart::where('users_id', Auth::id())->get();
         Cart::destroy($cartItems);
 
-        return redirect('/')->with('success', 'Order Placed Successfully');
+        return redirect('/account/order')->with('success', 'Order Placed Successfully');
     }
 
     public function callback(Request $request)
