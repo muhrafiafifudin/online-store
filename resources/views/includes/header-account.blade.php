@@ -4,7 +4,7 @@
             <a class="nav-link {{ request()->is('account/dashboard') ? 'active' : '' }}"  href="{{ url('account/dashboard') }}">Dashboard</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link {{ request()->is('account/order') ? 'active' : '' }}" href="{{ url('account/order') }}">Orders</a>
+            <a class="nav-link {{ request()->is('account/transaction') ? 'active' : '' }}" href="{{ url('account/transaction') }}">Orders</a>
         </li>
         <li class="nav-item">
             <a class="nav-link {{ request()->is('account/address') ? 'active' : '' }}" href="{{ url('account/address') }}">Account Details</a>

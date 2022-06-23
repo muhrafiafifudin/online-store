@@ -40,7 +40,7 @@ class Regency extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function province()
+    public function provinces()
     {
         return $this->belongsTo(Province::class);
     }
@@ -60,8 +60,8 @@ class Regency extends Model
         return $this->hasOne(User::class);
     }
 
-    public function order() 
+    public function transactions()
     {
-        return $this->hasOne(Order::class);
+        return $this->hasOne(Transaction::class);
     }
 }

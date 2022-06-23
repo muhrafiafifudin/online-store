@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Order extends Model
+class Transaction extends Model
 {
     use HasFactory;
 
-    protected $table = 'orders';
+    protected $table = 'transactions';
 
     protected $fillable = [
         'users_id',
@@ -31,9 +31,9 @@ class Order extends Model
 
     ];
 
-    public function orderItems()
+    public function transactiondetails()
     {
-        return $this->hasMany(OrderItem::class, 'orders_id', 'id');
+        return $this->hasMany(TransactionDetail::class, 'transactions_id', 'id');
     }
 
     public function provinces()

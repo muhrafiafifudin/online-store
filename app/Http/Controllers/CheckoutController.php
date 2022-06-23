@@ -9,8 +9,8 @@ use App\Models\District;
 use App\Models\Village;
 use App\Models\Cart;
 use App\Models\Product;
-use App\Models\Order;
-use App\Models\OrderItem;
+use App\Models\Transaction;
+use App\Models\TransactionDetail;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -65,19 +65,19 @@ class CheckoutController extends Controller
 
     public function placeorder(Request $request)
     {
-        $order = new Order();
-        $order->users_id = Auth::id();
-        $order->name = $request->input('name');
-        $order->email = $request->input('email');
-        $order->street_address = $request->input('street_address');
-        $order->house_address = $request->input('house_address');
-        $order->provinces_id = $request->input('province');
-        $order->cities_id = $request->input('city');
-        $order->districts_id = $request->input('district');
-        $order->villages_id = $request->input('village');
-        $order->postcode = $request->input('postcode');
-        $order->phone_number = $request->input('phone_number');
-        $order->note = $request->input('note');
+        $transaction = new Transaction();
+        $transaction->users_id = Auth::id();
+        $transaction->name = $request->input('name');
+        $transaction->email = $request->input('email');
+        $transaction->street_address = $request->input('street_address');
+        $transaction->house_address = $request->input('house_address');
+        $transaction->provinces_id = $request->input('province');
+        $transaction->cities_id = $request->input('city');
+        $transaction->districts_id = $request->input('district');
+        $transaction->villages_id = $request->input('village');
+        $transaction->postcode = $request->input('postcode');
+        $transaction->phone_number = $request->input('phone_number');
+        $transaction->note = $request->input('note');
 
         // To Calculate the Gross Amount
         $gross_amount = 0;
@@ -87,14 +87,14 @@ class CheckoutController extends Controller
             $gross_amount += $data->products->price * $data->products_qty;
         }
 
-        $order->gross_amount = $gross_amount;
-        $order->order_id = 'order-'.rand(1111, 9999);
-        $order->save();
+        $transaction->gross_amount = $gross_amount;
+        $transaction->order_number = 'order-'.rand(1111, 9999);
+        $transaction->save();
 
         $cartItems = Cart::where('users_id', Auth::id())->get();
         foreach ($cartItems as $item) {
-            OrderItem::create([
-                'orders_id' => $order->id,
+            TransactionDetail::create([
+                'transactions_id' => $transaction->id,
                 'products_id' => $item->products_id,
                 'qty' => $item->products_qty,
                 'price' => $item->products->price * $item->products_qty
@@ -123,49 +123,6 @@ class CheckoutController extends Controller
         $cartItems = Cart::where('users_id', Auth::id())->get();
         Cart::destroy($cartItems);
 
-        return redirect('/account/order')->with('success', 'Order Placed Successfully');
-    }
-
-    public function callback(Request $request)
-    {
-        // Set your Merchant Server Key
-        \Midtrans\Config::$serverKey = 'SB-Mid-server-UotwAE5oBWVH47THXMwwB4Kv';
-        // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
-        \Midtrans\Config::$isProduction = false;
-        // Set sanitization on (default)
-        \Midtrans\Config::$isSanitized = true;
-        // Set 3DS transaction for credit card to true
-        \Midtrans\Config::$is3ds = true;
-
-        $params = array(
-            'transaction_details' => array(
-                'order_id' => 'order-'.rand(),
-                'gross_amount' => 10000,
-            ),
-            'item_details' => array(
-                [
-                    'id' => 'a01',
-                    'price' => 8000,
-                    'quantity' => 4,
-                    'name' => 'Apple'
-                ],
-                [
-                    'id' => 'a01',
-                    'price' => 8000,
-                    'quantity' => 4,
-                    'name' => 'Apple'
-                ],
-            ),
-            'customer_details' => array(
-                'first_name' => $request->get('name'),
-                'last_name' => '',
-                'email' => 'nama@gmail.com',
-                'phone' => '12345',
-            ),
-        );
-
-        $snapToken = \Midtrans\Snap::getSnapToken($params);
-
-        return view('pages.invoice', ['snapToken' => $snapToken]);
+        return redirect('/account/transaction')->with('success', 'Order Placed Successfully');
     }
 }

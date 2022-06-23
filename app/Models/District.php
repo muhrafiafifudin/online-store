@@ -42,7 +42,7 @@ class District extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function regency()
+    public function regencies()
     {
         return $this->belongsTo(Regency::class);
     }
@@ -62,8 +62,8 @@ class District extends Model
         return $this->hasOne(User::class);
     }
 
-    public function order() 
+    public function transactions()
     {
-        return $this->hasOne(Order::class);
+        return $this->hasOne(Transaction::class);
     }
 }

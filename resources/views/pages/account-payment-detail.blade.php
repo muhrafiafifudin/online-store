@@ -27,57 +27,57 @@
                 <div class="row">
                     <div class="col-lg-7">
 
-                        <form action="{{ url('account/order/' . $orders->id) }}" id="submit_form" method="POST">
+                        <form action="{{ url('account/transaction/' . $transactions->id) }}" id="submit_form" method="POST">
                             @csrf
 
                             <input type="hidden" name="json" id="json_callback">
                         </form>
 
-                        <h2 class="checkout-title">Order Number : {{ $orders->order_id }}</h2><!-- End .checkout-title -->
+                        <h2 class="checkout-title">Order Number : {{ $transactions->order_id }}</h2><!-- End .checkout-title -->
 
                         <label>Full Name *</label>
-                        <input type="text" class="form-control" value="{{ $orders->name }}" disabled>
+                        <input type="text" class="form-control" value="{{ $transactions->name }}" disabled>
 
                         <label>Email address *</label>
-                        <input type="email" class="form-control" value="{{ $orders->email }}" disabled>
+                        <input type="email" class="form-control" value="{{ $transactions->email }}" disabled>
 
                         <label>Street address *</label>
-                        <input type="text" class="form-control" value="{{ $orders->street_address }}" disabled>
-                        <input type="text" class="form-control" value="{{ $orders->home_address }}" disabled>
+                        <input type="text" class="form-control" value="{{ $transactions->street_address }}" disabled>
+                        <input type="text" class="form-control" value="{{ $transactions->home_address }}" disabled>
 
                         <div class="row">
                             <div class="col-sm-6">
                                 <label>Province *</label>
-                                <input type="text" class="form-control" value="{{ $orders->provinces->name }}" disabled>
+                                <input type="text" class="form-control" value="{{ $transactions->provinces->name }}" disabled>
                             </div><!-- End .col-sm-6 -->
 
                             <div class="col-sm-6">
                                 <label>Town / City *</label>
-                                <input type="text" class="form-control" value="{{ $orders->regencies->name }}" disabled>
+                                <input type="text" class="form-control" value="{{ $transactions->regencies->name }}" disabled>
                             </div><!-- End .col-sm-6 -->
                         </div><!-- End .row -->
 
                         <div class="row">
                             <div class="col-sm-6">
                                 <label>District *</label>
-                                <input type="text" class="form-control" value="{{ $orders->districts->name }}" disabled>
+                                <input type="text" class="form-control" value="{{ $transactions->districts->name }}" disabled>
                             </div><!-- End .col-sm-6 -->
 
                             <div class="col-sm-6">
                                 <label>Village *</label>
-                                <input type="text" class="form-control" value="{{ $orders->villages->name }}" disabled>
+                                <input type="text" class="form-control" value="{{ $transactions->villages->name }}" disabled>
                             </div><!-- End .col-sm-6 -->
                         </div><!-- End .row -->
 
                         <div class="row">
                             <div class="col-sm-6">
                                 <label>Postcode *</label>
-                                <input type="text" class="form-control postcode" value="{{ $orders->postcode }}" disabled>
+                                <input type="text" class="form-control postcode" value="{{ $transactions->postcode }}" disabled>
                             </div><!-- End .col-sm-6 -->
 
                             <div class="col-sm-6">
                                 <label>Phone *</label>
-                                <input type="text" class="form-control phone_number" value="{{ $orders->phone_number }}" disabled>
+                                <input type="text" class="form-control phone_number" value="{{ $transactions->phone_number }}" disabled>
                             </div><!-- End .col-sm-6 -->
                         </div><!-- End .row -->
 
@@ -97,7 +97,7 @@
                                 </thead>
 
                                 <tbody>
-                                    @foreach ($orders->orderItems as $item)
+                                    @foreach ($transactions->transactiondetails as $item)
                                         <tr>
                                             <td>{{ $item->products->name }} <strong>x{{ $item->qty }}</strong></a></td>
                                             <td>IDR. {{ number_format($item->price, 2, ',', '.') }}</td>
@@ -106,7 +106,7 @@
 
                                     <tr class="summary-subtotal">
                                         <td>Subtotal:</td>
-                                        <td>IDR. {{ number_format($orders->gross_amount, 2, ',', '.') }}</td>
+                                        <td>IDR. {{ number_format($transactions->gross_amount, 2, ',', '.') }}</td>
                                     </tr><!-- End .summary-subtotal -->
                                     <tr>
                                         <td>Shipping Price</td>
@@ -114,7 +114,7 @@
                                     </tr>
                                     <tr class="summary-total">
                                         <td>Total:</td>
-                                        <td>IDR. {{ number_format($orders->gross_amount, 2, ',', '.') }}</td>
+                                        <td>IDR. {{ number_format($transactions->gross_amount, 2, ',', '.') }}</td>
                                     </tr><!-- End .summary-total -->
                                 </tbody>
                             </table><!-- End .table table-summary -->

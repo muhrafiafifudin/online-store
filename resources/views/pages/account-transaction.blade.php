@@ -8,7 +8,7 @@
 <main class="main">
     <div class="page-header text-center" style="background-image: url('/user/assets/images/page-header-bg.jpg')">
         <div class="container">
-            <h1 class="page-title">My Account<span>Order</span></h1>
+            <h1 class="page-title">My Account<span>Transactions</span></h1>
         </div><!-- End .container -->
     </div><!-- End .page-header -->
     <nav aria-label="breadcrumb" class="breadcrumb-nav mb-3">
@@ -32,17 +32,17 @@
                             <div class="tab-pane fade show active" id="tab-orders" role="tabpanel" aria-labelledby="tab-orders-link">
                                 <table class="table table-order">
                                     <tbody>
-                                        @foreach ($orders as $order)
+                                        @foreach ($transactions as $transaction)
                                             <tr>
-                                                <td>{{ $order->order_id }}</td>
-                                                <td class="text-center">IDR. {{ number_format($order->gross_amount, 2, ',', '.') }}</td>
-                                                <td class="text-center">{{ $order->status }}</td>
-                                                <td class="text-center">{{ $order->created_at }}</td>
+                                                <td>{{ $transaction->order_number }}</td>
+                                                <td class="text-center">IDR. {{ number_format($transaction->gross_amount, 2, ',', '.') }}</td>
+                                                <td class="text-center">{{ $transaction->status }}</td>
+                                                <td class="text-center">{{ $transaction->created_at }}</td>
                                                 <td class="text-center">
-                                                    <a href="{{ url('account/order/order-' . $order->id) }}" class="btn btn-outline-primary mr-3">View Orders</a>
+                                                    <a href="{{ url('account/transaction/transaction-' . $transaction->id) }}" class="btn btn-outline-primary mr-3">Details</a>
 
-                                                    @if ($order->status == 'waiting')
-                                                        <a href="{{ url('account/order/' . $order->id) }}" class="btn btn-outline-primary-2">Pay</a>
+                                                    @if ($transaction->process == 0)
+                                                        <a href="{{ url('account/transaction/' . $transaction->id) }}" class="btn btn-outline-primary-2">Pay</a>
                                                     @else
                                                         <button class="btn btn-outline-primary-paid">Pay</button>
                                                     @endif

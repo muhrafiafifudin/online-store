@@ -36,17 +36,17 @@ Route::post('delete-cart-item', 'CartController@deleteProduct');
 Route::middleware(['auth'])->group(function () {
     // Account Setting
     Route::get('account/dashboard', 'AccountController@dashboard');
-    Route::get('account/order', 'AccountController@order');
-    Route::get('account/order/order-{id}', 'AccountController@orderDetail');
-    Route::get('account/order/{id}', 'AccountController@paymentDetail');
-    // Update Data to Database Order from Midtrans
-    Route::post('account/order/{id}', 'AccountController@paymentPost');
+    Route::get('account/transaction', 'AccountController@transaction');
+    Route::get('account/transaction/transaction-{id}', 'AccountController@transactionDetail');
+    Route::get('account/transaction/{id}', 'AccountController@paymentDetail');
+    // Update Data to Database Transaction from Midtrans
+    Route::post('account/transaction/{id}', 'AccountController@paymentPost');
 
     Route::get('account/address', 'AccountController@address');
 
     Route::get('cart', 'CartController@index');
     Route::get('checkout', 'CheckoutController@index');
-    // Add Data to Database Order
+    // Add Data to Database Transaction
     Route::post('place-order', 'CheckoutController@placeorder');
 
     // Get region with IndoRegion
@@ -76,5 +76,5 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
 
 // Test HTML
 Route::get('tes', function() {
-    return view('pages.account-order-detail');
+    return view('pages.account-transaction-detail');
 });

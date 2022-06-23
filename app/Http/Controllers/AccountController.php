@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Order;
+use App\Models\Transaction;
+use App\Models\Payment;
 use Illuminate\Support\Facades\Auth;
 
 class AccountController extends Controller
@@ -13,23 +14,32 @@ class AccountController extends Controller
         return view('pages.account-dashboard');
     }
 
-    public function order()
+    public function transaction()
     {
-        $orders = Order::where('users_id', Auth::id())->get();
+        $transactions = Transaction::where('users_id', Auth::id())->get();
 
-        return view('pages.account-order', compact('orders'));
+        return view('pages.account-transaction', compact('transactions'));
     }
 
-    public function orderDetail($id)
+    public function transactionDetail($id)
     {
-        $orders = Order::where('id', $id)->where('users_id', Auth::id())->first();
+        $transactions = Transaction::where('id', $id)->where('users_id', Auth::id())->first();
 
-        return view('pages.account-order-detail', compact('orders'));
+        return view('pages.account-transaction-detail', compact('transactions'));
     }
 
     public function paymentDetail($id)
     {
-        $orders = Order::where('id', $id)->where('users_id', Auth::id())->first();
+        $transactions = Transaction::where('id', $id)->where('users_id', Auth::id())->first();
+
+        foreach ($transactions->transactiondetails as $item) {
+            $item_details[] =  array(
+                'id' => $item->products_id,
+                'price' => $item->price,
+                'quantity' => $item->qty,
+                'name' => $item->products->name
+            );
+        }
 
         // Set your Merchant Server Key
         \Midtrans\Config::$serverKey = env('MIDTRANS_SERVER_KEY');
@@ -42,31 +52,32 @@ class AccountController extends Controller
 
         $params = array(
             'transaction_details' => array(
-                'order_id' => $orders->order_id,
-                'gross_amount' => $orders->gross_amount,
+                'order_id' => $transactions->order_number,
+                'gross_amount' => $transactions->gross_amount,
             ),
+            'item_details' => $item_details,
             'customer_details' => array(
-                'first_name' => $orders->name,
+                'first_name' => $transactions->name,
                 'last_name' => '',
-                'email' => $orders->email,
-                'phone' => $orders->phone_number,
-            ),
-            'shipping_address' => array(
-                'first_name' => $orders->name,
-                'last_name' => '',
-                'email' => $orders->email,
-                'phone' => $orders->phone_number,
-                'address' => $orders->street_address . $orders->home_address,
-                'city' => $orders->regencies->name,
-                'postal_code' => $orders->postcode,
-                'country_code' => 'IDN'
+                'email' => $transactions->email,
+                'phone' => $transactions->phone_number,
+                'billing_address' => array(
+                    'first_name' => $transactions->name,
+                    'last_name' => '',
+                    'email' => $transactions->email,
+                    'phone' => $transactions->phone_number,
+                    'address' => $transactions->street_address . $transactions->home_address,
+                    'city' => $transactions->regencies->name,
+                    'postal_code' => $transactions->postcode,
+                    'country_code' => 'IDN'
+                )
             )
         );
 
         $snapToken = \Midtrans\Snap::getSnapToken($params);
 
         return view('pages.account-payment-detail', [
-            'orders' => $orders,
+            'transactions' => $transactions,
             'snapToken' => $snapToken
         ]);
     }
@@ -74,13 +85,17 @@ class AccountController extends Controller
     public function paymentPost(Request $request)
     {
         $json = json_decode($request->get('json'));
-        $order = Order::where('order_id', $json->order_id)->first();
-        $order->status = $json->transaction_status;
-        $order->transaction_id = $json->transaction_id;
-        $order->gross_amount = $json->gross_amount;
-        $order->payment_type = $json->payment_type;
+        $payment = new Payment();
+        $payment->transactions_id = $request->id;
+        $payment->order_id = $json->order_id;
+        $payment->transaction_id = $json->transaction_id;
+        $payment->gross_amount = $json->gross_amount;
+        $payment->payment_type = $json->payment_type;
+        $payment->status_code = $json->status_code;
+        $payment->transaction_status = $json->transaction_status;
+        $payment->transaction_time = $json->transaction_time;
 
-        return $order->update() ? redirect(url('/'))->with('alert-success', 'Order Berhasil Dibuat') : redirect(url('/'))->with('alert-failed', 'Terjadi Kesalahan');
+        return $payment->save() ? redirect(url('/'))->with('alert-success', 'Order Berhasil Dibuat') : redirect(url('/'))->with('alert-failed', 'Terjadi Kesalahan');
     }
 
     public function address()

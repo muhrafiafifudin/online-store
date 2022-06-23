@@ -40,8 +40,8 @@ class Province extends Model
         return $this->hasOne(User::class);
     }
 
-    public function order() 
+    public function transactions()
     {
-        return $this->hasOne(Order::class);
+        return $this->hasOne(Transaction::class);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Order;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 
 class ApiController extends Controller
@@ -17,7 +17,7 @@ class ApiController extends Controller
         }
 
         // Status Berhasil
-        $order = Order::where('order_id', $json->order_id)->first();
-        return $order->update(['status'=>$json->transaction_status]);
+        $order = Transaction::where('order_id', $json->order_id)->first();
+        return $transaction->update(['status'=>$json->transaction_status]);
     }
 }

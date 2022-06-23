@@ -41,7 +41,7 @@ class Village extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function district()
+    public function districts()
     {
         return $this->belongsTo(District::class);
     }
@@ -51,8 +51,8 @@ class Village extends Model
         return $this->hasOne(User::class);
     }
 
-    public function order() 
+    public function transactions()
     {
-        return $this->hasOne(Order::class);
+        return $this->hasOne(Transaction::class);
     }
 }
