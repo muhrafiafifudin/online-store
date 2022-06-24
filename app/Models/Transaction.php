@@ -36,6 +36,11 @@ class Transaction extends Model
         return $this->hasMany(TransactionDetail::class, 'transactions_id', 'id');
     }
 
+    public function payments()
+    {
+        return $this->hasOne(Payment::class, 'transactions_id', 'id');
+    }
+
     public function provinces()
     {
         return $this->belongsTo(Province::class, 'provinces_id');

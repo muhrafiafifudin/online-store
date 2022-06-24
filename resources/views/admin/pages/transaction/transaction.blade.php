@@ -74,12 +74,6 @@
                                     <span class="nav-text">Finish</span>
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#failed">
-                                    <span class="nav-icon"><i class="flaticon2-trash"></i></span>
-                                    <span class="nav-text">Failed</span>
-                                </a>
-                            </li>
                         </ul>
                     </div>
                     <div class="tab-content">
@@ -201,39 +195,6 @@
                                     @php $no=1 @endphp
                                     @foreach ($transactions as $transaction)
                                         @if ($transaction->process == 3)
-                                            <tr>
-                                                <td>{{ $no++ }}</td>
-                                                <td>{{ $transaction->order_number }}</td>
-                                                <td>{{ $transaction->name }}</td>
-                                                <td>{{ $transaction->email }}</td>
-                                                <td>{{ $transaction->gross_amount }}</td>
-                                                <td>{{ $transaction->created_at }}</td>
-                                                <td>
-                                                    <button type="submit" class="btn btn-warning" onclick="return confirm('Are you sure ?')">View</button>
-                                                </td>
-                                            </tr>
-                                        @endif
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="tab-pane fade mt-10" id="failed" role="tabpanel">
-                            <table class="table table-checkable">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Order Number</th>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Total</th>
-                                        <th>Date</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @php $no=1 @endphp
-                                    @foreach ($transactions as $transaction)
-                                        @if ($transaction->process == 4)
                                             <tr>
                                                 <td>{{ $no++ }}</td>
                                                 <td>{{ $transaction->order_number }}</td>

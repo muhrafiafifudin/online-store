@@ -29,7 +29,7 @@ class CreateTransactionsTable extends Migration
             $table->string('gross_amount');
             $table->string('order_number');
             $table->string('note')->nullable();
-            $table->tinyInteger('process')->default(0)->comment('0 = Order, 1 = Process, 2 = Delivery, 3 = Finish, 4 = Cancel/Failed');
+            $table->tinyInteger('process')->default(0)->comment('0 = Order, 1 = Process, 2 = Delivery, 3 = Finish');
             $table->timestamps();
         });
     }
