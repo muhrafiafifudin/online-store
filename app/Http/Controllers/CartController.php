@@ -47,7 +47,6 @@ class CartController extends Controller
 
     public function updateProduct(Request $request)
     {
-        // dd($request->all());
         $products_id = $request->input('products_id');
         $products_qty = $request->input('products_qty');
 
@@ -60,9 +59,7 @@ class CartController extends Controller
 
                 return response()->json(['status' => 'Quantity Updated']);
             }
-
         }
-        
     }
 
     public function deleteProduct(Request $request)

@@ -51,12 +51,12 @@
 						<h3 class="card-label">Form Item
 							<div class="text-muted pt-2 font-size-sm">Add Data Item</div>
 						</h3>
-					</div>	
+					</div>
 				</div>
 				<!--begin::Form-->
 				<form action="{{ route('admin.product.store') }}" method="post" enctype="multipart/form-data">
 					@csrf
-					@method('post')
+					@method('POST')
 
 					<div class="card-body">
 						<div class="form-group">

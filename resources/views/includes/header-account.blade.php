@@ -7,7 +7,7 @@
             <a class="nav-link {{ request()->is('account/transaction') ? 'active' : '' }}" href="{{ url('account/transaction') }}">Orders</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link {{ request()->is('account/address') ? 'active' : '' }}" href="{{ url('account/address') }}">Account Details</a>
+            <a class="nav-link {{ request()->is('account/user-account') ? 'active' : '' }}" href="{{ url('account/user-account') }}">User Account</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#">Sign Out</a>

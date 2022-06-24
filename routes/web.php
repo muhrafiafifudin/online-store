@@ -42,7 +42,8 @@ Route::middleware(['auth'])->group(function () {
     // Update Data to Database Transaction from Midtrans
     Route::post('account/transaction/{id}', 'AccountController@paymentPost');
 
-    Route::get('account/address', 'AccountController@address');
+    Route::get('account/user-account', 'AccountController@address')->name('account.user');
+    Route::put('account/user-account/{id}', 'AccountController@addressUpdate');
 
     Route::get('cart', 'CartController@index');
     Route::get('checkout', 'CheckoutController@index');
@@ -69,6 +70,8 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
         Route::resource('category','CategoryController');
         //Product
         Route::resource('product','ProductController');
+        // Transaction
+        Route::get('transaction', 'TransactionController@index')->name('transaction.index');
     });
     Route::post('logout', 'Auth\AuthenticatedSessionController@destroy')->name('logout');
 });
@@ -76,5 +79,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
 
 // Test HTML
 Route::get('tes', function() {
-    return view('pages.account-transaction-detail');
+    return view('admin.pages.transaction.transaction');
 });
+
+

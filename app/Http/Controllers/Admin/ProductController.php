@@ -83,8 +83,8 @@ class ProductController extends Controller
 
         return view('admin.pages.shop.edit-product', [
             'product'   => $product,
-            'category'  => Category::all() 
-        ]); 
+            'category'  => Category::all()
+        ]);
     }
 
     /**
@@ -106,7 +106,7 @@ class ProductController extends Controller
         } else{
             unset($data['photos']);
         }
-          
+
         $product->update($data);
 
         return redirect()->route('admin.product.index');
@@ -122,7 +122,7 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id);
         $product->delete();
-        
+
         return redirect()->route('admin.product.index');
     }
 }

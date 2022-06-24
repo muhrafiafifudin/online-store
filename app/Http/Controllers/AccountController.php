@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Transaction;
 use App\Models\Payment;
+use App\Models\Province;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class AccountController extends Controller
@@ -100,6 +102,30 @@ class AccountController extends Controller
 
     public function address()
     {
-        return view('pages.account-address');
+        $provinces = Province::all();
+        $users = User::get();
+
+        return view('pages.account-address', [
+            'provinces' => $provinces,
+            'users' => $users
+        ]);
+    }
+
+    public function addressUpdate(Request $request)
+    {
+        $user = User::where('id', Auth::id())->first();
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->street_address = $request->input('street_address');
+        $user->house_address = $request->input('house_address');
+        $user->provinces_id = $request->input('province');
+        $user->cities_id = $request->input('city');
+        $user->districts_id = $request->input('district');
+        $user->villages_id = $request->input('village');
+        $user->postcode = $request->input('postcode');
+        $user->phone_number = $request->input('phone_number');
+        $user->update();
+
+        return redirect()->route('account.user');
     }
 }

@@ -56,7 +56,7 @@
 				<!--begin::Form-->
 				<form action="{{ route('admin.product.update', $product->id) }}" method="post" enctype="multipart/form-data">
 					@csrf
-					@method('put')
+					@method('PUT')
 
 					<div class="card-body">
 						<div class="form-group">

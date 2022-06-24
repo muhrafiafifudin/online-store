@@ -85,7 +85,7 @@
 									<td>{{ $data->category }}</td>
 									<td>
 										<form action="{{ route('admin.category.destroy', $data->id) }}" method="post">
-											@csrf	
+											@csrf
 											@method('DELETE')
 
 											<a href="{{ route('admin.category.edit', $data->id) }}" class="btn btn-warning">Edit</a>
@@ -116,7 +116,7 @@ const baseUrl = 'http://127.0.0.1:8000';
 showCategory();
 
 // table row with ajax
-function table_category_row(res) 
+function table_category_row(res)
 {
 	let htmlView = '';
 
@@ -140,12 +140,12 @@ function table_category_row(res)
 			</tr>
 		`;
 	}
-	
+
 	$('#tbody').html(htmlView);
 
 }
 
-function showCategory() 
+function showCategory()
 {
 	$.ajax({
 		type: "GET",

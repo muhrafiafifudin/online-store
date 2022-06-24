@@ -56,8 +56,8 @@
 				<!--begin::Form-->
 				<form action="{{ route('admin.category.update', $category->id) }}" method="post">
 					@csrf
-					@method('put')
-					
+					@method('PUT')
+
 					<div class="card-body">
 						<div class="form-group">
 							<label>Category

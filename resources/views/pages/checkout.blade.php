@@ -38,7 +38,7 @@
                             <input type="email" class="form-control email" value="{{ Auth::user()->email }}" name="email" placeholder="Enter Your Email ..." required>
 
                             <label>Street address *</label>
-                            <input type="text" class="form-control street_address" value="{{ Auth::user()->street_address }}" name="street_address" placeholder="Street address etc ..." required etc ..." required>
+                            <input type="text" class="form-control street_address" value="{{ Auth::user()->street_address }}" name="street_address" placeholder="Street address etc ..." required>
                             <input type="text" class="form-control home_address" value="{{ Auth::user()->home_address }}" name="house_address" placeholder="House number etc ...">
 
                             <div class="row">
