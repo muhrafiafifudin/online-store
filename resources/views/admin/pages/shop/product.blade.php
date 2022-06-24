@@ -43,7 +43,7 @@
 		<div class="container">
 			<!--begin::Card-->
 			<div class="card card-custom">
-				<div class="card-header border-0 flex-wrap py-5">
+				<div class="card-header flex-wrap py-5">
 					<div class="card-title">
 						<h3 class="card-label">Product
 							<div class="text-muted pt-2 font-size-sm">All Data Product</div>
@@ -68,7 +68,7 @@
 				</div>
 				<div class="card-body">
 					<!--begin: Datatable-->
-					<table class="table table-checkable" id="kt_datatable">
+					<table class="table table-checkable">
 						<thead>
 							<tr>
 								<th>No</th>
@@ -94,7 +94,7 @@
 									<td>{{ $data->slug }}</td>
 									<td>
 										<form action="{{ route('admin.product.destroy', $data->id) }}" method="post">
-											@csrf	
+											@csrf
 											@method('DELETE')
 
 											<a href="{{ route('admin.product.edit', $data->id) }}" class="btn btn-warning">Edit</a>
