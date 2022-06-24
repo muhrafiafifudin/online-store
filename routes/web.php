@@ -25,8 +25,9 @@ Route::get('/dashboard', function () {
 require __DIR__.'/auth.php';
 
 Route::get('/', 'DashboardController@index');
-Route::get('/product', 'ProductController@index')->name('product.index');
-Route::get('/product/{slug}', 'ProductDetailController@index');
+Route::get('product', 'ProductController@index');
+Route::get('product/{slug}', 'ProductDetailController@index');
+Route::get('about-us', 'DashboardController@aboutUs');
 
 Route::post('add-to-cart', 'CartController@addProduct');
 Route::post('update-cart', 'CartController@updateProduct');

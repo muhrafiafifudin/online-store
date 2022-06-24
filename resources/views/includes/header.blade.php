@@ -17,7 +17,7 @@
                             <a href="{{ url('/') }}">Home</a>
                         </li>
                         <li>
-                            <a href="{{ route('product.index') }}">Product</a>
+                            <a href="{{ url('product') }}">Product</a>
                         </li>
                         {{-- <li>
                             <a href="{{ url('blog') }}">Blog</a>
@@ -32,8 +32,8 @@
                 </nav><!-- End .main-nav -->
             </div><!-- End .header-left -->
 
-            
-                
+
+
 
             @if (Route::has('login'))
                 <div class="header-right">
@@ -46,7 +46,7 @@
                                 $count = DB::table('carts')->where('users_id', Auth::id())->count();
                             }
                             @endphp
-                            
+
 
                             <span class="cart-count">{{ $count }}</span>
                         </a>
@@ -83,7 +83,7 @@
                     @endauth
                 </div><!-- End .header-right -->
             @endif
-            
+
         </div><!-- End .container -->
     </div><!-- End .header-middle -->
 </header><!-- End .header -->

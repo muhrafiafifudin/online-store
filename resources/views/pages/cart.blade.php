@@ -20,7 +20,7 @@
             </ol>
         </div><!-- End .container -->
     </nav><!-- End .breadcrumb-nav -->
-    
+
     <div class="page-content">
         <div class="cart">
             <div class="container">
@@ -58,19 +58,19 @@
                                             <td class="price-col">IDR. {{ number_format($data->products->price, 2, ',', '.') }}</td>
                                             <td class="quantity-col">
                                                 <input type="hidden" class="prod_id" value="{{ $data->products_id }}">
-                                                
+
                                                 @if ($data->products->qty >= $data->products_qty)
                                                     <div class="cart-product-quantity">
                                                         <input type="number" class="form-control" value="{{ $data->products_qty }}" min="1" max="10" step="1" data-decimals="0" required>
                                                     </div><!-- End .cart-product-quantity -->
 
-                                                    @php 
+                                                    @php
                                                         $totalItem = $data->products->price * $data->products_qty;
-                                                        $total += $data->products->price * $data->products_qty; 
+                                                        $total += $data->products->price * $data->products_qty;
                                                     @endphp
                                                 @else
                                                     <span class="product-label-detail label-out">Out of Stock</span>
-                                                    
+
                                                     @php $totalItem = $data->products->price * 0; @endphp
                                                 @endif
                                             </td>
@@ -90,7 +90,7 @@
                                     <button class="btn btn-outline-dark-2-cart">SUBTOTAL : &nbsp; <span class="idr-subtotal">IDR. {{ number_format($total, 2, ',', '.') }}</span></button>
                                 </div><!-- End .cart-discount -->
 
-                                <a href="{{ route('product.index') }}" class="btn btn-outline-dark-2"><span>CONTINUE SHOPPING</span><i class="icon-refresh"></i></a>
+                                <a href="{{ url('product') }}" class="btn btn-outline-dark-2"><span>CONTINUE SHOPPING</span><i class="icon-refresh"></i></a>
                                 <a href="{{ url('checkout') }}" class="btn btn-outline-primary-2"><span>PROCEED TO ORDER</span></a>
                             </div><!-- End .cart-bottom -->
                         </div><!-- End .col-lg-9 -->
@@ -99,7 +99,7 @@
                     <div class="reply text-center">
                         <h3 class="title">Cart is Empty</h3><!-- End .title -->
                         <p class="title-desc">Please, continue shopping and come back here</p>
-                        <a href="{{ route('product.index') }}" class="btn btn-outline-dark-2 mt-3"><span>CONTINUE SHOPPING</span><i class="icon-refresh"></i></a>
+                        <a href="{{ url('product') }}" class="btn btn-outline-dark-2 mt-3"><span>CONTINUE SHOPPING</span><i class="icon-refresh"></i></a>
                     </div><!-- End .reply -->
                 @endif
             </div><!-- End .container -->
