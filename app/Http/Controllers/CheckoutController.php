@@ -97,7 +97,7 @@ class CheckoutController extends Controller
                 'transactions_id' => $transaction->id,
                 'products_id' => $item->products_id,
                 'qty' => $item->products_qty,
-                'price' => $item->products->price * $item->products_qty
+                'price' => $item->products->price
             ]);
 
             $product = Product::where('id', $item->products_id)->first();

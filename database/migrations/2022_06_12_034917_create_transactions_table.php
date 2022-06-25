@@ -26,7 +26,7 @@ class CreateTransactionsTable extends Migration
             $table->bigInteger('villages_id');
             $table->string('postcode');
             $table->string('phone_number');
-            $table->string('gross_amount');
+            $table->integer('gross_amount');
             $table->string('order_number');
             $table->string('note')->nullable();
             $table->tinyInteger('process')->default(0)->comment('0 = Order, 1 = Process, 2 = Delivery, 3 = Finish');

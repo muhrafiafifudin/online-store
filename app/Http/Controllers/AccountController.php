@@ -8,6 +8,8 @@ use App\Models\Payment;
 use App\Models\Province;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redis;
+use Midtrans;
 
 class AccountController extends Controller
 {
@@ -54,7 +56,7 @@ class AccountController extends Controller
 
         $params = array(
             'transaction_details' => array(
-                'order_id' => $transactions->order_number,
+                'order_id' => $transactions->id . '-' . rand(),
                 'gross_amount' => $transactions->gross_amount,
             ),
             'item_details' => $item_details,
@@ -94,10 +96,54 @@ class AccountController extends Controller
         $payment->gross_amount = $json->gross_amount;
         $payment->payment_type = $json->payment_type;
         $payment->status_code = $json->status_code;
-        $payment->transaction_status = $json->transaction_status;
         $payment->transaction_time = $json->transaction_time;
 
-        return $payment->save() ? redirect(url('/'))->with('alert-success', 'Order Berhasil Dibuat') : redirect(url('/'))->with('alert-failed', 'Terjadi Kesalahan');
+        $transaction_status = $json->transaction_status;
+        $fraud = $json->fraud_status;
+
+        if ($transaction_status == 'capture') {
+            if ($fraud == 'challenge') {
+                // TODO Set payment status in merchant's database to 'challenge'
+                $payment->transaction_status = 'pending';
+            }
+            else if ($fraud == 'accept') {
+                // TODO Set payment status in merchant's database to 'success'
+                $payment->transaction_status = 'paid';
+            }
+        }
+        else if ($transaction_status == 'cancel') {
+            if ($fraud == 'challenge') {
+                // TODO Set payment status in merchant's database to 'failure'
+                $payment->transaction_status = 'failed';
+            }
+            else if ($fraud == 'accept') {
+                // TODO Set payment status in merchant's database to 'failure'
+                $payment->transaction_status = 'failed';
+            }
+        }
+        else if ($transaction_status == 'deny') {
+            // TODO Set payment status in merchant's database to 'failure'
+            $payment->transaction_status = 'failed';
+        }
+        else if ($transaction_status == 'settlement') {
+            // TODO set payment status in merchant's database to 'Settlement'
+            $payment->transaction_status = 'paid';
+        }
+        else if ($transaction_status == 'pending') {
+            // TODO set payment status in merchant's database to 'Pending'
+            $payment->transaction_status = 'pending';
+        }
+        else if ($transaction_status == 'expire') {
+            // TODO set payment status in merchant's database to 'expire'
+            $payment->transaction_status = 'failed';
+        }
+
+        return $payment->save() ? redirect(url('/account/transaction-success'))->with('alert-success', 'Order Berhasil Dibuat') : redirect(url('/'))->with('alert-failed', 'Terjadi Kesalahan');
+    }
+
+    public function transactionSuccess()
+    {
+        return view('pages.transaction-success');
     }
 
     public function address()

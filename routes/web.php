@@ -80,7 +80,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
 
 // Test HTML
 Route::get('tes', function() {
-    return view('admin.pages.transaction.transaction');
+    return view('pages.transaction-success');
 });
 
 
