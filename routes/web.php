@@ -24,6 +24,10 @@ Route::get('/dashboard', function () {
 
 require __DIR__.'/auth.php';
 
+// Route Login Google Acoount use Socialite
+Route::get('sign-in-google', 'Auth\AuthenticatedSessionController@redirectToGoogle');
+Route::get('auth/google/callback', 'Auth\AuthenticatedSessionController@handleProviderCallback')->name('google.callback');
+
 Route::get('/', 'DashboardController@index');
 Route::get('product', 'ProductController@index');
 Route::get('product/{slug}', 'ProductDetailController@index');

@@ -51,7 +51,7 @@
                                 <p class="text-center">or sign in with</p>
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <a href="#" class="btn btn-login btn-g">
+                                        <a href="{{ url('sign-in-google') }}" class="btn btn-login btn-g">
                                             <i class="icon-google"></i>
                                             Login With Google
                                         </a>
