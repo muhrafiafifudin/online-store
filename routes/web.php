@@ -31,7 +31,8 @@ Route::get('auth/google/callback', 'Auth\AuthenticatedSessionController@handlePr
 Route::get('/', 'DashboardController@index');
 Route::get('product', 'ProductController@index');
 Route::get('product/{slug}', 'ProductDetailController@index');
-Route::get('about-us', 'DashboardController@aboutUs');
+Route::get('about-us', 'AboutUsController@index');
+Route::get('contact-us', 'ContactUsController@index');
 
 Route::post('add-to-cart', 'CartController@addProduct');
 Route::post('update-cart', 'CartController@updateProduct');
@@ -46,6 +47,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('account/transaction/{id}', 'AccountController@paymentDetail');
     // Update Data to Database Transaction from Midtrans
     Route::post('account/transaction/{id}', 'AccountController@paymentPost');
+    Route::get('account/transaction-success', 'AccountController@transactionSuccess');
 
     Route::get('account/user-account', 'AccountController@address')->name('account.user');
     Route::put('account/user-account/{id}', 'AccountController@addressUpdate');
@@ -77,6 +79,12 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
         Route::resource('product','ProductController');
         // Transaction
         Route::get('transaction', 'TransactionController@index')->name('transaction.index');
+        Route::get('transaction-process', 'TransactionController@transactionProcess')->name('transaction.process');
+        Route::get('transaction-delivery', 'TransactionController@transactionDelivery');
+        Route::get('transaction-finish', 'TransactionController@transactionFinish');
+
+        Route::put('transaction/update-process/{id}', 'TransactionController@updateProcess');
+        Route::put('transaction/update-delivery/{id}', 'TransactionController@updateDelivery');
     });
     Route::post('logout', 'Auth\AuthenticatedSessionController@destroy')->name('logout');
 });

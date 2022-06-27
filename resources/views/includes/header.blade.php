@@ -25,9 +25,9 @@
                         <li>
                             <a href="{{ url('about-us') }}">About Us</a>
                         </li>
-                        {{-- <li>
+                        <li>
                             <a href="{{ url('contact-us') }}">Contact Us</a>
-                        </li> --}}
+                        </li>
                     </ul><!-- End .menu -->
                 </nav><!-- End .main-nav -->
             </div><!-- End .header-left -->

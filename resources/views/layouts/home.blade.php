@@ -22,7 +22,7 @@
     <meta name="msapplication-TileColor" content="#cc9966">
     <meta name="msapplication-config" content="{{ asset('user/assets/images/icons/browserconfig.xml') }}">
     <meta name="theme-color" content="#ffffff">
-    
+
     @include('includes.style')
 </head>
 
@@ -37,7 +37,7 @@
 
     <button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
 
-    @yield('scripts')
+    @stack('scripts')
 
     @include('includes.script')
 </body>

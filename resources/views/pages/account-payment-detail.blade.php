@@ -132,7 +132,7 @@
 </main><!-- End .main -->
 @endsection
 
-@section('scripts')
+@push('scripts')
 <script type="text/javascript">
     // For example trigger on button clicked, or any time you need
     var payButton = document.getElementById('pay-button');
@@ -167,4 +167,4 @@
         $('#submit_form').submit();
     }
 </script>
-@endsection
+@endpush
