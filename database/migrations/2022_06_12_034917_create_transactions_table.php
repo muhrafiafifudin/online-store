@@ -28,6 +28,9 @@ class CreateTransactionsTable extends Migration
             $table->string('phone_number');
             $table->integer('gross_amount');
             $table->string('order_number');
+            $table->string('resi');
+            $table->string('courier');
+            $table->string('order_number');
             $table->string('note')->nullable();
             $table->tinyInteger('process')->default(0)->comment('0 = Order, 1 = Process, 2 = Delivery, 3 = Finish');
             $table->timestamps();

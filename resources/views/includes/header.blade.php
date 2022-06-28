@@ -8,7 +8,7 @@
                 </button>
 
                 <a href="index.html" class="logo">
-                    <img src="{{ asset('user/assets/images/logo.png') }}" alt="Molla Logo" width="105" height="25">
+                    <img src="{{ asset('user/assets/images/logo.png') }}" alt="Molla Logo" width="80" height="25">
                 </a>
 
                 <nav class="main-nav">
@@ -19,9 +19,6 @@
                         <li>
                             <a href="{{ url('product') }}">Product</a>
                         </li>
-                        {{-- <li>
-                            <a href="{{ url('blog') }}">Blog</a>
-                        </li> --}}
                         <li>
                             <a href="{{ url('about-us') }}">About Us</a>
                         </li>
