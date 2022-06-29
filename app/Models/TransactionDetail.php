@@ -16,7 +16,6 @@ class TransactionDetail extends Model
         'transactions_id',
         'products_id',
         'qty',
-        'price'
     ];
 
     public function products()

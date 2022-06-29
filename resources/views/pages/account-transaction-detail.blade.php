@@ -100,7 +100,7 @@
                                     @foreach ($transactions->transactiondetails as $item)
                                         <tr>
                                             <td>{{ $item->products->name }} <strong>x{{ $item->qty }}</strong></a></td>
-                                            <td>IDR. {{ number_format($item->price, 2, ',', '.') }}</td>
+                                            <td>IDR. {{ number_format($item->products->price, 2, ',', '.') }}</td>
                                         </tr>
                                     @endforeach
 

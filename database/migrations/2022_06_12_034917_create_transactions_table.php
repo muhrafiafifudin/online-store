@@ -26,13 +26,14 @@ class CreateTransactionsTable extends Migration
             $table->bigInteger('villages_id');
             $table->string('postcode');
             $table->string('phone_number');
-            $table->integer('gross_amount');
+            $table->decimal('gross_amount', 15, 2);
             $table->string('order_number');
+            $table->tinyInteger('process')->default(0)->comment('0 = Order, 1 = Process, 2 = Delivery, 3 = Finish');
             $table->string('resi');
             $table->string('courier');
-            $table->string('order_number');
+            $table->decimal('weight', 10, 2);
+            $table->string('estimate');
             $table->string('note')->nullable();
-            $table->tinyInteger('process')->default(0)->comment('0 = Order, 1 = Process, 2 = Delivery, 3 = Finish');
             $table->timestamps();
         });
     }

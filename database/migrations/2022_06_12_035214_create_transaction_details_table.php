@@ -18,7 +18,6 @@ class CreateTransactionDetailsTable extends Migration
             $table->integer('transactions_id');
             $table->integer('products_id');
             $table->integer('qty');
-            $table->bigInteger('price');
             $table->timestamps();
         });
     }

@@ -12,7 +12,9 @@ use App\Models\Product;
 use App\Models\Transaction;
 use App\Models\TransactionDetail;
 use App\Models\User;
+use App\Models\Store;
 use Illuminate\Support\Facades\Auth;
+use Kavist\RajaOngkir\Facades\RajaOngkir;
 
 class CheckoutController extends Controller
 {
@@ -63,6 +65,71 @@ class CheckoutController extends Controller
         }
     }
 
+    public function getCourier(Request $request)
+    {
+        if ($request) {
+            echo '<option value="jne" name="JNE">JNE</option>';
+            echo '<option value="tiki" name="TIKI">TIKI</option>';
+            echo '<option value="pos" name="POS Indonesia">POS Indonesia</option>';
+        }
+    }
+
+    public function getPackage(Request $request)
+    {
+        $stores = Store::all();
+
+        foreach ($stores as $store) {
+            $origin = $store->regencies_id;
+        }
+
+        $getLocation = array(
+            'origin'        => 155,     // ID kota/kabupaten asal
+            'destination'   => 80,      // ID kota/kabupaten tujuan
+            'weight'        => $request->weight,    // berat barang dalam gram
+            'courier'       => $request->courier_id,    // kode kurir pengiriman: ['jne', 'tiki', 'pos'] untuk starter
+        );
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+        CURLOPT_URL => "https://api.rajaongkir.com/starter/cost",
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => "",
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 30,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => "POST",
+        CURLOPT_POSTFIELDS => "origin=" . $getLocation['origin'] . "&destination=" . $getLocation['destination'] . "&weight=" . $getLocation['weight'] . "&courier=" . $getLocation['courier'] . "",
+        CURLOPT_HTTPHEADER => array(
+            "content-type: application/x-www-form-urlencoded",
+            "key: 3850ade724ce3b7a993736edb3f0053b"
+        ),
+        ));
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        } else {
+            $array_response = json_decode($response, true);
+            $packages = $array_response['rajaongkir']['results'][0]['costs'];
+
+            foreach ($packages as $package) {
+                echo "<option value='" . $package['service'] . "' ongkir='" . $package['cost'][0]['value'] . "' estimasi='" . $package['cost'][0]['etd'] . "'>";
+                echo $package['service'] . " | IDR " . $package['cost'][0]['value'];
+                echo "</option>";
+            }
+        }
+    }
+
+    public function getEstimate(Request $request)
+    {
+        echo $request;
+    }
+
     public function placeorder(Request $request)
     {
         $transaction = new Transaction();
@@ -88,7 +155,7 @@ class CheckoutController extends Controller
         }
 
         $transaction->gross_amount = $gross_amount;
-        $transaction->order_number = 'order-'.rand(1111, 9999);
+        $transaction->order_number = 'order-'.rand();
         $transaction->save();
 
         $cartItems = Cart::where('users_id', Auth::id())->get();
@@ -96,8 +163,7 @@ class CheckoutController extends Controller
             TransactionDetail::create([
                 'transactions_id' => $transaction->id,
                 'products_id' => $item->products_id,
-                'qty' => $item->products_qty,
-                'price' => $item->products->price
+                'qty' => $item->products_qty
             ]);
 
             $product = Product::where('id', $item->products_id)->first();

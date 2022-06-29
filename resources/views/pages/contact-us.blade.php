@@ -23,7 +23,7 @@
 
     <div class="page-content">
         <div id="map" class="mb-5">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15862.53234191291!2d107.000334!3d-6.3118381!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x5e24dacdb72086f2!2sPT%20Diva%20Metal%20Mandiri!5e0!3m2!1sen!2sid!4v1656313844347!5m2!1sen!2sid" width="1400" height="492" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <iframe src="{{ $stores->maps }}" width="1400" height="492" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div><!-- End #map -->
         <div class="container">
             <div class="row">
@@ -31,7 +31,7 @@
                     <div class="contact-box text-center">
                         <h3>Office</h3>
 
-                        <address>1 New York Plaza, New York, <br>NY 10004, USA</address>
+                        <address>{{ $stores->street_address }}, {{ $stores->villages->name }}, <br>{{ $stores->regencies->name }}, {{ $stores->provinces->name }}, {{ $stores->postcode }}</address>
                     </div><!-- End .contact-box -->
                 </div><!-- End .col-md-4 -->
 
@@ -39,8 +39,8 @@
                     <div class="contact-box text-center">
                         <h3>Start a Conversation</h3>
 
-                        <div><a href="mailto:#">info@Molla.com</a></div>
-                        <div><a href="tel:#">+1 987-876-6543</a>, <a href="tel:#">+1 987-976-1234</a></div>
+                        <div><a href="mailto:#">{{ $stores->email }}</a></div>
+                        <div><a href="tel:#">{{ $stores->phone_number }}</a></div>
                     </div><!-- End .contact-box -->
                 </div><!-- End .col-md-4 -->
 

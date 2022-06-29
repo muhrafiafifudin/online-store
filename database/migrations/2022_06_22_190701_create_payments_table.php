@@ -18,7 +18,7 @@ class CreatePaymentsTable extends Migration
             $table->string('transactions_id')->comment('Transaction ID local');
             $table->string('order_id');
             $table->string('transaction_id');
-            $table->string('gross_amount');
+            $table->decimal('gross_amount', 15, 2);
             $table->string('payment_type');
             $table->string('status_code');
             $table->string('transaction_status');

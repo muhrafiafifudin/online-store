@@ -39,7 +39,7 @@ class AccountController extends Controller
         foreach ($transactions->transactiondetails as $item) {
             $item_details[] =  array(
                 'id' => $item->products_id,
-                'price' => $item->price,
+                'price' => $item->products->price,
                 'quantity' => $item->qty,
                 'name' => $item->products->name
             );

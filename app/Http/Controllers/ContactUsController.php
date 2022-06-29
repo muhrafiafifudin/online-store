@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Store;
 
 class ContactUsController extends Controller
 {
     public function index()
     {
-        return view('pages.contact-us');
+        $stores = Store::all()->first();
+
+        return view('pages.contact-us', compact('stores'));
     }
 }

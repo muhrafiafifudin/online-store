@@ -11,7 +11,7 @@
 <!-- Add in Detail Cart -->
 <script src="{{ asset('user/assets/js/bootstrap-input-spinner.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.js"></script>
-<!-- IndoRegion Jquery -->
-<script src="{{ asset('user/assets/js/indoregion-jquery.js') }}"></script>
+<!-- IndoRegion & Raja Ongkir Jquery -->
+<script src="{{ asset('user/assets/js/indoregion-rajaongkir.js') }}"></script>
 <!-- @TODO: replace SET_YOUR_CLIENT_KEY_HERE with your client key -->
 <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-08BKvFEKX4Y1tqX-"></script>

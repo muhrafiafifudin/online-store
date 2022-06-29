@@ -57,10 +57,13 @@ Route::middleware(['auth'])->group(function () {
     // Add Data to Database Transaction
     Route::post('place-order', 'CheckoutController@placeorder');
 
-    // Get region with IndoRegion
+    // Get region with IndoRegion & Raja Ongkir
     Route::post('get-city', 'CheckoutController@getCity');
     Route::post('get-district', 'CheckoutController@getDistrict');
     Route::post('get-village', 'CheckoutController@getVillage');
+    Route::post('get-courier', 'CheckoutController@getCourier');
+    Route::post('get-package', 'CheckoutController@getPackage');
+    Route::post('get-estimate', 'CheckoutController@getEstimate');
 });
 
 // Admin Routes

@@ -28,7 +28,7 @@
                     @csrf
 
                     <div class="row">
-                        <div class="col-lg-7">
+                        <div class="col-lg-6">
                             <h2 class="checkout-title">Billing Details</h2><!-- End .checkout-title -->
 
                             <label>Full Name *</label>
@@ -98,7 +98,7 @@
                             <label>Order notes (optional)</label>
                             <textarea class="form-control note" cols="30" rows="4" name="note" placeholder="Notes about your order, e.g. special notes for delivery"></textarea>
                         </div><!-- End .col-lg-9 -->
-                        <aside class="col-lg-5">
+                        <aside class="col-lg-6">
                             <div class="summary">
                                 <h3 class="summary-title">Your Order</h3><!-- End .summary-title -->
 
@@ -109,7 +109,6 @@
                                             <th>Total</th>
                                         </tr>
                                     </thead>
-
                                     <tbody>
                                         @php $total = 0; $totalItem = 0; @endphp
                                         @foreach ($cartItems as $data)
@@ -129,8 +128,42 @@
                                             <td>IDR. {{ number_format($total, 2, ',', '.') }}</td>
                                         </tr><!-- End .summary-subtotal -->
                                         <tr>
-                                            <td>Shipping Price</td>
-                                            <td>Free shipping</td>
+                                            <th colspan="2">
+                                                <div class="row mt-2">
+                                                    <div class="col-sm-6">
+                                                        <label>Weight</label>
+                                                        @php $weight = 0; $totalWeight = 0; @endphp
+                                                        @foreach ($cartItems as $data)
+                                                            @php
+                                                                $weight = $data->products->weight * $data->products_qty;
+                                                                $totalWeight += $weight;
+                                                            @endphp
+                                                        @endforeach
+                                                        <input type="text" class="form-control" value="{{ $totalWeight }}" name="weight" id="weight" disabled>
+                                                    </div><!-- End .col-sm-6 -->
+
+                                                    <div class="col-sm-6">
+                                                        <label>Courier *</label>
+                                                        <select name="courier" id="courier" class="form-control" required>
+                                                            <option selected="selected">Choose Your Courier</option>
+                                                        </select>
+                                                    </div><!-- End .col-sm-6 -->
+                                                </div><!-- End .row -->
+
+                                                <div class="row mb-2">
+                                                    <div class="col-sm-6">
+                                                        <label>Package *</label>
+                                                        <select name="package" id="package" class="form-control cities">
+                                                            <option selected="selected">Choose Your Package</option>
+                                                        </select>
+                                                    </div><!-- End .col-sm-6 -->
+
+                                                    <div class="col-sm-6">
+                                                        <label>Estimate</label>
+                                                        <input type="text" class="form-control name" name="estimate" id="estimate" placeholder="Your Estimate ..." disabled>
+                                                    </div><!-- End .col-sm-6 -->
+                                                </div><!-- End .row -->
+                                            </th>
                                         </tr>
                                         <tr class="summary-total">
                                             <td>Total:</td>
