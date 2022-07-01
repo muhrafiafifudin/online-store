@@ -10,6 +10,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redis;
 use Midtrans;
+use Kavist\RajaOngkir\Facades\RajaOngkir;
 
 class AccountController extends Controller
 {
@@ -28,13 +29,15 @@ class AccountController extends Controller
     public function transactionDetail($id)
     {
         $transactions = Transaction::where('id', $id)->where('users_id', Auth::id())->first();
+        $address = RajaOngkir::kota()->dariProvinsi($transactions->provinces_id)->find($transactions->cities_id);
 
-        return view('pages.account-transaction-detail', compact('transactions'));
+        return view('pages.account-transaction-detail', compact('transactions', 'address'));
     }
 
     public function paymentDetail($id)
     {
         $transactions = Transaction::where('id', $id)->where('users_id', Auth::id())->first();
+        $address = RajaOngkir::kota()->dariProvinsi($transactions->provinces_id)->find($transactions->cities_id);
 
         foreach ($transactions->transactiondetails as $item) {
             $item_details[] =  array(
@@ -65,25 +68,12 @@ class AccountController extends Controller
                 'last_name' => '',
                 'email' => $transactions->email,
                 'phone' => $transactions->phone_number,
-                'billing_address' => array(
-                    'first_name' => $transactions->name,
-                    'last_name' => '',
-                    'email' => $transactions->email,
-                    'phone' => $transactions->phone_number,
-                    'address' => $transactions->street_address . $transactions->home_address,
-                    'city' => $transactions->regencies->name,
-                    'postal_code' => $transactions->postcode,
-                    'country_code' => 'IDN'
-                )
             )
         );
 
         $snapToken = \Midtrans\Snap::getSnapToken($params);
 
-        return view('pages.account-payment-detail', [
-            'transactions' => $transactions,
-            'snapToken' => $snapToken
-        ]);
+        return view('pages.account-payment-detail', compact('transactions',  'snapToken', 'address'));
     }
 
     public function paymentPost(Request $request)
@@ -148,13 +138,10 @@ class AccountController extends Controller
 
     public function address()
     {
-        $provinces = Province::all();
-        $users = User::get();
+        $users = Auth::user();
+        $address = RajaOngkir::kota()->dariProvinsi($users->provinces_id)->find($users->cities_id);
 
-        return view('pages.account-address', [
-            'provinces' => $provinces,
-            'users' => $users
-        ]);
+        return view('pages.account-address', compact('users', 'address'));
     }
 
     public function addressUpdate(Request $request)

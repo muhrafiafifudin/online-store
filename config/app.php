@@ -162,9 +162,6 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
-        // Provider Indoregion
-        AzisHapidin\IndoRegion\IndoRegionServiceProvider::class,
-
         /*
          * Package Service Providers...
          */

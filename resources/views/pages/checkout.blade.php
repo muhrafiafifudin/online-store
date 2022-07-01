@@ -37,25 +37,32 @@
                             <label>Email address *</label>
                             <input type="email" class="form-control email" value="{{ Auth::user()->email }}" name="email" placeholder="Enter Your Email ..." required>
 
-                            <label>Street address *</label>
-                            <input type="text" class="form-control street_address" value="{{ Auth::user()->street_address }}" name="street_address" placeholder="Street address etc ..." required>
-                            <input type="text" class="form-control home_address" value="{{ Auth::user()->home_address }}" name="house_address" placeholder="House number etc ...">
-
                             <div class="row">
                                 <div class="col-sm-6">
                                     <label>Province *</label>
                                     <select name="province" id="province" class="form-control" required>
-                                        <option selected="selected">Choose Your Province</option>
+                                        @if (Auth::user()->provinces_id == NULL)
+                                            <option selected="selected">Choose Your Province</option>
+                                        @else
+                                            <option selected="selected" value="{{ $address{'province_id'} }}">{{ $address['province'] }}</option>
+                                        @endif
                                     </select>
                                 </div><!-- End .col-sm-6 -->
 
                                 <div class="col-sm-6">
                                     <label>Town / City *</label>
                                     <select name="city" id="city" class="form-control cities">
-                                        <option selected="selected">Choose Your City</option>
+                                        @if (Auth::user()->cities_id == NULL)
+                                            <option selected="selected">Choose Your City</option>
+                                        @else
+                                            <option selected="selected" value="{{ $address['city_id'] }}">{{ $address['city_name'] }}</option>
+                                        @endif
                                     </select>
                                 </div><!-- End .col-sm-6 -->
                             </div><!-- End .row -->
+
+                            <label>Address</label>
+                            <textarea class="form-control note" cols="30" rows="4" name="address" placeholder="Your street address, district and village ..."></textarea>
 
                             <div class="row">
                                 <div class="col-sm-6">
@@ -113,7 +120,7 @@
                                                                 $totalWeight += $weight;
                                                             @endphp
                                                         @endforeach
-                                                        <input type="text" class="form-control" value="{{ $totalWeight }}" name="weight" id="weight" disabled>
+                                                        <input type="text" class="form-control" value="{{ $totalWeight }}" name="weight" id="weight" readonly>
                                                     </div><!-- End .col-sm-6 -->
 
                                                     <div class="col-sm-6">
@@ -134,7 +141,7 @@
 
                                                     <div class="col-sm-6">
                                                         <label>Estimate</label>
-                                                        <input type="text" class="form-control name" name="estimate" id="estimate" placeholder="Your Estimate ..." disabled>
+                                                        <input type="text" class="form-control name" name="estimate" id="estimate" placeholder="Your Estimate ..." readonly>
                                                     </div><!-- End .col-sm-6 -->
                                                 </div><!-- End .row -->
                                             </th>

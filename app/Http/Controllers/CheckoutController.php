@@ -20,10 +20,8 @@ class CheckoutController extends Controller
 {
     public function index()
     {
-        // INDOREGION
-        // $provinces = Province::all();
-
         $users = User::get();
+        $address = RajaOngkir::kota()->dariProvinsi(Auth::user()->provinces_id)->find(Auth::user()->cities_id);
 
         $oldCart = Cart::where('users_id', Auth::id())->get();
         foreach ($oldCart as $item) {
@@ -34,44 +32,8 @@ class CheckoutController extends Controller
         }
         $cartItems = Cart::where('users_id', Auth::id())->get();
 
-        return view('pages.checkout', compact('cartItems', 'users'));
+        return view('pages.checkout', compact('cartItems', 'users', 'address'));
     }
-
-
-    // START INDOREGION
-
-    // public function getCity(Request $request)
-    // {
-    //     $province_id = $request->province_id;
-    //     $city = Regency::where('province_id', $province_id)->get();
-
-    //     foreach ($city as $data) {
-    //         echo "<option value='$data->id'>$data->name</option>";
-    //     }
-    // }
-
-    // public function getDistrict(Request $request)
-    // {
-    //     $city_id = $request->city_id;
-    //     $district = District::where('regency_id', $city_id)->get();
-
-    //     foreach ($district as $data) {
-    //         echo "<option value='$data->id'>$data->name</option>";
-    //     }
-    // }
-
-    // public function getVillage(Request $request)
-    // {
-    //     $district_id = $request->district_id;
-    //     $village = Village::where('district_id', $district_id)->get();
-
-    //     foreach ($village as $data) {
-    //         echo "<option value='$data->id'>$data->name</option>";
-    //     }
-    // }
-
-    // END INDOREGION
-
 
     public function getProvince()
     {
@@ -101,7 +63,15 @@ class CheckoutController extends Controller
             $arrayResponse = json_decode($response, true);
             $provinces = $arrayResponse['rajaongkir']['results'];
 
-            echo "<option>Choose Your Province</option>";
+            $address = RajaOngkir::kota()->dariProvinsi(Auth::user()->provinces_id)->find(Auth::user()->cities_id);
+            $province_id = $address['province_id'];
+            $province_name = $address['province'];
+
+            if (Auth::user()->provinces_id == NULL) {
+                echo "<option>Choose Your Province</option>";
+            } {
+                echo "<option value='$province_id'>$province_name</option>";
+            }
 
             foreach ($provinces as $province) {
                 echo "<option value='" . $province['province_id'] . "' >" . $province['province'] . "</option>";
@@ -136,6 +106,16 @@ class CheckoutController extends Controller
         } else {
             $arrayResponse = json_decode($response, true);
             $cities = $arrayResponse['rajaongkir']['results'];
+
+            $address = RajaOngkir::kota()->dariProvinsi(Auth::user()->provinces_id)->find(Auth::user()->cities_id);
+            $city_id = $address['city_id'];
+            $city_name = $address['city_name'];
+
+            if (Auth::user()->cities_id == NULL) {
+                echo "<option>Choose Your City</option>";
+            } {
+                echo "<option value='$city_id'>$city_name</option>";
+            }
 
             foreach ($cities as $city) {
                 echo "<option value='" . $city['city_id'] . "' >" . $city['city_name'] . "</option>";
@@ -214,14 +194,14 @@ class CheckoutController extends Controller
         $transaction->users_id = Auth::id();
         $transaction->name = $request->input('name');
         $transaction->email = $request->input('email');
-        $transaction->street_address = $request->input('street_address');
-        $transaction->house_address = $request->input('house_address');
         $transaction->provinces_id = $request->input('province');
         $transaction->cities_id = $request->input('city');
-        $transaction->districts_id = $request->input('district');
-        $transaction->villages_id = $request->input('village');
+        $transaction->address = $request->input('address');
         $transaction->postcode = $request->input('postcode');
         $transaction->phone_number = $request->input('phone_number');
+        $transaction->courier = $request->input('courier');
+        $transaction->weight = $request->input('weight');
+        $transaction->estimate = $request->input('estimate');
         $transaction->note = $request->input('note');
 
         // To Calculate the Gross Amount
@@ -253,12 +233,9 @@ class CheckoutController extends Controller
             $user = User::where('id', Auth::id())->first();
             $user->name = $request->input('name');
             $user->email = $request->input('email');
-            $user->street_address = $request->input('street_address');
-            $user->house_address = $request->input('house_address');
             $user->provinces_id = $request->input('province');
             $user->cities_id = $request->input('city');
-            $user->districts_id = $request->input('district');
-            $user->villages_id = $request->input('village');
+            $user->address = $request->input('address');
             $user->postcode = $request->input('postcode');
             $user->phone_number = $request->input('phone_number');
             $user->update();

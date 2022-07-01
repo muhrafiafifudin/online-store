@@ -27,12 +27,9 @@ class User extends Authenticatable
         'email',
         'email_verified_at',
         'password',
-        'street_address',
-        'house_address',
         'provinces_id',
         'cities_id',
-        'districts_id',
-        'villages_id',
+        'address',
         'post_code',
         'phone_number',
     ];
@@ -55,24 +52,4 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-    public function provinces()
-    {
-        return $this->belongsTo(Provinces::class, 'provinces_id');
-    }
-
-    public function regencies()
-    {
-        return $this->belongsTo(Regency::class, 'cities_id');
-    }
-
-    public function districts()
-    {
-        return $this->belongsTo(District::class, 'districts_id');
-    }
-
-    public function villages()
-    {
-        return $this->belongsTo(Village::class, 'villages_id');
-    }
 }

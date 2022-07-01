@@ -31,7 +31,7 @@
                     <div class="contact-box text-center">
                         <h3>Office</h3>
 
-                        <address>{{ $stores->street_address }}, {{ $stores->villages->name }}, <br>{{ $stores->regencies->name }}, {{ $stores->provinces->name }}, {{ $stores->postcode }}</address>
+                        <address>{{ $stores->address }}, <br>{{ $address['city_name'] }}, {{ $address['province'] }}, {{ $stores->postcode }}</address>
                     </div><!-- End .contact-box -->
                 </div><!-- End .col-md-4 -->
 

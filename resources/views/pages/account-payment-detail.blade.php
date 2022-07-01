@@ -41,33 +41,20 @@
                         <label>Email address *</label>
                         <input type="email" class="form-control" value="{{ $transactions->email }}" disabled>
 
-                        <label>Street address *</label>
-                        <input type="text" class="form-control" value="{{ $transactions->street_address }}" disabled>
-                        <input type="text" class="form-control" value="{{ $transactions->home_address }}" disabled>
-
                         <div class="row">
                             <div class="col-sm-6">
                                 <label>Province *</label>
-                                <input type="text" class="form-control" value="{{ $transactions->provinces->name }}" disabled>
+                                <input type="text" class="form-control" value="{{ $address['province'] }}" disabled>
                             </div><!-- End .col-sm-6 -->
 
                             <div class="col-sm-6">
                                 <label>Town / City *</label>
-                                <input type="text" class="form-control" value="{{ $transactions->regencies->name }}" disabled>
+                                <input type="text" class="form-control" value="{{ $address['city_name'] }}" disabled>
                             </div><!-- End .col-sm-6 -->
                         </div><!-- End .row -->
 
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <label>District *</label>
-                                <input type="text" class="form-control" value="{{ $transactions->districts->name }}" disabled>
-                            </div><!-- End .col-sm-6 -->
-
-                            <div class="col-sm-6">
-                                <label>Village *</label>
-                                <input type="text" class="form-control" value="{{ $transactions->villages->name }}" disabled>
-                            </div><!-- End .col-sm-6 -->
-                        </div><!-- End .row -->
+                        <label>Address</label>
+                        <textarea class="form-control note" cols="30" rows="4" disabled>{{ $transactions->address }}</textarea>
 
                         <div class="row">
                             <div class="col-sm-6">
@@ -109,8 +96,20 @@
                                         <td>IDR. {{ number_format($transactions->gross_amount, 2, ',', '.') }}</td>
                                     </tr><!-- End .summary-subtotal -->
                                     <tr>
+                                        <td>Weight</td>
+                                        <td>{{ $transactions->weight }}</td>
+                                    </tr>
+                                    <tr>
                                         <td>Shipping Price</td>
                                         <td>Free shipping</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Courier</td>
+                                        <td>{{ $transactions->courier }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Estimate</td>
+                                        <td>{{ $transactions->estimate }}</td>
                                     </tr>
                                     <tr class="summary-total">
                                         <td>Total:</td>

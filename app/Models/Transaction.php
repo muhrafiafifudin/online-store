@@ -15,12 +15,9 @@ class Transaction extends Model
         'users_id',
         'name',
         'email',
-        'street_address',
-        'house_address',
         'provinces_id',
         'cities_id',
-        'districts_id',
-        'villages_id',
+        'address',
         'post_code',
         'phone_number',
         'status',
@@ -39,25 +36,5 @@ class Transaction extends Model
     public function payments()
     {
         return $this->hasOne(Payment::class, 'transactions_id', 'id');
-    }
-
-    public function provinces()
-    {
-        return $this->belongsTo(Province::class, 'provinces_id');
-    }
-
-    public function regencies()
-    {
-        return $this->belongsTo(Regency::class, 'cities_id');
-    }
-
-    public function districts()
-    {
-        return $this->belongsTo(District::class, 'districts_id');
-    }
-
-    public function villages()
-    {
-        return $this->belongsTo(Village::class, 'villages_id');
     }
 }

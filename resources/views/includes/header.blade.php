@@ -7,30 +7,27 @@
                     <i class="icon-bars"></i>
                 </button>
 
-                <a href="index.html" class="logo">
+                <a href="{{ url('/') }}" class="logo">
                     <img src="{{ asset('user/assets/images/logo.png') }}" alt="Molla Logo" width="80" height="25">
                 </a>
 
                 <nav class="main-nav">
                     <ul class="menu sf-arrows">
-                        <li class="megamenu-container">
+                        <li class="megamenu-container {{ request()->is('/') ? 'active' : '' }}">
                             <a href="{{ url('/') }}">Home</a>
                         </li>
-                        <li>
+                        <li class="{{ request()->is('product') ? 'active' : '' }}">
                             <a href="{{ url('product') }}">Product</a>
                         </li>
-                        <li>
+                        <li class="{{ request()->is('about-us') ? 'active' : '' }}">
                             <a href="{{ url('about-us') }}">About Us</a>
                         </li>
-                        <li>
+                        <li class="{{ request()->is('contact-us') ? 'active' : '' }}">
                             <a href="{{ url('contact-us') }}">Contact Us</a>
                         </li>
                     </ul><!-- End .menu -->
                 </nav><!-- End .main-nav -->
             </div><!-- End .header-left -->
-
-
-
 
             @if (Route::has('login'))
                 <div class="header-right">

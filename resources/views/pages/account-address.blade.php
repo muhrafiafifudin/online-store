@@ -40,51 +40,24 @@
                                     <label>Email address</label>
                                     <input type="email" class="form-control email" value="{{ Auth::user()->email }}" name="email" placeholder="Enter Your Email ...">
 
-                                    <label>Street address</label>
-                                    <input type="text" class="form-control street_address" value="{{ Auth::user()->street_address }}" name="street_address" placeholder="Street address etc ...">
-                                    <input type="text" class="form-control home_address" value="{{ Auth::user()->home_address }}" name="house_address" placeholder="House number etc ...">
-
                                     <div class="row">
                                         <div class="col-sm-6">
-                                            <label>Province</label>
-                                            <select name="province" id="province" class="form-control">
-                                                <option selected="selected">Choose Your Province</option>
-                                                @foreach ($provinces as $province)
-                                                    <option value="{{ $province->id }}" {{ $province->id == Auth::user()->provinces_id ? 'selected' : '' }}>{{ $province->name }}</option>>
-                                                @endforeach
+                                            <label>Province *</label>
+                                            <select name="province" id="province" class="form-control" required>
+                                                <option selected="selected" value="{{ Auth::user()->provinces_id == NULL ? 0 : Auth::user()->provinces_id }}">{{ $address['province'] }}</option>
                                             </select>
                                         </div><!-- End .col-sm-6 -->
 
                                         <div class="col-sm-6">
-                                            <label>Town / City</label>
+                                            <label>Town / City *</label>
                                             <select name="city" id="city" class="form-control cities">
-                                                @foreach ($users as $user)
-                                                    <option value="{{ Auth::user()->cities_id == NULL ? 0 : $user->regencies->id }}" selected >{{ Auth::user()->cities_id == NULL ? 'Choose Your City' : $user->regencies->name }}</option>
-                                                @endforeach
-
+                                                <option selected="selected" value="{{ Auth::user()->cities_id == NULL ? 0 : Auth::user()->cities_id }}">{{ $address['city_name'] }}</option>
                                             </select>
                                         </div><!-- End .col-sm-6 -->
                                     </div><!-- End .row -->
 
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <label>District</label>
-                                            <select name="district" id="district" class="form-control districts">
-                                                @foreach ($users as $user)
-                                                    <option value="{{ Auth::user()->districts_id == NULL ? 0 : $user->districts->id }}" selected >{{ Auth::user()->districts_id == NULL ? 'Choose Your District' : $user->districts->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div><!-- End .col-sm-6 -->
-
-                                        <div class="col-sm-6">
-                                            <label>Village</label>
-                                            <select name="village" id="village" class="form-control villages">
-                                                @foreach ($users as $user)
-                                                    <option value="{{ Auth::user()->villages_id == NULL ? 0 : $user->villages->id }}" selected >{{ Auth::user()->villages_id == NULL ? 'Choose Your Village' : $user->villages->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div><!-- End .col-sm-6 -->
-                                    </div><!-- End .row -->
+                                    <label>Address</label>
+                                    <textarea class="form-control note" name="address" cols="30" rows="4" disabled>{{ Auth::user()->address }}</textarea>
 
                                     <div class="row">
                                         <div class="col-sm-6">
