@@ -46,39 +46,13 @@
                                     <label>Province *</label>
                                     <select name="province" id="province" class="form-control" required>
                                         <option selected="selected">Choose Your Province</option>
-                                        @foreach ($provinces as $province)
-                                            <option value="{{ $province->id }}" {{ $province->id == Auth::user()->provinces_id ? 'selected' : '' }}>{{ $province->name }}</option>>
-                                        @endforeach
                                     </select>
                                 </div><!-- End .col-sm-6 -->
 
                                 <div class="col-sm-6">
                                     <label>Town / City *</label>
                                     <select name="city" id="city" class="form-control cities">
-                                        @foreach ($users as $user)
-                                            <option value="{{ Auth::user()->cities_id == NULL ? 0 : $user->regencies->id }}" selected >{{ Auth::user()->cities_id == NULL ? 'Choose Your City' : $user->regencies->name }}</option>
-                                        @endforeach
-
-                                    </select>
-                                </div><!-- End .col-sm-6 -->
-                            </div><!-- End .row -->
-
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <label>District *</label>
-                                    <select name="district" id="district" class="form-control districts">
-                                        @foreach ($users as $user)
-                                            <option value="{{ Auth::user()->districts_id == NULL ? 0 : $user->districts->id }}" selected >{{ Auth::user()->districts_id == NULL ? 'Choose Your District' : $user->districts->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div><!-- End .col-sm-6 -->
-
-                                <div class="col-sm-6">
-                                    <label>Village *</label>
-                                    <select name="village" id="village" class="form-control villages">
-                                        @foreach ($users as $user)
-                                            <option value="{{ Auth::user()->villages_id == NULL ? 0 : $user->villages->id }}" selected >{{ Auth::user()->villages_id == NULL ? 'Choose Your Village' : $user->villages->name }}</option>
-                                        @endforeach
+                                        <option selected="selected">Choose Your City</option>
                                     </select>
                                 </div><!-- End .col-sm-6 -->
                             </div><!-- End .row -->

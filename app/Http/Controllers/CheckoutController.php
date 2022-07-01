@@ -20,7 +20,9 @@ class CheckoutController extends Controller
 {
     public function index()
     {
-        $provinces = Province::all();
+        // INDOREGION
+        // $provinces = Province::all();
+
         $users = User::get();
 
         $oldCart = Cart::where('users_id', Auth::id())->get();
@@ -32,36 +34,112 @@ class CheckoutController extends Controller
         }
         $cartItems = Cart::where('users_id', Auth::id())->get();
 
-        return view('pages.checkout', compact('cartItems', 'provinces', 'users'));
+        return view('pages.checkout', compact('cartItems', 'users'));
     }
 
-    public function getCity(Request $request)
-    {
-        $province_id = $request->province_id;
-        $city = Regency::where('province_id', $province_id)->get();
 
-        foreach ($city as $data) {
-            echo "<option value='$data->id'>$data->name</option>";
+    // START INDOREGION
+
+    // public function getCity(Request $request)
+    // {
+    //     $province_id = $request->province_id;
+    //     $city = Regency::where('province_id', $province_id)->get();
+
+    //     foreach ($city as $data) {
+    //         echo "<option value='$data->id'>$data->name</option>";
+    //     }
+    // }
+
+    // public function getDistrict(Request $request)
+    // {
+    //     $city_id = $request->city_id;
+    //     $district = District::where('regency_id', $city_id)->get();
+
+    //     foreach ($district as $data) {
+    //         echo "<option value='$data->id'>$data->name</option>";
+    //     }
+    // }
+
+    // public function getVillage(Request $request)
+    // {
+    //     $district_id = $request->district_id;
+    //     $village = Village::where('district_id', $district_id)->get();
+
+    //     foreach ($village as $data) {
+    //         echo "<option value='$data->id'>$data->name</option>";
+    //     }
+    // }
+
+    // END INDOREGION
+
+
+    public function getProvince()
+    {
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+        CURLOPT_URL => "https://api.rajaongkir.com/starter/province",
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => "",
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 30,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => "GET",
+        CURLOPT_HTTPHEADER => array(
+            "key: " . env('RAJAONGKIR_API_KEY')
+        ),
+        ));
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        } else {
+            $arrayResponse = json_decode($response, true);
+            $provinces = $arrayResponse['rajaongkir']['results'];
+
+            echo "<option>Choose Your Province</option>";
+
+            foreach ($provinces as $province) {
+                echo "<option value='" . $province['province_id'] . "' >" . $province['province'] . "</option>";
+            }
         }
     }
 
-    public function getDistrict(Request $request)
+    public function getCity($id)
     {
-        $city_id = $request->city_id;
-        $district = District::where('regency_id', $city_id)->get();
+        $curl = curl_init();
 
-        foreach ($district as $data) {
-            echo "<option value='$data->id'>$data->name</option>";
-        }
-    }
+        curl_setopt_array($curl, array(
+        CURLOPT_URL => "https://api.rajaongkir.com/starter/city?&province=$id",
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => "",
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 30,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => "GET",
+        CURLOPT_HTTPHEADER => array(
+            "key: " . env('RAJAONGKIR_API_KEY')
+        ),
+        ));
 
-    public function getVillage(Request $request)
-    {
-        $district_id = $request->district_id;
-        $village = Village::where('district_id', $district_id)->get();
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
 
-        foreach ($village as $data) {
-            echo "<option value='$data->id'>$data->name</option>";
+        curl_close($curl);
+
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        } else {
+            $arrayResponse = json_decode($response, true);
+            $cities = $arrayResponse['rajaongkir']['results'];
+
+            foreach ($cities as $city) {
+                echo "<option value='" . $city['city_id'] . "' >" . $city['city_name'] . "</option>";
+            }
         }
     }
 
@@ -83,8 +161,8 @@ class CheckoutController extends Controller
         }
 
         $getLocation = array(
-            'origin'        => 155,     // ID kota/kabupaten asal
-            'destination'   => 80,      // ID kota/kabupaten tujuan
+            'origin'        => 54,     // ID kota/kabupaten asal
+            'destination'   => $request->city_id,      // ID kota/kabupaten tujuan
             'weight'        => $request->weight,    // berat barang dalam gram
             'courier'       => $request->courier_id,    // kode kurir pengiriman: ['jne', 'tiki', 'pos'] untuk starter
         );
@@ -102,7 +180,7 @@ class CheckoutController extends Controller
         CURLOPT_POSTFIELDS => "origin=" . $getLocation['origin'] . "&destination=" . $getLocation['destination'] . "&weight=" . $getLocation['weight'] . "&courier=" . $getLocation['courier'] . "",
         CURLOPT_HTTPHEADER => array(
             "content-type: application/x-www-form-urlencoded",
-            "key: 3850ade724ce3b7a993736edb3f0053b"
+            "key: " . env('RAJAONGKIR_API_KEY')
         ),
         ));
 
@@ -114,8 +192,8 @@ class CheckoutController extends Controller
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
-            $array_response = json_decode($response, true);
-            $packages = $array_response['rajaongkir']['results'][0]['costs'];
+            $arrayResponse = json_decode($response, true);
+            $packages = $arrayResponse['rajaongkir']['results'][0]['costs'];
 
             foreach ($packages as $package) {
                 echo "<option value='" . $package['service'] . "' ongkir='" . $package['cost'][0]['value'] . "' estimasi='" . $package['cost'][0]['etd'] . "'>";
