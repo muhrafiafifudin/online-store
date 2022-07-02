@@ -29,7 +29,7 @@
 							<a href="" class="text-muted">Item</a>
 						</li>
 						<li class="breadcrumb-item">
-							<a href="" class="text-muted">Add Item</a>
+							<a href="" class="text-muted">Edit Item</a>
 						</li>
 					</ul>
 					<!--end::Breadcrumb-->
@@ -48,8 +48,8 @@
 			<div class="card card-custom">
 				<div class="card-header flex-wrap py-5">
 					<div class="card-title">
-						<h3 class="card-label">Form Item
-							<div class="text-muted pt-2 font-size-sm">Add Data Item</div>
+						<h3 class="card-label">Form Edit Item
+							<div class="text-muted pt-2 font-size-sm">edit Data Item</div>
 						</h3>
 					</div>
 				</div>

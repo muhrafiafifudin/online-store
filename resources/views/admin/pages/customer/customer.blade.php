@@ -1,7 +1,7 @@
 @extends('admin.layouts.admin')
 
 @section('title')
-	Diva Metal Mandiri | Shop
+	Diva Metal Mandiri | Customer
 @endsection
 
 @section('content')
@@ -15,7 +15,7 @@
 				<!--begin::Page Heading-->
 				<div class="d-flex align-items-baseline flex-wrap mr-5">
 					<!--begin::Page Title-->
-					<h5 class="text-dark font-weight-bold my-1 mr-5">Pages Shop</h5>
+					<h5 class="text-dark font-weight-bold my-1 mr-5">Pages Customer</h5>
 					<!--end::Page Title-->
 					<!--begin::Breadcrumb-->
 					<ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
@@ -23,10 +23,7 @@
 							<a href="" class="text-muted">Dashboard</a>
 						</li>
 						<li class="breadcrumb-item">
-							<a href="" class="text-muted">Shop</a>
-						</li>
-						<li class="breadcrumb-item">
-							<a href="" class="text-muted">Product</a>
+							<a href="" class="text-muted">Customer</a>
 						</li>
 					</ul>
 					<!--end::Breadcrumb-->
@@ -45,13 +42,13 @@
 			<div class="card card-custom">
 				<div class="card-header flex-wrap py-5">
 					<div class="card-title">
-						<h3 class="card-label">Product
-							<div class="text-muted pt-2 font-size-sm">All Data Product</div>
+						<h3 class="card-label">Customer
+							<div class="text-muted pt-2 font-size-sm">All Data Customer</div>
 						</h3>
 					</div>
 					<div class="card-toolbar">
 						<!--begin::Button-->
-						<a href="{{ route('admin.product.create') }}" class="btn btn-primary font-weight-bolder">
+						<a href="{{ route('admin.customer.create') }}" class="btn btn-primary font-weight-bolder">
 						<span class="svg-icon svg-icon-md">
 							<!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
 							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -62,7 +59,8 @@
 								</g>
 							</svg>
 							<!--end::Svg Icon-->
-						</span>Add Product</a>
+						</span>Add Customer
+						</a>
 						<!--end::Button-->
 					</div>
 				</div>
@@ -72,33 +70,29 @@
 						<thead>
 							<tr>
 								<th>No</th>
-								<th>Images</th>
-								<th>Name Product</th>
-								<th>Description</th>
-								<th>Category</th>
-								<th>Price</th>
-								<th>Slug</th>
+								<th>Name</th>
+								<th>Email</th>
+								<th>Address</th>
+								<th>Phone</th>
 								<th>Actions</th>
 							</tr>
 						</thead>
 						<tbody>
-							@php $no=1 @endphp
-							@foreach ($product as $data)
+                            @php $no=1 @endphp
+							@foreach ($users as $user)
 								<tr>
 									<td>{{ $no++ }}</td>
-									<td><img src="../admin/assets/images/{{ $data->photos }}" width="100px"></td>
-									<td>{{ $data->name }}</td>
-									<td>{{ $data->description }}</td>
-									<td>{{ $data->category->category }}</td>
-									<td>{{ $data->price }}</td>
-									<td>{{ $data->slug }}</td>
+									<td>{{ $user->name }}</td>
+									<td>{{ $user->email }}</td>
+									<td>{{ $user->address }}</td>
+									<td>{{ $user->phone_number }}</td>
 									<td>
-										<form action="{{ route('admin.product.destroy', $data->id) }}" method="post">
+										<form action="{{ route('admin.customer.destroy', $user->id) }}" method="post">
 											@csrf
 											@method('DELETE')
 
-											<a href="{{ route('admin.product.edit', $data->id) }}" class="btn btn-warning">Edit</a>
-											<button type="submit" class="btn btn-danger mt-1" onclick="return confirm('Are you sure ?')">Delete</button>
+											<a href="{{ route('admin.customer.edit', $user->id) }}" class="btn btn-warning">Edit</a>
+											<button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure ?')">Delete</button>
 										</form>
 									</td>
 								</tr>

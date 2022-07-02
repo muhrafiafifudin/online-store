@@ -57,11 +57,6 @@ Route::middleware(['auth'])->group(function () {
     // Add Data to Database Transaction
     Route::post('place-order', 'CheckoutController@placeorder');
 
-    // Get region with IndoRegion
-    // Route::post('get-city', 'CheckoutController@getCity');
-    // Route::post('get-district', 'CheckoutController@getDistrict');
-    // Route::post('get-village', 'CheckoutController@getVillage');
-
     // Get region and shipping cost Rajaongkir
     Route::post('get-province', 'CheckoutController@getProvince');
     Route::post('get-city/{id}', 'CheckoutController@getCity');
@@ -80,6 +75,8 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
     Route::middleware('admin')->group(function () {
         // Dashboard
         Route::get('dashboard','DashboardController@index')->name('dashboard');
+        // Customer
+        Route::resource('customer','CustomerController');
         // Category
         Route::resource('category','CategoryController');
         //Product

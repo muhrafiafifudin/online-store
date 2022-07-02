@@ -62,7 +62,7 @@
 						<div class="form-group">
 							<label>Category
 							<span class="text-danger">*</span></label>
-							<input type="text" name="category" class="form-control" placeholder="Enter category" />
+							<input type="text" name="category" class="form-control" placeholder="Enter category" required/>
 						</div>
 					</div>
 					<div class="card-footer">
