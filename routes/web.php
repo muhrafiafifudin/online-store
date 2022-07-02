@@ -79,8 +79,10 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
         Route::resource('customer','CustomerController');
         // Category
         Route::resource('category','CategoryController');
-        //Product
+        // Product
         Route::resource('product','ProductController');
+        // Store Profile
+        Route::resource('store','StoreController');
         // Transaction
         Route::get('transaction', 'TransactionController@index')->name('transaction.index');
         Route::get('transaction-process', 'TransactionController@transactionProcess')->name('transaction.process');

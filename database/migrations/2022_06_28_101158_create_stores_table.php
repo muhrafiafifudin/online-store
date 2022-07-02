@@ -18,8 +18,8 @@ class CreateStoresTable extends Migration
             $table->string('name');
             $table->string('email');
             $table->string('phone_number');
-            $table->integer('provinces_id');
-            $table->integer('cities_id');
+            $table->integer('provinces_id')->nullable();
+            $table->integer('cities_id')->nullable();
             $table->string('address');
             $table->string('postcode');
             $table->string('maps')->comment('With maps embed');
