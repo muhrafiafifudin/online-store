@@ -1,23 +1,21 @@
 @extends('layouts.home')
 
 @section('title')
-    Shop
+    Diva Metal Mandiri | Product
 @endsection
 
 @section('content')
 <main class="main">
 <div class="page-header text-center" style="background-image: url('user/assets/images/page-header-bg.jpg')">
     <div class="container">
-        <h1 class="page-title">Boxed No Sidebar<span>Shop</span></h1>
+        <h1 class="page-title">Product<span>Pages</span></h1>
     </div><!-- End .container -->
 </div><!-- End .page-header -->
 <nav aria-label="breadcrumb" class="breadcrumb-nav mb-2">
     <div class="container">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-            <li class="breadcrumb-item"><a href="#">Shop</a></li>
-            <li class="breadcrumb-item"><a href="#">No Sidebar</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Boxed</li>
+            <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Product</li>
         </ol>
     </div><!-- End .container -->
 </nav><!-- End .breadcrumb-nav -->
@@ -90,7 +88,7 @@
                 <a href="#" class="btn btn-outline-darker btn-load-more">More Products <i class="icon-refresh"></i></a>
             </div><!-- End .load-more-container -->
         </div><!-- End .products -->
-        
+
     </div><!-- End .container -->
 </div><!-- End .page-content -->
 </main><!-- End .main -->

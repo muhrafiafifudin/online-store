@@ -1,7 +1,7 @@
 @extends('layouts.home')
 
 @section('title')
-    DIVA METAL MANDIRI
+    Diva Metal Mandiri
 @endsection
 
 @section('content')

@@ -41,22 +41,14 @@
                                 <div class="col-sm-6">
                                     <label>Province *</label>
                                     <select name="province" id="province" class="form-control" required>
-                                        @if (Auth::user()->provinces_id == NULL)
-                                            <option selected="selected">Choose Your Province</option>
-                                        @else
-                                            <option selected="selected" value="{{ $address{'province_id'} }}">{{ $address['province'] }}</option>
-                                        @endif
+                                        <option selected="selected">Choose Your Province</option>
                                     </select>
                                 </div><!-- End .col-sm-6 -->
 
                                 <div class="col-sm-6">
                                     <label>Town / City *</label>
                                     <select name="city" id="city" class="form-control cities">
-                                        @if (Auth::user()->cities_id == NULL)
-                                            <option selected="selected">Choose Your City</option>
-                                        @else
-                                            <option selected="selected" value="{{ $address['city_id'] }}">{{ $address['city_name'] }}</option>
-                                        @endif
+                                        <option selected="selected">Choose Your City</option>
                                     </select>
                                 </div><!-- End .col-sm-6 -->
                             </div><!-- End .row -->
@@ -112,7 +104,7 @@
                                             <th colspan="2">
                                                 <div class="row mt-2">
                                                     <div class="col-sm-6">
-                                                        <label>Weight</label>
+                                                        <label>Weight (Gram)</label>
                                                         @php $weight = 0; $totalWeight = 0; @endphp
                                                         @foreach ($cartItems as $data)
                                                             @php

@@ -1,22 +1,21 @@
 @extends('layouts.home')
 
 @section('title')
-    Contact Us
+    Diva Metal Mandiri | Contact Us
 @endsection
 
 @section('content')
 <main class="main">
     <div class="page-header text-center" style="background-image: url('user/assets/images/page-header-bg.jpg')">
         <div class="container">
-            <h1 class="page-title">Contact us 2<span>Pages</span></h1>
+            <h1 class="page-title">Contact us<span>Pages</span></h1>
         </div><!-- End .container -->
     </div><!-- End .page-header -->
     <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
         <div class="container">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Pages</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Contact us 2</li>
+                <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Contact us</li>
             </ol>
         </div><!-- End .container -->
     </nav><!-- End .breadcrumb-nav -->
@@ -37,7 +36,7 @@
 
                 <div class="col-md-4">
                     <div class="contact-box text-center">
-                        <h3>Start a Conversation</h3>
+                        <h3>Contact</h3>
 
                         <div><a href="mailto:#">{{ $stores->email }}</a></div>
                         <div><a href="tel:#">{{ $stores->phone_number }}</a></div>
@@ -67,7 +66,7 @@
                     <p class="lead text-primary">
                         We collaborate with ambitious brands and people; we’d love to build something great together.
                     </p><!-- End .lead text-primary -->
-                    <p class="mb-3">Vestibulum volutpat, lacus a ultrices sagittis, mi neque euismod dui, eu pulvinar nunc sapien ornare nisl. Phasellus pede arcu, dapibus eu, fermentum et, dapibus sed, urna.</p>
+                    <p class="mb-3">Let’s connect directly with us by filling out the inquiry form below :</p>
                     </div><!-- End .text-center -->
 
                     <form action="#" class="contact-form mb-2">

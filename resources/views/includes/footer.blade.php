@@ -65,10 +65,7 @@
 
 <div class="footer-bottom">
     <div class="container">
-        <p class="footer-copyright">Copyright © 2019 Molla Store. All Rights Reserved.</p><!-- End .footer-copyright -->
-        <figure class="footer-payments">
-            <img src="{{ asset('user/assets/images/payments.png') }}" alt="Payment methods" width="272" height="20">
-        </figure><!-- End .footer-payments -->
+        <p class="footer-copyright">Copyright © 2022 Diva Metal Mandiri. All Rights Reserved.</p><!-- End .footer-copyright -->
     </div><!-- End .container -->
 </div><!-- End .footer-bottom -->
 </footer><!-- End .footer -->

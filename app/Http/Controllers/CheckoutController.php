@@ -40,16 +40,16 @@ class CheckoutController extends Controller
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-        CURLOPT_URL => "https://api.rajaongkir.com/starter/province",
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => "",
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 30,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => "GET",
-        CURLOPT_HTTPHEADER => array(
-            "key: " . env('RAJAONGKIR_API_KEY')
-        ),
+            CURLOPT_URL => "https://api.rajaongkir.com/starter/province",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => array(
+                "key: " . env('RAJAONGKIR_API_KEY')
+            ),
         ));
 
         $response = curl_exec($curl);
@@ -63,15 +63,7 @@ class CheckoutController extends Controller
             $arrayResponse = json_decode($response, true);
             $provinces = $arrayResponse['rajaongkir']['results'];
 
-            $address = RajaOngkir::kota()->dariProvinsi(Auth::user()->provinces_id)->find(Auth::user()->cities_id);
-            $province_id = $address['province_id'];
-            $province_name = $address['province'];
-
-            if (Auth::user()->provinces_id == NULL) {
-                echo "<option>Choose Your Province</option>";
-            } {
-                echo "<option value='$province_id'>$province_name</option>";
-            }
+            echo "<option>Choose Your Province</option>";
 
             foreach ($provinces as $province) {
                 echo "<option value='" . $province['province_id'] . "' >" . $province['province'] . "</option>";
@@ -84,16 +76,16 @@ class CheckoutController extends Controller
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-        CURLOPT_URL => "https://api.rajaongkir.com/starter/city?&province=$id",
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => "",
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 30,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => "GET",
-        CURLOPT_HTTPHEADER => array(
-            "key: " . env('RAJAONGKIR_API_KEY')
-        ),
+            CURLOPT_URL => "https://api.rajaongkir.com/starter/city?&province=$id",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => array(
+                "key: " . env('RAJAONGKIR_API_KEY')
+            ),
         ));
 
         $response = curl_exec($curl);
@@ -107,15 +99,7 @@ class CheckoutController extends Controller
             $arrayResponse = json_decode($response, true);
             $cities = $arrayResponse['rajaongkir']['results'];
 
-            $address = RajaOngkir::kota()->dariProvinsi(Auth::user()->provinces_id)->find(Auth::user()->cities_id);
-            $city_id = $address['city_id'];
-            $city_name = $address['city_name'];
-
-            if (Auth::user()->cities_id == NULL) {
-                echo "<option>Choose Your City</option>";
-            } {
-                echo "<option value='$city_id'>$city_name</option>";
-            }
+            echo "<option>Choose Your City</option>";
 
             foreach ($cities as $city) {
                 echo "<option value='" . $city['city_id'] . "' >" . $city['city_name'] . "</option>";
@@ -150,18 +134,18 @@ class CheckoutController extends Controller
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-        CURLOPT_URL => "https://api.rajaongkir.com/starter/cost",
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => "",
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 30,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => "POST",
-        CURLOPT_POSTFIELDS => "origin=" . $getLocation['origin'] . "&destination=" . $getLocation['destination'] . "&weight=" . $getLocation['weight'] . "&courier=" . $getLocation['courier'] . "",
-        CURLOPT_HTTPHEADER => array(
-            "content-type: application/x-www-form-urlencoded",
-            "key: " . env('RAJAONGKIR_API_KEY')
-        ),
+            CURLOPT_URL => "https://api.rajaongkir.com/starter/cost",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => "origin=" . $getLocation['origin'] . "&destination=" . $getLocation['destination'] . "&weight=" . $getLocation['weight'] . "&courier=" . $getLocation['courier'] . "",
+            CURLOPT_HTTPHEADER => array(
+                "content-type: application/x-www-form-urlencoded",
+                "key: " . env('RAJAONGKIR_API_KEY')
+            ),
         ));
 
         $response = curl_exec($curl);
@@ -213,7 +197,7 @@ class CheckoutController extends Controller
         }
 
         $transaction->gross_amount = $gross_amount;
-        $transaction->order_number = 'order-'.rand();
+        $transaction->order_number = 'order-' . rand();
         $transaction->save();
 
         $cartItems = Cart::where('users_id', Auth::id())->get();

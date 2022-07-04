@@ -17,7 +17,7 @@ class ApiController extends Controller
         }
 
         // Status Berhasil
-        $order = Transaction::where('order_id', $json->order_id)->first();
+        $transaction = Transaction::where('order_id', $json->order_id)->first();
         return $transaction->update(['status'=>$json->transaction_status]);
     }
 }

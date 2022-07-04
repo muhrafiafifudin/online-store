@@ -95,35 +95,28 @@ class AccountController extends Controller
             if ($fraud == 'challenge') {
                 // TODO Set payment status in merchant's database to 'challenge'
                 $payment->transaction_status = 'pending';
-            }
-            else if ($fraud == 'accept') {
+            } else if ($fraud == 'accept') {
                 // TODO Set payment status in merchant's database to 'success'
                 $payment->transaction_status = 'paid';
             }
-        }
-        else if ($transaction_status == 'cancel') {
+        } else if ($transaction_status == 'cancel') {
             if ($fraud == 'challenge') {
                 // TODO Set payment status in merchant's database to 'failure'
                 $payment->transaction_status = 'failed';
-            }
-            else if ($fraud == 'accept') {
+            } else if ($fraud == 'accept') {
                 // TODO Set payment status in merchant's database to 'failure'
                 $payment->transaction_status = 'failed';
             }
-        }
-        else if ($transaction_status == 'deny') {
+        } else if ($transaction_status == 'deny') {
             // TODO Set payment status in merchant's database to 'failure'
             $payment->transaction_status = 'failed';
-        }
-        else if ($transaction_status == 'settlement') {
+        } else if ($transaction_status == 'settlement') {
             // TODO set payment status in merchant's database to 'Settlement'
             $payment->transaction_status = 'paid';
-        }
-        else if ($transaction_status == 'pending') {
+        } else if ($transaction_status == 'pending') {
             // TODO set payment status in merchant's database to 'Pending'
             $payment->transaction_status = 'pending';
-        }
-        else if ($transaction_status == 'expire') {
+        } else if ($transaction_status == 'expire') {
             // TODO set payment status in merchant's database to 'expire'
             $payment->transaction_status = 'failed';
         }
