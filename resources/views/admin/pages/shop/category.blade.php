@@ -78,7 +78,7 @@
 							</tr>
 						</thead>
 						<tbody id="tbody">
-							@php $no=1 @endphp
+							@php $no = 1 @endphp
 							@foreach ($category as $data)
 								<tr>
 									<td>{{ $no++ }}</td>

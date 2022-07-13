@@ -59,8 +59,6 @@ $(document).ready(function() {
         })
     });
 
-
-
     var spacePressed = false
     var originalVal = $.fn.val
     $.fn.val = function (value) {

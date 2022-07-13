@@ -67,11 +67,13 @@ Route::middleware(['auth'])->group(function () {
 
 // Admin Routes
 Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
+
     Route::namespace('Auth')->middleware('guest:admin')->group(function () {
         // Login Route
         Route::get('login', 'AuthenticatedSessionController@create')->name('login');
         Route::post('login', 'AuthenticatedSessionController@store')->name('adminlogin');
     });
+
     Route::middleware('admin')->group(function () {
         // Dashboard
         Route::get('dashboard','DashboardController@index')->name('dashboard');
@@ -92,6 +94,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
         Route::put('transaction/update-process/{id}', 'TransactionController@updateProcess');
         Route::put('transaction/update-delivery/{id}', 'TransactionController@updateDelivery');
     });
+
     Route::post('logout', 'Auth\AuthenticatedSessionController@destroy')->name('logout');
 });
 
