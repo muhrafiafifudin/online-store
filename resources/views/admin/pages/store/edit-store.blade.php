@@ -57,7 +57,7 @@
 
 					<div class="card-body">
 						<div class="form-group">
-							<label>Full Name</label>
+							<label>Name</label>
 							<input type="text" name="name" class="form-control" value="{{ $stores->name }}" placeholder="Enter full name ..." required/>
 						</div>
 						<div class="form-group">

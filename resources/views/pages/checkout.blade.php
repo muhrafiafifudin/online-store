@@ -54,7 +54,7 @@
                             </div><!-- End .row -->
 
                             <label>Address</label>
-                            <textarea class="form-control note" cols="30" rows="4" name="address" placeholder="Your street address, district and village ..."></textarea>
+                            <textarea class="form-control note" cols="30" rows="4" name="address" placeholder="Your street address, district and village ...">{{ Auth::user()->address }}</textarea>
 
                             <div class="row">
                                 <div class="col-sm-6">
