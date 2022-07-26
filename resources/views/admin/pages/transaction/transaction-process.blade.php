@@ -77,12 +77,35 @@
                                                 <td>{{ $transaction->gross_amount }}</td>
                                                 <td>{{ $transaction->created_at }}</td>
                                                 <td>
-                                                    <form action="{{ url('admin/transaction/update-delivery/' . $transaction->id) }}" method="POST">
-                                                        @csrf
-                                                        @method('PUT')
-                                                        <button type="submit" class="btn btn-primary">Delivery</button>
-                                                        <button class="btn btn-warning" onclick="return confirm('Are you sure ?')">View</button>
-                                                    </form>
+                                                    <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#exampleModalCenter">Delivery</button>
+                                                    <button class="btn btn-warning" onclick="return confirm('Are you sure ?')">View</button>
+
+                                                    <!-- Modal-->
+                                                    <div class="modal fade" id="exampleModalCenter" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                                            <div class="modal-content">
+                                                                <form action="{{ url('admin/transaction/update-delivery/' . $transaction->id) }}" method="POST">
+                                                                    @csrf
+                                                                    @method('PUT')
+
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">Added Receipt Number</h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <i aria-hidden="true" class="ki ki-close"></i>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <label>Receipt Number</label>
+                                                                        <input type="text" name="resi" class="form-control" placeholder="Enter receipt number ..." required/>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+                                                                        <button type="submit" class="btn btn-primary font-weight-bold">Save</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         @endif
@@ -91,6 +114,7 @@
                             </table>
                         </div>
                     </div>
+
 				</div>
 			</div>
 			<!--end::Card-->

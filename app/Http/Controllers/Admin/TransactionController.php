@@ -62,10 +62,11 @@ class TransactionController extends Controller
         return redirect()->route('admin.transaction.index');
     }
 
-    public function updateDelivery($id)
+    public function updateDelivery(Request $request, $id)
     {
         $transactions = Transaction::findOrFail($id);
         $transactions->process = 2;
+        $transactions->resi = $request->resi;
         $transactions->update();
 
         return redirect()->route('admin.transaction.process');
