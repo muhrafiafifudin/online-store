@@ -14,14 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-Route::get('/dashboard', function () {
-    return view('pages.home');
-})->middleware(['auth'])->name('dashboard');
-
 require __DIR__.'/auth.php';
 
 // Route Login Google Acoount use Socialite
@@ -40,6 +32,8 @@ Route::post('delete-cart-item', 'CartController@deleteProduct');
 
 // User Routes
 Route::middleware(['auth'])->group(function () {
+    // Dashboard
+    Route::get('dashboard', 'DashboardController@index');
     // Account Setting
     Route::get('account/dashboard', 'AccountController@dashboard');
     Route::get('account/transaction', 'AccountController@transaction');

@@ -28,7 +28,7 @@ class DashboardController extends Controller
 
         $incomes = $payments;
 
-        return view('admin.dashboard', [
+        return view('admin.pages.dashboard', [
             'users' => $users,
             'products' => $products,
             'incomes' => $incomes

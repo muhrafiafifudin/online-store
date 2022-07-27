@@ -13,6 +13,6 @@ class ContactUsController extends Controller
         $stores = Store::all()->first();
         $address = RajaOngkir::kota()->dariProvinsi($stores->provinces_id)->find($stores->cities_id);
 
-        return view('pages.contact-us', compact('stores', 'address'));
+        return view('users.pages.contact-us', compact('stores', 'address'));
     }
 }

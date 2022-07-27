@@ -11,11 +11,11 @@ class ProductController extends Controller
     {
         $products = Product::get();
 
-        return view('pages.product', compact('products'));
+        return view('users.pages.product', compact('products'));
     }
 
     public function login()
     {
-        return view('pages.login');
+        return view('users.pages.login');
     }
 }

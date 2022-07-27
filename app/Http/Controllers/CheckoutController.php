@@ -28,7 +28,7 @@ class CheckoutController extends Controller
         }
         $cartItems = Cart::where('users_id', Auth::id())->get();
 
-        return view('pages.checkout', compact('cartItems', 'users', 'address'));
+        return view('users.pages.checkout', compact('cartItems', 'users', 'address'));
     }
 
     public function getProvince()

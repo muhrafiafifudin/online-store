@@ -12,7 +12,7 @@ class ProductDetailController extends Controller
         if (Product::where('slug', $slug)->exists()) {
             $products = Product::where('slug', $slug)->first();
 
-            return view('pages.product-detail', compact('products'));
+            return view('users.pages.product-detail', compact('products'));
         } else {
             return redirect('/product')->with('view', 'The link was broken');
         }
