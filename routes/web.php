@@ -87,6 +87,10 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
 
         Route::put('transaction/update-process/{id}', 'TransactionController@updateProcess');
         Route::put('transaction/update-delivery/{id}', 'TransactionController@updateDelivery');
+
+        // Report Transaction
+        Route::get('report-transaction', 'TransactionController@reportTransaction');
+        Route::get('print-pdf/{fromDate}/{toDate}/{type}', 'TransactionController@printPdf');
     });
 
     Route::post('logout', 'Auth\AuthenticatedSessionController@destroy')->name('logout');

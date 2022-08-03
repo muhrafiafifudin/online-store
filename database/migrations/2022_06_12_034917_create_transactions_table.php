@@ -23,7 +23,9 @@ class CreateTransactionsTable extends Migration
             $table->string('address');
             $table->string('postcode');
             $table->string('phone_number');
-            $table->decimal('gross_amount', 15, 2);
+            $table->decimal('shipping', 15, 2);
+            $table->decimal('subtotal', 15, 2);
+            $table->decimal('total', 15, 2);
             $table->string('order_number');
             $table->tinyInteger('process')->default(0)->comment('0 = Order, 1 = Process, 2 = Delivery, 3 = Finish');
             $table->string('resi')->nullable();

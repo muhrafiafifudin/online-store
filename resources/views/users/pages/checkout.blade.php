@@ -145,6 +145,9 @@
                                     </tbody>
                                 </table><!-- End .table table-summary -->
 
+                                <input type="hidden" name="shipping" id="shipping">
+                                <input type="hidden" name="subtotal" value="{{ $total }}">
+
                                 <button type="submit" class="btn btn-outline-primary-2 btn-order btn-block">
                                     <span class="btn-text">Place Order</span>
                                     <span class="btn-hover-text">Proceed to Checkout</span>

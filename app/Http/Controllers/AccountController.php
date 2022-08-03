@@ -21,12 +21,13 @@ class AccountController extends Controller
 
     public function transaction()
     {
-        // $transactions = Transaction::where('users_id', Auth::id())->get();
-        $transactions = DB::table('transactions')
-                ->rightJoin('payments', 'transactions.id', '=', 'payments.transactions_id')
-                ->where('transactions.users_id', Auth::id())
-                ->get();
-        dd($transactions);
+        $transactions = Transaction::where('users_id', Auth::id())->get();
+        // $transactions = DB::table('transactions')
+        //         ->rightJoin('payments', 'transactions.id', '=', 'payments.transactions_id')
+        //         ->where('transactions.users_id', Auth::id())
+        //         ->where('transactions.id', 'payments.transactions_id')
+        //         ->get();
+        // dd($transactions);
 
         return view('users.pages.account-transaction', compact('transactions'));
     }
@@ -52,6 +53,15 @@ class AccountController extends Controller
                 'name' => $item->products->name
             );
         }
+
+        $shipping = array(
+            'id' => 'shipping',
+            'price' => $transactions->shipping,
+            'quantity' => 1,
+            'name' => 'Shipping Price'
+        );
+
+        $item_details[] = $shipping;
 
         // Set your Merchant Server Key
         \Midtrans\Config::$serverKey = env('MIDTRANS_SERVER_KEY');

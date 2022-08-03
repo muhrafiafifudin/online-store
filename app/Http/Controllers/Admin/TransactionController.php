@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use DB;
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use PDF;
 use App\Models\Transaction;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 
 class TransactionController extends Controller
 {
@@ -70,5 +72,26 @@ class TransactionController extends Controller
         $transactions->update();
 
         return redirect()->route('admin.transaction.process');
+    }
+
+    public function reportTransaction()
+    {
+        return view('admin.pages.report.transaction');
+    }
+
+    public function printPdf($fromDate, $toDate, $type)
+    {
+        $fromDate = $fromDate;
+        $toDate = $toDate;
+
+        if ($type == 4) {
+            $transactions = Transaction::all();
+        } else {
+            $transactions = Transaction::where('process', $type)->whereBetween('created_at', [$fromDate, $toDate])->get();
+        }
+
+        $pdf = PDF::loadView('admin.pages.report.print-pdf', compact('transactions', 'fromDate', 'toDate'))->setPaper('a4', 'landscape');
+
+        return $pdf->download('Diva Metal.pdf');
     }
 }

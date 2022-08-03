@@ -8,7 +8,7 @@
 <main class="main">
     <div class="page-header text-center" style="background-image: url('/user/assets/images/page-header-bg.jpg')">
         <div class="container">
-            <h1 class="page-title">Checkout<span>Shop</span></h1>
+            <h1 class="page-title">Invoice<span>Shop</span></h1>
         </div><!-- End .container -->
     </div><!-- End .page-header -->
     <nav aria-label="breadcrumb" class="breadcrumb-nav">
@@ -16,7 +16,7 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.html">Home</a></li>
                 <li class="breadcrumb-item"><a href="#">Shop</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+                <li class="breadcrumb-item active" aria-current="page">Invoice</li>
             </ol>
         </div><!-- End .container -->
     </nav><!-- End .breadcrumb-nav -->
@@ -93,7 +93,7 @@
 
                                     <tr class="summary-subtotal">
                                         <td>Subtotal:</td>
-                                        <td>IDR. {{ number_format($transactions->gross_amount, 2, ',', '.') }}</td>
+                                        <td>IDR. {{ number_format($transactions->total, 2, ',', '.') }}</td>
                                     </tr><!-- End .summary-subtotal -->
                                     <tr>
                                         <td>Weight</td>
@@ -113,7 +113,7 @@
                                     </tr>
                                     <tr class="summary-total">
                                         <td>Total:</td>
-                                        <td>IDR. {{ number_format($transactions->gross_amount, 2, ',', '.') }}</td>
+                                        <td>IDR. {{ number_format($transactions->total, 2, ',', '.') }}</td>
                                     </tr><!-- End .summary-total -->
                                 </tbody>
                             </table><!-- End .table table-summary -->

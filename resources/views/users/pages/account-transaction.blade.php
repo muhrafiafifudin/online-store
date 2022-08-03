@@ -35,17 +35,16 @@
                                         @foreach ($transactions as $transaction)
                                             <tr>
                                                 <td>{{ $transaction->order_number }}</td>
-                                                <td class="text-center">IDR. {{ number_format($transaction->gross_amount, 2, ',', '.') }}</td>
-                                                <td class="text-center">{{ $transaction->status }}</td>
-                                                <td class="text-center">{{ $transaction->created_at }}</td>
+                                                <td class="text-center">IDR. {{ number_format($transaction->total, 2, ',', '.') }}</td>
+                                                <td class="text-center">{{ date('d M Y', strtotime($transaction->created_at)) }}</td>
                                                 <td class="text-center">
                                                     <a href="{{ url('account/transaction/transaction-' . $transaction->id) }}" class="btn btn-outline-primary mr-3">Details</a>
 
-                                                    @if ($transaction->transactions_id->num_rows() > 0)
-                                                    <button class="btn btn-outline-primary-paid">Pay</button>
-                                                    @else
-                                                    <a href="{{ url('account/transaction/' . $transaction->id) }}" class="btn btn-outline-primary-2">Pay</a>
-                                                    @endif
+                                                    {{-- @if ($transaction->payments->transactions_id->check()) --}}
+                                                        {{-- <button class="btn btn-outline-primary-paid">Pay</button> --}}
+                                                    {{-- @else --}}
+                                                        <a href="{{ url('account/transaction/' . $transaction->id) }}" class="btn btn-outline-primary-2">Pay</a>
+                                                    {{-- @endif --}}
 
                                                 </td>
                                             </tr>

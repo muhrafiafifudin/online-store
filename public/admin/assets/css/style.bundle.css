@@ -43,6 +43,13 @@
   -webkit-box-sizing: border-box;
   box-sizing: border-box; }
 
+  /* Additional Css */
+.font-logo {
+    font-weight: 700;
+    color: white;
+    padding-top: 0.5rem;
+}
+
 html {
   font-family: sans-serif;
   line-height: 1.15;
@@ -62279,3 +62286,4 @@ body {
 @media (max-width: 425px) {
   .offcanvas-mobile {
     width: 90% !important; } }
+

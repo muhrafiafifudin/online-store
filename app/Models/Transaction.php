@@ -22,7 +22,9 @@ class Transaction extends Model
         'phone_number',
         'status',
         'order_id',
-        'gross_amount',
+        'shipping',
+        'subtotal',
+        'total',
         'transaction_id',
         'payment_type'
 

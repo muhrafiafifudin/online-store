@@ -2,20 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Cart;
-use App\Models\Product;
-use App\Models\Transaction;
-use App\Models\TransactionDetail;
 use App\Models\User;
 use App\Models\Store;
+use App\Models\Product;
+use App\Models\Transaction;
+use Illuminate\Http\Request;
+use App\Models\TransactionDetail;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Kavist\RajaOngkir\Facades\RajaOngkir;
 
 class CheckoutController extends Controller
 {
     public function index()
     {
+        $checkout = Session::all();
+
         $users = User::get();
         $address = RajaOngkir::kota()->dariProvinsi(Auth::user()->provinces_id)->find(Auth::user()->cities_id);
 
@@ -179,6 +182,8 @@ class CheckoutController extends Controller
         $transaction->address = $request->input('address');
         $transaction->postcode = $request->input('postcode');
         $transaction->phone_number = $request->input('phone_number');
+        $transaction->shipping = $request->input('shipping');
+        $transaction->subtotal = $request->input('subtotal');
         $transaction->courier = $request->input('courier');
         $transaction->weight = $request->input('weight');
         $transaction->estimate = $request->input('estimate');
@@ -192,7 +197,7 @@ class CheckoutController extends Controller
             $gross_amount += $data->products->price * $data->products_qty;
         }
 
-        $transaction->gross_amount = $gross_amount;
+        $transaction->total = $gross_amount + $request->input('shipping');
         $transaction->order_number = 'order-' . rand();
         $transaction->save();
 

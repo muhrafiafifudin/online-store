@@ -65,8 +65,8 @@
 					<!--begin::Brand-->
 					<div class="brand flex-column-auto" id="kt_brand">
 						<!--begin::Logo-->
-						<a href="index.html" class="brand-logo">
-							<img alt="Logo" src="/admin/assets/media/logos/logo-light.png" />
+						<a href="#" class="brand-logo">
+							<h1 class="font-logo">DIVA METAL</h1>
 						</a>
 						<!--end::Logo-->
 						<!--begin::Toggle-->

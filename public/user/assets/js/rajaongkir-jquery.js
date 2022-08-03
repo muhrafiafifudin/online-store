@@ -80,17 +80,21 @@ $(function() {
 
     $('#package').on('change', function() {
         let estimate = $('option:selected', this).attr('estimasi') + " Days";
+        let shipping = $("option:selected", this).attr('ongkir');
 
         $.ajax({
             type: 'POST',
             url: "/get-estimate",
             data: {
                 'estimate': estimate,
+                'shipping': shipping,
             },
             cache: false,
             success: function(msg) {
                 $('#estimate').html(msg);
                 $('input[name=estimate]').val(estimate);
+                $('#shipping').html(msg);
+                $('input[name=shipping]').val(shipping);
             },
             error: function(data) {
                 console.log(data);
