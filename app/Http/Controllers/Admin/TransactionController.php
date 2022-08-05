@@ -7,7 +7,6 @@ use PDF;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Carbon\Carbon;
 
 class TransactionController extends Controller
 {
@@ -84,11 +83,7 @@ class TransactionController extends Controller
         $fromDate = $fromDate;
         $toDate = $toDate;
 
-        if ($type == 4) {
-            $transactions = Transaction::all();
-        } else {
-            $transactions = Transaction::where('process', $type)->whereBetween('created_at', [$fromDate, $toDate])->get();
-        }
+        $transactions = Transaction::whereBetween('created_at', [$fromDate, $toDate])->where('process', $type)->get();
 
         $pdf = PDF::loadView('admin.pages.report.print-pdf', compact('transactions', 'fromDate', 'toDate'))->setPaper('a4', 'landscape');
 

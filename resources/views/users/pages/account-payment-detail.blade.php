@@ -93,19 +93,26 @@
 
                                     <tr class="summary-subtotal">
                                         <td>Subtotal:</td>
-                                        <td>IDR. {{ number_format($transactions->total, 2, ',', '.') }}</td>
+                                        <td>IDR. {{ number_format($transactions->subtotal, 2, ',', '.') }}</td>
                                     </tr><!-- End .summary-subtotal -->
                                     <tr>
                                         <td>Weight</td>
-                                        <td>{{ $transactions->weight }}</td>
+                                        <td>{{ $transactions->weight }} gram</td>
                                     </tr>
-                                    <tr>
-                                        <td>Shipping Price</td>
-                                        <td>Free shipping</td>
-                                    </tr>
+                                    @if ($transactions->cities_id !== 54)
+                                        <tr>
+                                            <td>Shipping Price</td>
+                                            <td>IDR. {{ number_format($transactions->shipping, 2, ',', '.') }}</td>
+                                        </tr>
+                                    @else
+                                        <tr>
+                                            <td>Shipping Price</td>
+                                            <td>Free shipping</td>
+                                        </tr>
+                                    @endif
                                     <tr>
                                         <td>Courier</td>
-                                        <td>{{ $transactions->courier }}</td>
+                                        <td>{{ strtoupper($transactions->courier) }}</td>
                                     </tr>
                                     <tr>
                                         <td>Estimate</td>

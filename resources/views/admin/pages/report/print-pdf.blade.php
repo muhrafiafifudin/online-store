@@ -43,7 +43,23 @@
                 <td>{{ date('d M Y', strtotime($transaction->created_at)) }}</td>
                 <td>{{ $transaction->name }}</td>
                 <td>IDR. {{ number_format($transaction->total, 2, ',', '.') }}</td>
-                <td>{{ $transaction->process }}</td>
+                <td>
+                    @php
+                        switch ($transaction->process) {
+                        case 0:
+                            echo 'Order';
+                            break;
+                        case 1:
+                            echo 'Process';
+                            break;
+                        case 2:
+                            echo 'Delivery';
+                            break;
+                        default:
+                            echo 'Finish';
+                        }
+                    @endphp
+                </td>
             </tr>
         @endforeach
     </table>
