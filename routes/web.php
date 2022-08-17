@@ -57,6 +57,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('get-courier', 'CheckoutController@getCourier');
     Route::post('get-package', 'CheckoutController@getPackage');
     Route::post('get-estimate', 'CheckoutController@getEstimate');
+
+    // Transaction Status
+    Route::put('transaction/update-finish/{id}', 'AccountController@updateFinish');
 });
 
 // Admin Routes

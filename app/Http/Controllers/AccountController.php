@@ -169,4 +169,13 @@ class AccountController extends Controller
 
         return redirect()->route('account.user');
     }
+
+    public function updateFinish(Request $request, $id)
+    {
+        $transactions = Transaction::findOrFail($id);
+        $transactions->process = 3;
+        $transactions->update();
+
+        return redirect('account/transaction/transaction-' . $id);
+    }
 }

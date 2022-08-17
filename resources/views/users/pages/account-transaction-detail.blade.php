@@ -87,29 +87,45 @@
                                     @foreach ($transactions->transactiondetails as $item)
                                         <tr>
                                             <td>{{ $item->products->name }} <strong>x{{ $item->qty }}</strong></a></td>
-                                            <td>IDR. {{ number_format($item->products->price, 2, ',', '.') }}</td>
+                                            <td>IDR. {{ number_format($item->products->price * $item->qty, 2, ',', '.') }}</td>
                                         </tr>
                                     @endforeach
 
                                     <tr class="summary-subtotal">
                                         <td>Subtotal:</td>
-                                        <td>IDR. {{ number_format($transactions->total, 2, ',', '.') }}</td>
+                                        <td>IDR. {{ number_format($transactions->subtotal, 2, ',', '.') }}</td>
                                     </tr><!-- End .summary-subtotal -->
                                     <tr>
                                         <td>Weight</td>
-                                        <td>{{ $transactions->weight }}</td>
+                                        <td>{{ number_format($transactions->weight, 0, ',', '.') }} gram</td>
                                     </tr>
                                     <tr>
                                         <td>Shipping Price</td>
-                                        <td>Free shipping</td>
+                                        <td>IDR. {{ number_format($transactions->shipping, 2, ',', '.') }}</td>
                                     </tr>
                                     <tr>
                                         <td>Courier</td>
-                                        <td>{{ $transactions->courier }}</td>
+                                        <td>{{ strtoupper($transactions->courier) }}</td>
                                     </tr>
                                     <tr>
                                         <td>Estimate</td>
                                         <td>{{ $transactions->estimate }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Status</td>
+                                        <td>
+                                            @php
+                                                if ($transactions->process == '0') {
+                                                    echo 'Waiting';
+                                                } elseif ($transactions->process == '1') {
+                                                    echo 'Process';
+                                                } elseif ($transactions->process == '2') {
+                                                    echo 'Delivery';
+                                                } else {
+                                                    echo 'Finish';
+                                                }
+                                            @endphp
+                                        </td>
                                     </tr>
                                     <tr class="summary-total">
                                         <td>Total:</td>
@@ -117,6 +133,18 @@
                                     </tr><!-- End .summary-total -->
                                 </tbody>
                             </table><!-- End .table table-summary -->
+
+                            @if ($transactions->process == '2')
+                                <form action="{{ url('transaction/update-finish/' . $transactions->id) }}" method="POST">
+                                    @csrf
+                                    @method('PUT')
+
+                                    <button type="submit" class="btn btn-outline-primary-2 btn-order btn-block">
+                                        <span class="btn-text">Items Received</span>
+                                        <span class="btn-hover-text">Accept</span>
+                                    </button>
+                                </form>
+                            @endif
 
                         </div><!-- End .summary -->
                     </aside><!-- End .col-lg-3 -->

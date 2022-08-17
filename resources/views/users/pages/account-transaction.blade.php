@@ -38,14 +38,11 @@
                                                 <td class="text-center">IDR. {{ number_format($transaction->total, 2, ',', '.') }}</td>
                                                 <td class="text-center">{{ date('d M Y', strtotime($transaction->created_at)) }}</td>
                                                 <td class="text-center">
-                                                    <a href="{{ url('account/transaction/transaction-' . $transaction->id) }}" class="btn btn-outline-primary mr-3">Details</a>
-
-                                                    {{-- @if ($transaction->payments->transactions_id->check()) --}}
-                                                        {{-- <button class="btn btn-outline-primary-paid">Pay</button> --}}
-                                                    {{-- @else --}}
+                                                    @if (\App\Models\Payment::where('transactions_id', $transaction->id)->exists())
+                                                        <a href="{{ url('account/transaction/transaction-' . $transaction->id) }}" class="btn btn-outline-primary">Details</a>
+                                                    @else
                                                         <a href="{{ url('account/transaction/' . $transaction->id) }}" class="btn btn-outline-primary-2">Pay</a>
-                                                    {{-- @endif --}}
-
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @endforeach
