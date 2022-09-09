@@ -182,12 +182,19 @@ class CheckoutController extends Controller
         $transaction->address = $request->input('address');
         $transaction->postcode = $request->input('postcode');
         $transaction->phone_number = $request->input('phone_number');
-        $transaction->shipping = $request->input('shipping');
         $transaction->subtotal = $request->input('subtotal');
         $transaction->courier = $request->input('courier');
         $transaction->weight = $request->input('weight');
         $transaction->estimate = $request->input('estimate');
         $transaction->note = $request->input('note');
+
+        $stores = Store::where('id', 1)->first();
+
+        if ($request->city == $stores->cities_id) {
+            $transaction->shipping = 0;
+        } else {
+            $transaction->shipping = $request->input('shipping');
+        }
 
         // To Calculate the Gross Amount
         $gross_amount = 0;
