@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Payment;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 
@@ -17,7 +18,12 @@ class ApiController extends Controller
         }
 
         // Status Berhasil
-        $transaction = Transaction::where('order_id', $json->order_id)->first();
-        return $transaction->update(['status'=>$json->transaction_status]);
+        $transaction = Transaction::where('order_number', $json->order_id)->first();
+
+        $payment = Payment::where('transactions_id', $transaction->id)->first();
+        return $payment->update([
+            'transaction_status' => $json->transaction_status,
+            'status_code' => $json->status_code
+        ]);
     }
 }

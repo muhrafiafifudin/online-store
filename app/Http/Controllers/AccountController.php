@@ -104,7 +104,7 @@ class AccountController extends Controller
         $payment->transaction_time = $json->transaction_time;
 
         $transaction_status = $json->transaction_status;
-        $fraud = $json->fraud_status;
+        $fraud = !empty($json->fraud_status) ? $json->fraud_status : '';
 
         if ($transaction_status == 'capture') {
             if ($fraud == 'challenge') {
