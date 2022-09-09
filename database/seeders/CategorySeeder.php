@@ -23,6 +23,18 @@ class CategorySeeder extends Seeder
             ),
             array(
                 'category' => 'Chair'
+            ),
+            array(
+                'category' => 'Building'
+            ),
+            array(
+                'category' => 'Door'
+            ),
+            array(
+                'category' => 'Under Stair'
+            ),
+            array(
+                'category' => 'Cupboard'
             )
         ));
     }

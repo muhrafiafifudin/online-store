@@ -75,12 +75,7 @@
                     </div><!-- End .product -->
                 </div><!-- End .col-sm-6 col-lg-4 col-xl-3 -->
                 @endforeach
-
             </div><!-- End .row -->
-
-            <div class="load-more-container text-center">
-                <a href="#" class="btn btn-outline-darker btn-load-more">More Products <i class="icon-refresh"></i></a>
-            </div><!-- End .load-more-container -->
         </div><!-- End .products -->
 
     </div><!-- End .container -->
