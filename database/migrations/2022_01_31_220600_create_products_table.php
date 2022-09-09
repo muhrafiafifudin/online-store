@@ -22,7 +22,7 @@ class CreateProductsTable extends Migration
             $table->decimal('weight', 10, 2);
             $table->longText('description');
             $table->string('slug');
-            $table->integer('qty');
+            $table->integer('stock');
             $table->timestamps();
         });
     }

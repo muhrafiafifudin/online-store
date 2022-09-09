@@ -19,7 +19,7 @@ class ProductController extends Controller
     {
         $product = Product::get();
 
-        return view('admin.pages.shop.product', compact('product'));
+        return view('admin.pages.product.product', compact('product'));
     }
 
     /**
@@ -31,7 +31,7 @@ class ProductController extends Controller
     {
         $category = Category::all();
 
-        return view('admin.pages.shop.form-product', compact('category'));
+        return view('admin.pages.product.form-product', compact('category'));
     }
 
     /**
@@ -81,7 +81,7 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id);
 
-        return view('admin.pages.shop.edit-product', [
+        return view('admin.pages.product.edit-product', [
             'product'   => $product,
             'category'  => Category::all()
         ]);

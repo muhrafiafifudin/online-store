@@ -62,7 +62,7 @@ class CheckoutController extends Controller
             $arrayResponse = json_decode($response, true);
             $provinces = $arrayResponse['rajaongkir']['results'];
 
-            echo "<option>Choose Your Province</option>";
+            echo "<option value=''>Choose Your Province</option>";
 
             foreach ($provinces as $province) {
                 echo "<option value='" . $province['province_id'] . "' >" . $province['province'] . "</option>";
@@ -98,7 +98,7 @@ class CheckoutController extends Controller
             $arrayResponse = json_decode($response, true);
             $cities = $arrayResponse['rajaongkir']['results'];
 
-            echo "<option>Choose Your City</option>";
+            echo "<option value=''>Choose Your City</option>";
 
             foreach ($cities as $city) {
                 echo "<option value='" . $city['city_id'] . "' >" . $city['city_name'] . "</option>";

@@ -62,24 +62,21 @@
 						</div>
 						<div class="form-group">
 							<label>Email</label>
-							<input type="text" name="email" class="form-control" placeholder="Enter email ..." required/>
-						</div>
-						<div class="form-group">
-							<label>Password</label>
-							<input type="password" name="password" class="form-control" placeholder="Enter password ..." required/>
-						</div>
+							<input type="text" name="email" class="form-control mb-2" placeholder="Enter email ..." required/>
+                            <span class="form-text">Default Password: <strong>12345678</strong></span>
+                        </div>
 						<div class="form-group row">
                             <div class="col-lg-6">
                                 <label for="exampleSelect1">Province</label>
-                                <select class="form-control" name="province" id="province">
-                                    <option value="">Choose Province</option>
+                                <select class="form-control" name="provinces_id" id="province" required>
+                                    <option value="">Choose Your Province</option>
                                 </select>
                             </div>
 
                             <div class="col-lg-6">
                                 <label for="exampleSelect1">City</label>
-                                <select class="form-control" name="city" id="city">
-                                    <option value="">Choose City</option>
+                                <select class="form-control" name="cities_id" id="city" required>
+                                    <option value="">Choose Your City</option>
                                 </select>
                             </div>
 						</div>

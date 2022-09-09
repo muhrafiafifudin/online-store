@@ -60,8 +60,7 @@
 
 					<div class="card-body">
 						<div class="form-group">
-							<label>Name Product
-							<span class="text-danger">*</span></label>
+							<label>Name Product</label>
 							<input type="text" name="name" value="{{ $product->name }}" class="form-control" placeholder="Enter email" />
 						</div>
 						<div class="form-group">
@@ -77,8 +76,7 @@
 							<textarea class="form-control" name="description" rows="3">{{ $product->description }}</textarea>
 						</div>
 						<div class="form-group">
-							<label for="exampleSelect1">Category
-							<span class="text-danger">*</span></label>
+							<label for="exampleSelect1">Category</label>
 							<select class="form-control" name="categories_id" value="Cek" >
 								@foreach ($category as $data)
 									<option value="{{ $data->id }}" {{ $data->id == $product->categories_id ? ' selected' : '' }}>{{ $data->category }}</option>
@@ -86,13 +84,19 @@
 							</select>
 						</div>
 						<div class="form-group">
-							<label>Price
-							<span class="text-danger">*</span></label>
+							<label>Price</label>
 							<input type="number" name="price" value="{{ $product->price }}" class="form-control" placeholder="Enter email" />
 						</div>
+                        <div class="form-group">
+							<label>Weight</label>
+							<input type="number" name="weight" value="{{ $product->weight }}" class="form-control" placeholder="Enter weight ..." required/>
+						</div>
 						<div class="form-group">
-							<label>Slug
-							<span class="text-danger">*</span></label>
+							<label>Stock</label>
+							<input type="number" name="stock" value="{{ $product->stock }}" class="form-control" placeholder="Enter stock ..." required/>
+						</div>
+						<div class="form-group">
+							<label>Slug</label>
 							<input type="text" name="slug" value="{{ $product->slug }}" class="form-control" placeholder="Enter email" />
 						</div>
 					</div>

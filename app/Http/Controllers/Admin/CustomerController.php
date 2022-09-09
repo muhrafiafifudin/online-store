@@ -78,7 +78,14 @@ class CustomerController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
+
         $users = User::findOrFail($id);
+        if ($request->provinces_id == NULL) {
+            $data['provinces_id'] = $users->provinces_id;
+        }
+        if ($request->cities_id == NULL) {
+            $data['cities_id'] = $users->cities_id;
+        }
         $users->update($data);
 
         return redirect()->route('admin.customer.index');

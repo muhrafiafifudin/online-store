@@ -74,10 +74,9 @@
 								<th>No</th>
 								<th>Images</th>
 								<th>Name Product</th>
-								<th>Description</th>
 								<th>Category</th>
 								<th>Price</th>
-								<th>Slug</th>
+								<th>Stock</th>
 								<th>Actions</th>
 							</tr>
 						</thead>
@@ -88,10 +87,9 @@
 									<td>{{ $no++ }}</td>
 									<td><img src="../admin/assets/images/{{ $data->photos }}" width="100px"></td>
 									<td>{{ $data->name }}</td>
-									<td>{{ $data->description }}</td>
 									<td>{{ $data->category->category }}</td>
-									<td>{{ $data->price }}</td>
-									<td>{{ $data->slug }}</td>
+									<td>Rp. {{ number_format($data->price, 2, ',', '.') }}</td>
+									<td>{{ $data->stock }}</td>
 									<td>
 										<form action="{{ route('admin.product.destroy', $data->id) }}" method="post">
 											@csrf

@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('google_id')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password')->default(bcrypt('12345678'))->nullable();
             $table->integer('provinces_id')->nullable();
             $table->integer('cities_id')->nullable();
             $table->string('address')->nullable();

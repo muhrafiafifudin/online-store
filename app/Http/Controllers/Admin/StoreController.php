@@ -75,7 +75,14 @@ class StoreController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
+
         $stores = Store::findOrFail($id);
+        if ($request->provinces_id == NULL) {
+            $data['provinces_id'] = $stores->provinces_id;
+        }
+        if ($request->cities_id == NULL) {
+            $data['cities_id'] = $stores->cities_id;
+        }
         $stores->update($data);
 
         return redirect()->route('admin.store.index');
