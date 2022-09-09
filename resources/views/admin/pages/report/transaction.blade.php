@@ -60,6 +60,7 @@
                         <div class="col-lg-4">
                             <label>Type</label>
                             <select class="form-control" name="type" id="type">
+                                <option value="">Choose Your Type</option>
                                 <option value="4">All Process</option>
                                 <option value="0">Order</option>
                                 <option value="1">Process</option>

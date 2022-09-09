@@ -84,9 +84,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
         Route::resource('store','StoreController');
         // Transaction
         Route::get('transaction', 'TransactionController@index')->name('transaction.index');
-        Route::get('transaction-process', 'TransactionController@transactionProcess')->name('transaction.process');
-        Route::get('transaction-delivery', 'TransactionController@transactionDelivery');
-        Route::get('transaction-finish', 'TransactionController@transactionFinish');
+        Route::get('transaction-detail/{id}', 'TransactionController@transactionDetail');
 
         Route::put('transaction/update-process/{id}', 'TransactionController@updateProcess');
         Route::put('transaction/update-delivery/{id}', 'TransactionController@updateDelivery');
@@ -97,12 +95,6 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
     });
 
     Route::post('logout', 'Auth\AuthenticatedSessionController@destroy')->name('logout');
-});
-
-
-// Test HTML
-Route::get('tes', function() {
-    return view('pages.transaction-success');
 });
 
 

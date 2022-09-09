@@ -21,6 +21,14 @@ class TransactionController extends Controller
         return view('admin.pages.transaction.transaction', compact('transactions'));
     }
 
+    public function transactionDetail($id)
+    {
+        $transactions = Transaction::findOrFail($id);
+        $transaction_details = TransactionDetail::where('transactions_id', $id)->get();
+
+        return view('admin.pages.transaction.transaction-detail', compact('transactions', 'transaction_details'));
+    }
+
     public function updateProcess($id)
     {
         $transactions = Transaction::findOrFail($id);
