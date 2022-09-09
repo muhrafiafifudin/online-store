@@ -6,6 +6,7 @@ use DB;
 use PDF;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use App\Models\TransactionDetail;
 use App\Http\Controllers\Controller;
 
 class TransactionController extends Controller
@@ -14,44 +15,10 @@ class TransactionController extends Controller
     {
         $transactions = DB::table('transactions')
             ->rightJoin('payments', 'transactions.id', '=', 'payments.transactions_id')
-            ->where('transactions.process', '=', 0)
             ->where('payments.transaction_status', 'paid')
             ->get();
 
-        return view('admin.pages.transaction.transaction-order', compact('transactions'));
-    }
-
-    public function transactionProcess()
-    {
-        $transactions = DB::table('transactions')
-            ->rightJoin('payments', 'transactions.id', '=', 'payments.transactions_id')
-            ->where('transactions.process', '=', 1)
-            ->where('payments.transaction_status', 'paid')
-            ->get();
-
-        return view('admin.pages.transaction.transaction-process', compact('transactions'));
-    }
-
-    public function transactionDelivery()
-    {
-        $transactions = DB::table('transactions')
-            ->rightJoin('payments', 'transactions.id', '=', 'payments.transactions_id')
-            ->where('transactions.process', '=', 2)
-            ->where('payments.transaction_status', 'paid')
-            ->get();
-
-        return view('admin.pages.transaction.transaction-delivery', compact('transactions'));
-    }
-
-    public function transactionFinish()
-    {
-        $transactions = DB::table('transactions')
-            ->rightJoin('payments', 'transactions.id', '=', 'payments.transactions_id')
-            ->where('transactions.process', '=', 3)
-            ->where('payments.transaction_status', 'paid')
-            ->get();
-
-        return view('admin.pages.transaction.transaction-finish', compact('transactions'));
+        return view('admin.pages.transaction.transaction', compact('transactions'));
     }
 
     public function updateProcess($id)
@@ -70,7 +37,7 @@ class TransactionController extends Controller
         $transactions->resi = $request->resi;
         $transactions->update();
 
-        return redirect()->route('admin.transaction.process');
+        return redirect()->route('admin.transaction.index');
     }
 
     public function reportTransaction()
@@ -83,7 +50,16 @@ class TransactionController extends Controller
         $fromDate = $fromDate;
         $toDate = $toDate;
 
-        $transactions = Transaction::whereBetween('created_at', [$fromDate, $toDate])->where('process', $type)->get();
+        if ($type == 4) {
+            $transactions = Transaction::whereDate('created_at', '>=', $fromDate)
+                                ->whereDate('created_at', '<=', $toDate)
+                                ->get();
+        } else {
+            $transactions = Transaction::whereDate('created_at', '>=', $fromDate)
+                                ->whereDate('created_at', '<=', $toDate)
+                                ->where('process', $type)
+                                ->get();
+        }
 
         $pdf = PDF::loadView('admin.pages.report.print-pdf', compact('transactions', 'fromDate', 'toDate'))->setPaper('a4', 'landscape');
 
