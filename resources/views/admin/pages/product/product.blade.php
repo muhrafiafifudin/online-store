@@ -88,7 +88,7 @@
 									<td><img src="../admin/assets/images/{{ $data->photos }}" width="100px"></td>
 									<td>{{ $data->name }}</td>
 									<td>{{ $data->category->category }}</td>
-									<td>Rp. {{ number_format($data->price, 2, ',', '.') }}</td>
+									<td>IDR. {{ number_format($data->price, 2, ',', '.') }}</td>
 									<td>{{ $data->stock }}</td>
 									<td>
 										<form action="{{ route('admin.product.destroy', $data->id) }}" method="post">
